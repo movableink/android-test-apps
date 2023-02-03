@@ -16,23 +16,23 @@ dependencies {
     implementation(Firebase.authentication)
     implementation("com.google.firebase:firebase-analytics")
 
-
     implementation(Kotlin.stdlib.jdk7)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.activity.ktx)
     implementation(AndroidX.constraintLayout)
     implementation(Google.android.material)
+    implementation(AndroidX.compose.material)
     implementation(AndroidX.lifecycle.runtime)
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha05")
     implementation(AndroidX.lifecycle.runtime.ktx)
     implementation(AndroidX.lifecycle.viewModel)
-    implementation (AndroidX.activity.compose)
-    implementation (AndroidX.compose.ui)
-    implementation (AndroidX.compose.ui.tooling)
-    implementation (AndroidX.compose.material3)
-    implementation (AndroidX.navigation.compose)
-
-    implementation(COIL.base)
-    //testing dependencies
+    implementation(AndroidX.lifecycle.viewModelCompose)
+    implementation(AndroidX.activity.compose)
+    implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.tooling)
+    implementation(AndroidX.navigation.compose)
+    implementation(AndroidX.compose.ui.util)
+    // testing dependencies
     testImplementation(Testing.junit4)
     testImplementation(AndroidX.test.ext.junit)
     androidTestImplementation(AndroidX.test.core)
