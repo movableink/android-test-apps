@@ -13,8 +13,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.movableink.app.ui.component.MovableSnackSnackBar
+import com.movableink.app.ui.navigation.DeepLinkPattern.baseDestination
 import com.movableink.app.ui.navigation.HomeSections
 import com.movableink.app.ui.navigation.MovableBottomBar
 import com.movableink.app.ui.navigation.addHomeGraph
@@ -57,6 +59,7 @@ fun ShoppingCartApp() {
                 navController = appState.navController,
                 startDestination = MainDestinations.HOME_ROUTE,
                 modifier = Modifier.padding(innerPaddingModifier)
+
             ) {
                 appNavGraph(
                     onGenderSelected = appState::navigateToCategories,
@@ -132,6 +135,20 @@ private fun NavGraphBuilder.appNavGraph(
             navArgument(MainDestinations.PRODUCT_ID) { type = NavType.StringType }
         )
     ) {
+        ProductDetailScreen(
+            popBackStack = upPress,
+            cartViewModel,
+            homeViewModel
+        )
+    }
+    composable(
+        route = MainDestinations.PRODUCT_DETAIL_ROUTE,
+        deepLinks = listOf(navDeepLink { uriPattern = "$baseDestination/{productId}" })
+    ) { backStackEntry ->
+        val arguments = requireNotNull(backStackEntry.arguments)
+        val selectedCategory = arguments.getString(MainDestinations.SELECTED_CATEGORY)
+        val productID = arguments.getString("productId")
+        homeViewModel.updateSelectedProduct(productID ?: "")
         ProductDetailScreen(
             popBackStack = upPress,
             cartViewModel,

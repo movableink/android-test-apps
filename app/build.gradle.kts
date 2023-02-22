@@ -24,6 +24,7 @@ dependencies {
     implementation(AndroidX.compose.material)
     implementation(AndroidX.lifecycle.runtime)
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha05")
+    implementation(AndroidX.lifecycle.runtime.compose)
     implementation(AndroidX.lifecycle.runtime.ktx)
     implementation(AndroidX.lifecycle.viewModel)
     implementation(AndroidX.lifecycle.viewModelCompose)
@@ -32,6 +33,8 @@ dependencies {
     implementation(AndroidX.compose.ui.tooling)
     implementation(AndroidX.navigation.compose)
     implementation(AndroidX.compose.ui.util)
+    implementation(Square.okHttp3.okHttp)
+    implementation(Square.okHttp3.loggingInterceptor)
     // testing dependencies
     testImplementation(Testing.junit4)
     testImplementation(AndroidX.test.ext.junit)
@@ -43,4 +46,13 @@ dependencies {
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.espresso.core)
+
+    implementation(
+        fileTree("libs/") {
+            // You can add as many include or exclude calls as you want
+            include("inked-debug.aar")
+            // You can also include all files by using a pattern wildcard
+            include("*.jar")
+        }
+    )
 }
