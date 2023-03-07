@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,6 +15,10 @@
         android:theme="@style/Theme.ShoppingCart"
         tools:targetApi="31"
         tools:ignore="HardcodedDebugMode">
+        <meta-data
+            android:name="com.movableink.inked.API_KEY"
+            android:value="${MOVABLE_INK_SDK_API_KEY}"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -31,7 +37,7 @@
             android:exported="true"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.ShoppingCart">
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />

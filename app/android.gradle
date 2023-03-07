@@ -1,6 +1,40 @@
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 android {
     namespace 'com.movableink.app'
     compileSdkVersion findProperty("compileSdkVersion") as Integer
+    signingConfigs {
+        debug {
+            storeFile file('locate file')
+            storePassword '-'
+            keyAlias '-'
+            keyPassword '-'
+        }
+        release {
+            storeFile file('locate file')
+            storePassword '-'
+            keyAlias '-'
+            keyPassword '-'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+        debug{
+            signingConfig signingConfigs.release
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            minifyEnabled false
+        }
+    }
     defaultConfig {
         applicationId findProperty("applicationId")
         minSdkVersion findProperty("minSdkVersion") as Integer
@@ -8,7 +42,13 @@ android {
         versionCode findProperty("versionCode") as Integer
         versionName findProperty("versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders ["MOVABLE_INK_SDK_API_KEY"] = localProperties['MOVABLE_INK_SDK_API_KEY']
         vectorDrawables.useSupportLibrary = true
+
+
+
+
     }
     buildFeatures {
         compose true

@@ -12,6 +12,12 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
     }
 }
+allprojects {
+    repositories {
+        google()
+        maven(url = "https://appboy.github.io/appboy-android-sdk/sdk")
+    }
+}
 
 subprojects {
     repositories {
