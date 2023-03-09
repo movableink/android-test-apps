@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.movableink.app.ui.navigation.DeepLinkPattern
 import com.movableink.app.utils.URIPath
-import com.movableink.inked.network.MIClient
+import com.movableink.inked.MIClient
 import kotlinx.coroutines.launch
 
 @SuppressLint("RestrictedApi")
@@ -57,7 +57,7 @@ class DeepLinkActivity : ComponentActivity() {
                 Intent.ACTION_VIEW,
                 "${DeepLinkPattern.baseDestination}/$productId".toUri(),
                 this@DeepLinkActivity,
-                MainActivity::class.java
+                MainActivity::class.java,
             )
             TaskStackBuilder.create(this@DeepLinkActivity).run {
                 addNextIntentWithParentStack(productDetailIntent)

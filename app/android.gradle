@@ -4,28 +4,6 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 android {
     namespace 'com.movableink.app'
     compileSdkVersion findProperty("compileSdkVersion") as Integer
-    signingConfigs {
-        debug {
-            storeFile file('locate file')
-            storePassword '-'
-            keyAlias '-'
-            keyPassword '-'
-        }
-        release {
-            storeFile file('locate file')
-            storePassword '-'
-            keyAlias '-'
-            keyPassword '-'
-        }
-    }
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-        debug{
-            signingConfig signingConfigs.release
-        }
-    }
     buildTypes {
         release {
             minifyEnabled false

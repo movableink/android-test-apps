@@ -19,7 +19,7 @@ fun MovableTopBar(modifier: Modifier = Modifier, title: String) {
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Color.Black,
-            elevation = 0.dp
+            elevation = 0.dp,
         ) {
             Text(
                 text = title,
@@ -30,7 +30,7 @@ fun MovableTopBar(modifier: Modifier = Modifier, title: String) {
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .weight(1f)
-                    .align(Alignment.CenterVertically)
+                    .align(Alignment.CenterVertically),
             )
         }
     }

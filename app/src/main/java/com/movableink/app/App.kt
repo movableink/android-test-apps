@@ -4,7 +4,7 @@ import android.app.Application
 import com.braze.Braze
 import com.braze.BrazeActivityLifecycleCallbackListener
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
-import com.movableink.inked.network.MIClient
+import com.movableink.inked.MIClient
 
 class App : Application() {
     override fun onCreate() {
@@ -15,8 +15,8 @@ class App : Application() {
         registerActivityLifecycleCallbacks(
             BrazeActivityLifecycleCallbackListener(
                 true,
-                true
-            )
+                true,
+            ),
         )
     }
 }

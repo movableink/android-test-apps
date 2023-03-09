@@ -37,12 +37,12 @@ fun CartItem(product: Product) {
             .padding(8.dp)
             .clip(RoundedCornerShape(16.dp)),
         elevation = 0.dp,
-        backgroundColor = Color.Gray
+        backgroundColor = Color.Gray,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
         ) {
             val drawable = getDrawableId(product.imageUrl) ?: R.drawable.placeholder
 
@@ -54,7 +54,7 @@ fun CartItem(product: Product) {
                 painter = image,
                 alignment = Alignment.CenterStart,
                 contentDescription = "",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
 
             Spacer(modifier = Modifier.width(16.dp))
@@ -65,18 +65,18 @@ fun CartItem(product: Product) {
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                     color = MaterialTheme.colors.surface,
                     fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.subtitle1
+                    style = MaterialTheme.typography.subtitle1,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
+                    horizontalArrangement = Arrangement.End,
                 ) {
                     Text(
                         text = formatPrice(product.price),
                         modifier = Modifier.padding(8.dp, 12.dp, 12.dp, 0.dp),
                         color = Color.Black,
-                        style = MaterialTheme.typography.button
+                        style = MaterialTheme.typography.button,
                     )
                 }
                 Text(
@@ -87,7 +87,7 @@ fun CartItem(product: Product) {
                     },
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                     color = MaterialTheme.colors.surface,
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.caption,
                 )
             }
         }

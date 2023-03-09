@@ -38,7 +38,7 @@ dependencies {
     implementation(COIL.compose)
     implementation(COIL.base)
     implementation(AndroidX.dataStore.preferences)
-
+    implementation(KotlinX.serialization.json)
     implementation("com.braze:android-sdk-ui:24.2.0")
     implementation("com.braze:android-sdk-location:24.2.0")
     // testing dependencies
@@ -59,6 +59,6 @@ dependencies {
             include("inked-debug.aar")
             // You can also include all files by using a pattern wildcard
             include("*.jar")
-        }
+        },
     )
 }
