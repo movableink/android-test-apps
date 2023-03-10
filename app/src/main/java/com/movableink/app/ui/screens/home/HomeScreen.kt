@@ -35,11 +35,11 @@ import com.movableink.app.ui.component.MovableTopBar
 @Composable
 fun HomeScreen(
     onGenderSelected: (String) -> Unit,
-    homeViewModel: HomeViewModel,
+    homeViewModel: HomeViewModel
 ) {
     Surface(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
     ) {
         Box {
             GenderList(onGenderSelected, homeViewModel)
@@ -55,8 +55,8 @@ fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel) {
         item {
             Spacer(
                 Modifier.windowInsetsTopHeight(
-                    WindowInsets.statusBars.add(WindowInsets(top = 60.dp)),
-                ),
+                    WindowInsets.statusBars.add(WindowInsets(top = 60.dp))
+                )
             )
         }
 
@@ -64,7 +64,7 @@ fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel) {
             GenderRow(
                 gender = gender,
                 onGenderClick = onGenderClick,
-                homeViewModel,
+                homeViewModel
             )
         }
     }
@@ -75,7 +75,7 @@ fun GenderRow(gender: String, onGenderClick: (gender: String) -> Unit, homeViewM
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = 8.dp),
+            .padding(all = 8.dp)
     ) {
         Surface(
             shape = RoundedCornerShape(8.dp),
@@ -83,19 +83,19 @@ fun GenderRow(gender: String, onGenderClick: (gender: String) -> Unit, homeViewM
             modifier = Modifier.clickable {
                 homeViewModel.updateCategories(gender)
                 onGenderClick(gender)
-            },
+            }
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 8.dp),
+                    .padding(all = 8.dp)
             ) {
                 Text(
                     text = gender,
                     modifier = Modifier
                         .weight(1f)
                         .align(Alignment.CenterVertically)
-                        .padding(8.dp),
+                        .padding(8.dp)
                 )
                 Column(horizontalAlignment = Alignment.End) {
                     Image(
@@ -105,7 +105,7 @@ fun GenderRow(gender: String, onGenderClick: (gender: String) -> Unit, homeViewM
                         painter = painterResource(id = R.drawable.baseline_navigate_next_24),
                         alignment = Alignment.Center,
                         contentDescription = "",
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.Crop
                     )
                 }
             }

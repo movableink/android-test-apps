@@ -42,7 +42,7 @@ import com.movableink.app.R
 fun CategoryScreen(
     onCategoryClick: (String, String) -> Unit,
     onBackClicked: () -> Unit,
-    homeViewModel: HomeViewModel,
+    homeViewModel: HomeViewModel
 ) {
     val homeUIState by homeViewModel.homeUIState.collectAsStateWithLifecycle()
     val selectedGender = remember {
@@ -51,13 +51,13 @@ fun CategoryScreen(
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
 
     ) {
         Spacer(
             Modifier.windowInsetsTopHeight(
-                WindowInsets.statusBars.add(WindowInsets(top = 60.dp)),
-            ),
+                WindowInsets.statusBars.add(WindowInsets(top = 60.dp))
+            )
         )
         CategoryList(onCategoryClick, homeUIState.categories, homeUIState.gender, homeViewModel)
     }
@@ -69,14 +69,14 @@ fun CategoryList(
     onCategoryClick: (String, String) -> Unit,
     categories: List<String>,
     gender: String,
-    homeViewModel: HomeViewModel,
+    homeViewModel: HomeViewModel
 ) {
     LazyColumn {
         item {
             Spacer(
                 Modifier.windowInsetsTopHeight(
-                    WindowInsets.statusBars.add(WindowInsets(top = 28.dp)),
-                ),
+                    WindowInsets.statusBars.add(WindowInsets(top = 28.dp))
+                )
             )
         }
 
@@ -85,7 +85,7 @@ fun CategoryList(
                 category = category,
                 onCategoryClick = onCategoryClick,
                 gender,
-                homeViewModel,
+                homeViewModel
             )
         }
     }
@@ -96,7 +96,7 @@ fun CategoryRow(
     category: String,
     onCategoryClick: (category: String, gender: String) -> Unit,
     gender: String,
-    homeViewModel: HomeViewModel,
+    homeViewModel: HomeViewModel
 ) {
     Card(
         modifier = Modifier
@@ -105,14 +105,14 @@ fun CategoryRow(
             .clickable {
                 homeViewModel.updateCatalogByCategory(category, gender)
                 onCategoryClick(category, gender)
-            },
+            }
     ) {
         Row(modifier = Modifier.padding(all = 10.dp)) {
             Text(
                 text = category,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
-                modifier = Modifier.padding(10.dp),
+                modifier = Modifier.padding(10.dp)
             )
         }
     }
@@ -124,7 +124,7 @@ fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: (
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Color.Black,
-            elevation = 0.dp,
+            elevation = 0.dp
 
         ) {
             IconButton(
@@ -132,12 +132,12 @@ fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: (
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .size(24.dp, 24.dp)
-                    .align(Alignment.CenterVertically),
+                    .align(Alignment.CenterVertically)
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     tint = Color.White,
-                    contentDescription = stringResource(R.string.app_name),
+                    contentDescription = stringResource(R.string.app_name)
                 )
             }
             Text(
@@ -150,7 +150,7 @@ fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: (
                 modifier = Modifier
                     .weight(1f)
                     .padding(8.dp, 0.dp, 0.dp, 0.dp)
-                    .align(Alignment.CenterVertically),
+                    .align(Alignment.CenterVertically)
             )
         }
     }

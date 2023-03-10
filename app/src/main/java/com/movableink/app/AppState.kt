@@ -39,7 +39,7 @@ fun rememberAppState(
     navController: NavHostController = rememberNavController(),
     snackBarManager: SnackbarManager = SnackbarManager,
     resources: Resources = resources(),
-    coroutineScope: CoroutineScope = rememberCoroutineScope(),
+    coroutineScope: CoroutineScope = rememberCoroutineScope()
 ) =
     remember(scaffoldState, navController, snackBarManager, resources, coroutineScope) {
         AppState(scaffoldState, navController, snackBarManager, resources, coroutineScope)
@@ -51,7 +51,7 @@ class AppState(
     val navController: NavHostController,
     private val snackbarManager: SnackbarManager,
     private val resources: Resources,
-    coroutineScope: CoroutineScope,
+    coroutineScope: CoroutineScope
 ) {
     init {
         coroutineScope.launch {

@@ -26,13 +26,13 @@ class SearchViewModel
     val productSearchModelState = combine(
         searchText,
         matchedProducts,
-        showProgressBar,
+        showProgressBar
     ) { text, matchedProducts, showProgress ->
 
         ProductSearchModelState(
             text,
             matchedProducts,
-            showProgress,
+            showProgress
         )
     }
 
@@ -57,9 +57,9 @@ class SearchViewModel
         val productsFromSearch = allProducts.filter { product ->
             product.name.contains(changedSearchText, true) ||
                 product.category.contains(changedSearchText, true) || product.gender.contains(
-                    changedSearchText,
-                    true,
-                )
+                changedSearchText,
+                true
+            )
         }
 
         matchedProducts.value = productsFromSearch
@@ -71,7 +71,7 @@ class SearchViewModel
     }
     companion object {
         fun provideFactory(
-            movableRepository: MovableRepository = MovableRepository,
+            movableRepository: MovableRepository = MovableRepository
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -84,7 +84,7 @@ class SearchViewModel
 data class ProductSearchModelState(
     val searchText: String = "",
     val products: List<Product> = arrayListOf(),
-    val showProgressBar: Boolean = false,
+    val showProgressBar: Boolean = false
 ) {
 
     companion object {

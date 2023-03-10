@@ -42,7 +42,7 @@ fun ShoppingCartApp() {
                     MovableBottomBar(
                         tabs = appState.bottomBarTabs,
                         currentRoute = appState.currentRoute!!,
-                        navigateToRoute = appState::navigateToBottomBarRoute,
+                        navigateToRoute = appState::navigateToBottomBarRoute
                     )
                 }
             },
@@ -50,15 +50,15 @@ fun ShoppingCartApp() {
                 SnackbarHost(
                     hostState = it,
                     modifier = Modifier.systemBarsPadding(),
-                    snackbar = { snackbarData -> MovableSnackSnackBar(snackbarData) },
+                    snackbar = { snackbarData -> MovableSnackSnackBar(snackbarData) }
                 )
             },
-            scaffoldState = appState.scaffoldState,
+            scaffoldState = appState.scaffoldState
         ) { innerPaddingModifier ->
             NavHost(
                 navController = appState.navController,
                 startDestination = MainDestinations.HOME_ROUTE,
-                modifier = Modifier.padding(innerPaddingModifier),
+                modifier = Modifier.padding(innerPaddingModifier)
 
             ) {
                 appNavGraph(
@@ -70,7 +70,7 @@ fun ShoppingCartApp() {
                     cartViewModel = cartViewModel,
                     navigateToCart = appState::navigateToCart,
                     homeViewModel = homeViewModel,
-                    searchViewModel = searchViewModel,
+                    searchViewModel = searchViewModel
                 )
             }
         }
@@ -85,11 +85,11 @@ private fun NavGraphBuilder.appNavGraph(
     cartViewModel: CartViewModel,
     navigateToCart: () -> Unit,
     homeViewModel: HomeViewModel,
-    searchViewModel: SearchViewModel,
+    searchViewModel: SearchViewModel
 ) {
     navigation(
         route = MainDestinations.HOME_ROUTE,
-        startDestination = HomeSections.HOME.route,
+        startDestination = HomeSections.HOME.route
     ) {
         addHomeGraph(
             onGenderSelected,
@@ -97,25 +97,25 @@ private fun NavGraphBuilder.appNavGraph(
             cartViewModel = cartViewModel,
             homeViewModel = homeViewModel,
             searchViewModel = searchViewModel,
-            navigateToProductDetail = navigateToProductDetail,
+            navigateToProductDetail = navigateToProductDetail
         )
     }
     composable(
         route = "${MainDestinations.CATEGORIES_ROUTE}/{${MainDestinations.SELECTED_GENDER}}",
-        arguments = listOf(navArgument(MainDestinations.SELECTED_GENDER) { type = NavType.StringType }),
+        arguments = listOf(navArgument(MainDestinations.SELECTED_GENDER) { type = NavType.StringType })
     ) {
         CategoryScreen(
             onCategoryClick = onCategoryClick,
             upPress,
-            homeViewModel,
+            homeViewModel
         )
     }
     composable(
         route = "${MainDestinations.CATALOG_ROUTE}/{${MainDestinations.SELECTED_CATEGORY}}/{${MainDestinations.SELECTED_GENDER}}",
         arguments = listOf(
             navArgument(MainDestinations.SELECTED_GENDER) { type = NavType.StringType },
-            navArgument(MainDestinations.SELECTED_CATEGORY) { type = NavType.StringType },
-        ),
+            navArgument(MainDestinations.SELECTED_CATEGORY) { type = NavType.StringType }
+        )
     ) { backStackEntry ->
         val arguments = requireNotNull(backStackEntry.arguments)
         val selectedCategory = arguments.getString(MainDestinations.SELECTED_CATEGORY)
@@ -125,25 +125,25 @@ private fun NavGraphBuilder.appNavGraph(
             upPress,
             cartViewModel,
             onViewCart = navigateToCart,
-            homeViewModel,
+            homeViewModel
         )
     }
 
     composable(
         route = "${MainDestinations.PRODUCT_DETAIL_ROUTE}/{${MainDestinations.PRODUCT_ID}}",
         arguments = listOf(
-            navArgument(MainDestinations.PRODUCT_ID) { type = NavType.StringType },
-        ),
+            navArgument(MainDestinations.PRODUCT_ID) { type = NavType.StringType }
+        )
     ) {
         ProductDetailScreen(
             popBackStack = upPress,
             cartViewModel,
-            homeViewModel,
+            homeViewModel
         )
     }
     composable(
         route = MainDestinations.PRODUCT_DETAIL_ROUTE,
-        deepLinks = listOf(navDeepLink { uriPattern = "$baseDestination/{productId}" }),
+        deepLinks = listOf(navDeepLink { uriPattern = "$baseDestination/{productId}" })
     ) { backStackEntry ->
         val arguments = requireNotNull(backStackEntry.arguments)
         val selectedCategory = arguments.getString(MainDestinations.SELECTED_CATEGORY)
@@ -152,17 +152,17 @@ private fun NavGraphBuilder.appNavGraph(
         ProductDetailScreen(
             popBackStack = upPress,
             cartViewModel,
-            homeViewModel,
+            homeViewModel
         )
     }
     composable(
-        route = MainDestinations.SEARCH_UI_ROUTE,
+        route = MainDestinations.SEARCH_UI_ROUTE
     ) {
         SearchView(
             onBackClicked = upPress,
             searchViewModel,
             navigateToProductDetail,
-            homeViewModel,
+            homeViewModel
         )
     }
 }

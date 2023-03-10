@@ -33,7 +33,7 @@ import com.movableink.app.ui.screens.home.ScreenDivider
 
 @Composable
 fun Cart(
-    viewModel: CartViewModel,
+    viewModel: CartViewModel
 ) {
     val cartUiState by viewModel.uiState.collectAsState()
     val cartList = cartUiState.cart
@@ -62,7 +62,7 @@ fun Cart(
                             modifier = Modifier
                                 .navigationBarsPadding()
                                 .then(Modifier.padding(horizontal = 24.dp))
-                                .heightIn(min = BottomBarHeight),
+                                .heightIn(min = BottomBarHeight)
                         ) {
                             Spacer(Modifier.width(16.dp))
                             Button(
@@ -71,13 +71,13 @@ fun Cart(
                                 },
                                 modifier = Modifier
                                     .weight(1f)
-                                    .padding(all = 16.dp),
+                                    .padding(all = 16.dp)
                             ) {
                                 Text(
                                     text = "Checkout ",
                                     modifier = Modifier.fillMaxWidth(),
                                     textAlign = TextAlign.Center,
-                                    maxLines = 1,
+                                    maxLines = 1
                                 )
                             }
                             Spacer(Modifier.width(16.dp))
@@ -92,7 +92,7 @@ fun Cart(
                     text = stringResource(R.string.empty_cart),
                     style = MaterialTheme.typography.h4,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
