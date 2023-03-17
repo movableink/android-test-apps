@@ -12,7 +12,7 @@ fun fetchDrawableByName(name: String, context: Context): Int {
     return resources.getIdentifier(
         name.trim(),
         "drawable",
-        context.packageName
+        context.packageName,
     )
 }
 

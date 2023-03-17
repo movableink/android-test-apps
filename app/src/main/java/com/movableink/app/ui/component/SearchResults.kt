@@ -38,7 +38,7 @@ fun SearchRow(product: Product, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { onClick() }
+            .clickable { onClick() },
     ) {
         Text(product.name, fontSize = 14.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(2.dp))

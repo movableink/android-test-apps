@@ -59,7 +59,7 @@ import com.movableink.app.ui.screens.home.HomeScreen
 import com.movableink.app.ui.screens.home.HomeViewModel
 import com.movableink.app.ui.screens.search.Search
 import com.movableink.app.ui.screens.search.SearchViewModel
-import java.util.*
+import java.util.Locale
 
 fun NavGraphBuilder.addHomeGraph(
     onGenderSelected: (String, NavBackStackEntry) -> Unit,

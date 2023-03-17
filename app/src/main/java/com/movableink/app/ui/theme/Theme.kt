@@ -14,13 +14,13 @@ import androidx.compose.ui.graphics.TileMode
 private val DarkColorPalette = darkColors(
     primary = Purple200,
     primaryVariant = Purple700,
-    secondary = Teal200
+    secondary = Teal200,
 )
 
 private val LightColorPalette = lightColors(
     primary = Purple500,
     primaryVariant = Purple700,
-    secondary = Teal200
+    secondary = Teal200,
 
 )
 
@@ -36,18 +36,18 @@ fun ShoppingCartTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Comp
         colors = colors,
         typography = typography,
         shapes = Shapes,
-        content = content
+        content = content,
     )
 }
 fun Modifier.offsetGradientBackground(
     colors: List<Color>,
     width: Float,
-    offset: Float = 0f
+    offset: Float = 0f,
 ) = background(
     Brush.horizontalGradient(
         colors,
         startX = -offset,
         endX = width - offset,
-        tileMode = TileMode.Mirror
-    )
+        tileMode = TileMode.Mirror,
+    ),
 )

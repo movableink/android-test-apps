@@ -58,6 +58,7 @@ import com.movableink.app.data.model.Product
 import com.movableink.app.ui.screens.cart.CartViewModel
 import com.movableink.app.utils.fetchDrawableByName
 import com.movableink.app.utils.formatPrice
+import com.movableink.inked.MIClient
 
 @Composable
 fun CatalogScreen(
@@ -127,6 +128,7 @@ fun ProductItem(
             modifier = Modifier
                 .clickable(onClick = {
                     homeViewModel.updateSelectedProduct(product.id)
+                    MIClient.productViewed(mapOf("id" to product.id))
                     onProductClick(product.id)
                 })
                 .fillMaxSize()

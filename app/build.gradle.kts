@@ -35,6 +35,12 @@ dependencies {
     implementation(AndroidX.compose.ui.util)
     implementation(Square.okHttp3.okHttp)
     implementation(Square.okHttp3.loggingInterceptor)
+    implementation(COIL.compose)
+    implementation(COIL.base)
+    implementation(AndroidX.dataStore.preferences)
+    implementation(KotlinX.serialization.json)
+    implementation("com.braze:android-sdk-ui:24.2.0")
+    implementation("com.braze:android-sdk-location:24.2.0")
     // testing dependencies
     testImplementation(Testing.junit4)
     testImplementation(AndroidX.test.ext.junit)
@@ -53,6 +59,6 @@ dependencies {
             include("inked-debug.aar")
             // You can also include all files by using a pattern wildcard
             include("*.jar")
-        }
+        },
     )
 }
