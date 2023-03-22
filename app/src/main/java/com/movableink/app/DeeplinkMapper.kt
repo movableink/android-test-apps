@@ -28,6 +28,16 @@ fun deepLinkToProductPage(url: String, context: Context) {
         } catch (e: Exception) {
             Log.e(TAG, "Failed to send deep link pending intent", e)
         }
+    } ?: run {
+        /*cannot deeplink to a product with the given click-through , go to homepage */
+        with(context) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            val activity = this as? DeepLinkActivity
+            activity?. finish()
+        }
+        Log.e(TAG, "The Product value is null ")
     }
 }
 
