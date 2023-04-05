@@ -106,47 +106,47 @@ fun SearchBar(
             )
         }
     }, actions = {
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 2.dp)
-                    .onFocusChanged { focusState ->
-                        showClearButton = (focusState.isFocused)
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 2.dp)
+                .onFocusChanged { focusState ->
+                    showClearButton = (focusState.isFocused)
+                }
+                .focusRequester(focusRequester),
+            value = searchText,
+            onValueChange = onSearchTextChanged,
+            placeholder = {
+                Text(text = placeholderText)
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                backgroundColor = Color.Transparent,
+                cursorColor = LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
+            ),
+            trailingIcon = {
+                AnimatedVisibility(
+                    visible = showClearButton,
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    IconButton(onClick = { onClearClick() }) {
+                        Icon(
+                            imageVector = Icons.Filled.Close,
+                            contentDescription = stringResource(id = R.string.app_name)
+                        )
                     }
-                    .focusRequester(focusRequester),
-                value = searchText,
-                onValueChange = onSearchTextChanged,
-                placeholder = {
-                    Text(text = placeholderText)
-                },
-                colors = TextFieldDefaults.textFieldColors(
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    backgroundColor = Color.Transparent,
-                    cursorColor = LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
-                ),
-                trailingIcon = {
-                    AnimatedVisibility(
-                        visible = showClearButton,
-                        enter = fadeIn(),
-                        exit = fadeOut()
-                    ) {
-                        IconButton(onClick = { onClearClick() }) {
-                            Icon(
-                                imageVector = Icons.Filled.Close,
-                                contentDescription = stringResource(id = R.string.app_name)
-                            )
-                        }
-                    }
-                },
-                maxLines = 1,
-                singleLine = true,
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(onDone = {
-                    keyboardController?.hide()
-                })
-            )
-        })
+                }
+            },
+            maxLines = 1,
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = {
+                keyboardController?.hide()
+            })
+        )
+    })
 
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
