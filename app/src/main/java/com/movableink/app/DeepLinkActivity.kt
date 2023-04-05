@@ -52,7 +52,7 @@ class DeepLinkActivity : ComponentActivity() {
 
         when (urlScheme(uri)) {
             Scheme.INTERNAL -> {
-                deepLinkToProductPage(uri, this@DeepLinkActivity)
+                deepLinkToProductPage(uri, this@DeepLinkActivity, Scheme.INTERNAL)
             }
             Scheme.GLOBAL -> {
                 lifecycleScope.launch {
@@ -64,7 +64,9 @@ class DeepLinkActivity : ComponentActivity() {
                     }
                 }
             }
-            Scheme.OTHER -> return
+            Scheme.OTHER -> {
+                return
+            }
         }
     }
 }

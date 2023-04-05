@@ -10,13 +10,14 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         MIClient.start()
+        MIClient.registerDeeplinkDomains(listOf("afra.io"))
         Braze.getInstance(applicationContext).logCustomEvent("Testing")
         BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(applicationContext)
         registerActivityLifecycleCallbacks(
             BrazeActivityLifecycleCallbackListener(
                 true,
-                true,
-            ),
+                true
+            )
         )
     }
 }

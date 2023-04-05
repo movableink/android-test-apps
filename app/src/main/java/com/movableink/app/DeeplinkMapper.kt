@@ -12,8 +12,8 @@ private const val TAG = "DeepLinkMapper"
 private const val MISCHEME = "miapp"
 private const val HTTPSCHEME = "https"
 
-fun deepLinkToProductPage(url: String, context: Context) {
-    URIPath.getProductFromURI(url.toUri())?.let { productId ->
+fun deepLinkToProductPage(url: String, context: Context, scheme: Scheme = Scheme.GLOBAL) {
+    URIPath.getProductFromURI(url.toUri(), scheme)?.let { productId ->
         val productDetailIntent = Intent(
             Intent.ACTION_VIEW,
             "${DeepLinkPattern.baseDestination}/$productId".toUri(),
