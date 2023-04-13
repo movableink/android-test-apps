@@ -34,9 +34,6 @@ dependencies {
     implementation(AndroidX.compose.ui.tooling)
     implementation(AndroidX.navigation.compose)
     implementation(AndroidX.compose.ui.util)
-    implementation(COIL.compose)
-    implementation(COIL.base)
-    implementation(KotlinX.serialization.json)
     //braze
     implementation("com.braze:android-sdk-ui:24.2.0")
     implementation("com.braze:android-sdk-location:24.2.0")
