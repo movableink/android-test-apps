@@ -17,6 +17,7 @@ allprojects {
     repositories {
         google()
         maven(url = "https://appboy.github.io/appboy-android-sdk/sdk")
+        maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 

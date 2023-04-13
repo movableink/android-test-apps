@@ -33,14 +33,12 @@ dependencies {
     implementation(AndroidX.compose.ui.tooling)
     implementation(AndroidX.navigation.compose)
     implementation(AndroidX.compose.ui.util)
-    implementation(Square.okHttp3.okHttp)
-    implementation(Square.okHttp3.loggingInterceptor)
     implementation(COIL.compose)
     implementation(COIL.base)
-    implementation(AndroidX.dataStore.preferences)
     implementation(KotlinX.serialization.json)
     implementation("com.braze:android-sdk-ui:24.2.0")
     implementation("com.braze:android-sdk-location:24.2.0")
+    implementation("com.movableink.sdk:inked:1.0.0")
     // testing dependencies
     testImplementation(Testing.junit4)
     testImplementation(AndroidX.test.ext.junit)
@@ -52,13 +50,4 @@ dependencies {
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.espresso.core)
-
-    implementation(
-        fileTree("libs/") {
-            // You can add as many include or exclude calls as you want
-            include("inked-debug.aar")
-            // You can also include all files by using a pattern wildcard
-            include("*.jar")
-        },
-    )
 }
