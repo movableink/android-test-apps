@@ -11,6 +11,7 @@ buildscript {
         classpath(Android.tools.build.gradlePlugin)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
         classpath("com.diffplug.spotless:spotless-plugin-gradle:6.12.1")
+        classpath ("com.google.gms:google-services:4.3.15")
     }
 }
 allprojects {

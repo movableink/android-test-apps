@@ -11,4 +11,9 @@
     <string name="searchResults">Results Found:</string>
     <string name="noResults">No matches found</string>
     <string name="search_label">Search products</string>
+    <string name="testUSerId">user-%s</string>
+    <string name="msg_token_fmt">format</string>
+    <string name="testuserName">Quasimodo</string>
+    <string name="testUserLastName">Sunday</string>
+    <string name="braze_channel_name">Braze Fallback Channel</string>
 </resources>

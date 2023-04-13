@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("com.google.gms.google-services")
 }
 
 apply(from = "android.gradle")
@@ -36,9 +37,13 @@ dependencies {
     implementation(COIL.compose)
     implementation(COIL.base)
     implementation(KotlinX.serialization.json)
+    //braze
     implementation("com.braze:android-sdk-ui:24.2.0")
     implementation("com.braze:android-sdk-location:24.2.0")
     implementation("com.movableink.sdk:inked:1.0.0")
+    // firebase messaging
+    implementation("com.google.firebase:firebase-core:21.1.1")
+    implementation("com.google.firebase:firebase-messaging:23.1.2")
     // testing dependencies
     testImplementation(Testing.junit4)
     testImplementation(AndroidX.test.ext.junit)
