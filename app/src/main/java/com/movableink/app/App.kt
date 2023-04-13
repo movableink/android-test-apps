@@ -16,15 +16,17 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         MIClient.start()
+        MIClient.registerDeeplinkDomains(
+            listOf("afra.io")
+        )
+        Braze.getInstance(applicationContext).logCustomEvent("Testing")
+        BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(applicationContext)
         FirebaseApp.initializeApp(this)
         registerActivityLifecycleCallbacks(
             BrazeActivityLifecycleCallbackListener(
                 sessionHandlingEnabled = true,
                 registerInAppMessageManager = true
             )
-        )
-        MIClient.registerDeeplinkDomains(
-            listOf("afra.io")
         )
         // set up braze config
         Braze.getInstance(applicationContext).logCustomEvent("Testing")

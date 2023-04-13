@@ -41,6 +41,7 @@ dependencies {
     implementation("com.braze:android-sdk-ui:24.2.0")
     implementation("com.braze:android-sdk-location:24.2.0")
     implementation("com.movableink.sdk:inked:1.0.0")
+    implementation("com.movableink.sdk:inked:1.0.0")
     // firebase messaging
     implementation("com.google.firebase:firebase-core:21.1.1")
     implementation("com.google.firebase:firebase-messaging:23.1.2")
