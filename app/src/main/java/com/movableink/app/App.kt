@@ -11,13 +11,16 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.movableink.inked.MIClient
-
+import com.appsflyer.AppsFlyerLib
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        AppsFlyerLib.getInstance().init(getString(R.string.apps_flyer_id), null, this)
+        AppsFlyerLib.getInstance().start(this)
+        AppsFlyerLib.getInstance().setDebugLog(true)
         MIClient.start()
         MIClient.registerDeeplinkDomains(
-            listOf("afra.io")
+            listOf("afra.io"),
         )
         Braze.getInstance(applicationContext).logCustomEvent("Testing")
         BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(applicationContext)
@@ -25,8 +28,8 @@ class App : Application() {
         registerActivityLifecycleCallbacks(
             BrazeActivityLifecycleCallbackListener(
                 sessionHandlingEnabled = true,
-                registerInAppMessageManager = true
-            )
+                registerInAppMessageManager = true,
+            ),
         )
         // set up braze config
         Braze.getInstance(applicationContext).logCustomEvent("Testing")
