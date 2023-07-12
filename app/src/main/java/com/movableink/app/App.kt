@@ -3,6 +3,7 @@ package com.movableink.app
 import android.app.Application
 import android.os.Build
 import android.util.Log
+import com.appsflyer.AppsFlyerLib
 import com.braze.Braze
 import com.braze.BrazeActivityLifecycleCallbackListener
 import com.braze.configuration.BrazeConfig
@@ -12,12 +13,18 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.movableink.inked.MIClient
 
+private const val LOG_TAG: String = "Application"
+
 class App : Application() {
+
     override fun onCreate() {
         super.onCreate()
+        AppsFlyerLib.getInstance().init(getString(R.string.apps_flyer_id).trim(), null, this)
+        AppsFlyerLib.getInstance().start(this)
+        AppsFlyerLib.getInstance().setDebugLog(true)
         MIClient.start()
         MIClient.registerDeeplinkDomains(
-            listOf("afra.io")
+            listOf("afra.io"),
         )
         Braze.getInstance(applicationContext).logCustomEvent("Testing")
         BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(applicationContext)
@@ -25,8 +32,8 @@ class App : Application() {
         registerActivityLifecycleCallbacks(
             BrazeActivityLifecycleCallbackListener(
                 sessionHandlingEnabled = true,
-                registerInAppMessageManager = true
-            )
+                registerInAppMessageManager = true,
+            ),
         )
         // set up braze config
         Braze.getInstance(applicationContext).logCustomEvent("Testing")
@@ -39,7 +46,7 @@ class App : Application() {
         Braze.configure(this, brazeConfig)
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task: Task<String?> ->
             if (!task.isSuccessful) {
-                Log.w("TAG", "Exception while registering FCM token with Braze.", task.exception)
+                Log.w(LOG_TAG, "Exception while registering FCM token with Braze.", task.exception)
                 return@addOnCompleteListener
             }
             val token = task.result

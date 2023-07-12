@@ -34,11 +34,14 @@ dependencies {
     implementation(AndroidX.compose.ui.tooling)
     implementation(AndroidX.navigation.compose)
     implementation(AndroidX.compose.ui.util)
+    //apps-flyer
+    implementation ("com.appsflyer:af-android-sdk:6.12.1")
+    implementation ("com.android.installreferrer:installreferrer:2.2")
+
     //braze
     implementation("com.braze:android-sdk-ui:24.2.0")
     implementation("com.braze:android-sdk-location:24.2.0")
-    implementation("com.movableink.sdk:inked:1.0.0")
-    implementation("com.movableink.sdk:inked:1.0.0")
+    implementation("com.movableink.sdk:inked:1.1.2")
     // firebase messaging
     implementation("com.google.firebase:firebase-core:21.1.1")
     implementation("com.google.firebase:firebase-messaging:23.1.2")
