@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingCart"
         tools:targetApi="31"
+        android:hardwareAccelerated="true"
         tools:ignore="HardcodedDebugMode">
         <meta-data
             android:name="com.movableink.inked.API_KEY"
