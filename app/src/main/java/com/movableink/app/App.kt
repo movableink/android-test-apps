@@ -43,10 +43,11 @@ class App : Application() {
         Braze.getInstance(applicationContext).logCustomEvent("Testing")
         setBrazeIdentifiers()
 
+//
+//        BrazeInAppMessageManager.getInstance().setCustomInAppMessageManagerListener(
+//            BrazeListener(this),
+//        )
 
-        BrazeInAppMessageManager.getInstance().setCustomInAppMessageManagerListener(
-            BrazeListener(this),
-        )
         BrazeInAppMessageManager.getInstance().ensureSubscribedToInAppMessageEvents(applicationContext)
 
         val brazeConfig = BrazeConfig.Builder()
