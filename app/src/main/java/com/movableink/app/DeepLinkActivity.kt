@@ -3,9 +3,9 @@ package com.movableink.app
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.ComponentActivity
 import androidx.lifecycle.lifecycleScope
-import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.movableink.inked.MIClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,9 +15,9 @@ import kotlinx.coroutines.withContext
 class DeepLinkActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         handleIntent(intent)
     }
+
     private fun handleIntent(intent: Intent?) {
         intent?.let {
             if (it.action == Intent.ACTION_VIEW) {
@@ -33,14 +33,9 @@ class DeepLinkActivity : ComponentActivity() {
 
     public override fun onResume() {
         super.onResume()
-        // Registers the BrazeInAppMessageManager for the current Activity. This Activity will now listen for
-        // in-app messages from Braze.
-        BrazeInAppMessageManager.getInstance().registerInAppMessageManager(this)
     }
     public override fun onPause() {
         super.onPause()
-        // Unregisters the BrazeInAppMessageManager.
-        BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(this)
     }
 
     private fun fetchClickableLink(uri: String) {

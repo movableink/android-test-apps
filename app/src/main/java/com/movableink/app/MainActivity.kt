@@ -1,15 +1,18 @@
 package com.movableink.app
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.braze.ui.inappmessage.BrazeInAppMessageManager
+import com.movableink.inked.MIClient
 
 private const val TAG = "MainActivity "
 
@@ -30,17 +33,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    public override fun onResume() {
-        super.onResume()
-        // Registers the BrazeInAppMessageManager for the current Activity. This Activity will now listen for
-        // in-app messages from Braze.
-        BrazeInAppMessageManager.getInstance().registerInAppMessageManager(this)
-    }
-    public override fun onPause() {
-        super.onPause()
-        // Unregisters the BrazeInAppMessageManager.
-        BrazeInAppMessageManager.getInstance().unregisterInAppMessageManager(this)
-    }
+
     private fun askNotificationPermission() {
         // This is only necessary for API level >= 33 (TIRAMISU)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -52,6 +45,40 @@ class MainActivity : ComponentActivity() {
             } else {
                 // Directly ask for the permission
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        fetchClickableLink()
+    }
+    private fun fetchClickableLink() {
+        val context = this
+        MIClient.checkPasteboardOnInstall { resolvedLink ->
+            Log.d("ksk", "haha $resolvedLink")
+            Toast.makeText(this, " Text From CP: $resolvedLink",Toast.LENGTH_LONG ).show()
+            try {
+
+                resolvedLink?.let {
+                    val uri = Uri.parse(it)
+                    if (uri != null) {
+                        // Check if your app can handle this URI
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        if (intent.resolveActivity(packageManager) != null) {
+                            Log.d(TAG, "fetchClickableLink: hahahah yeah {${intent.action}}")
+                            startActivity(intent)
+                        } else {
+
+                            Log.d(TAG, "fetchClickableLink: hahahah Not")
+                            Toast.makeText(this, "Cannot open the link", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+            }
+            catch (e:Exception){
+                Log.d(TAG, "fetchClickableLink: Error :${e.message}")
             }
         }
     }
