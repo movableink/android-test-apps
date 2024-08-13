@@ -23,6 +23,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingCart
@@ -55,6 +56,7 @@ import androidx.navigation.compose.composable
 import com.movableink.app.R
 import com.movableink.app.ui.screens.cart.Cart
 import com.movableink.app.ui.screens.cart.CartViewModel
+import com.movableink.app.ui.screens.home.AppSettings
 import com.movableink.app.ui.screens.home.HomeScreen
 import com.movableink.app.ui.screens.home.HomeViewModel
 import com.movableink.app.ui.screens.search.Search
@@ -87,6 +89,9 @@ fun NavGraphBuilder.addHomeGraph(
     composable(HomeSections.CART.route) { from ->
         Cart(cartViewModel)
     }
+    composable(HomeSections.SETTINGS.route){
+       AppSettings()
+    }
 }
 
 enum class HomeSections(
@@ -97,6 +102,7 @@ enum class HomeSections(
     HOME(R.string.home_feed, Icons.Outlined.Home, "home/init"),
     SEARCH(R.string.home_search, Icons.Outlined.Search, "home/search"),
     CART(R.string.home_cart, Icons.Outlined.ShoppingCart, "home/cart"),
+    SETTINGS(R.string.settings, Icons.Filled.Settings, "home/cart"),
 }
 
 @Composable

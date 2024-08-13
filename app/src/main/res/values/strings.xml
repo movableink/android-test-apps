@@ -17,4 +17,5 @@
     <string name="testUserLastName">Sunday</string>
     <string name="braze_channel_name">Braze Fallback Channel</string>
     <string name="apps_flyer_id">bZJ8XHti6cTg5giXXuH2BZ</string>
+    <string name="settings">settings</string>
 </resources>
