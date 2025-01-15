@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.update
 
 class CartViewModel(
     private val snackbarManager: SnackbarManager,
-    repository: MovableRepository
+    repository: MovableRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(CartState())
@@ -22,7 +22,7 @@ class CartViewModel(
         val updatedCart = _uiState.value.cart.plus(product)
         _uiState.update { currentState ->
             currentState.copy(
-                cart = updatedCart
+                cart = updatedCart,
             )
         }
         snackbarManager.showMessage(R.string.cart_updated)
@@ -36,7 +36,7 @@ class CartViewModel(
         val updatedCart = listOf<Product>()
         _uiState.update { currentState ->
             currentState.copy(
-                cart = updatedCart
+                cart = updatedCart,
             )
         }
         snackbarManager.showMessage(R.string.cart_checked_out)
@@ -44,7 +44,7 @@ class CartViewModel(
     companion object {
         fun provideFactory(
             snackbarManager: SnackbarManager = SnackbarManager,
-            movableRepository: MovableRepository = MovableRepository
+            movableRepository: MovableRepository = MovableRepository,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -54,5 +54,5 @@ class CartViewModel(
     }
 }
 data class CartState(
-    val cart: List<Product> = arrayListOf()
+    val cart: List<Product> = arrayListOf(),
 )

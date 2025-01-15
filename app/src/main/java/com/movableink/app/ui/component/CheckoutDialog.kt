@@ -36,24 +36,24 @@ fun CheckoutDialog(setShowDialog: (Boolean) -> Unit, cartViewModel: CartViewMode
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Surface(
             shape = RoundedCornerShape(16.dp),
-            color = Color.White
+            color = Color.White,
         ) {
             Box(
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
                             text = "Buy Products?",
                             style = TextStyle(
                                 fontSize = 24.sp,
                                 fontFamily = FontFamily.Default,
-                                fontWeight = FontWeight.Bold
-                            )
+                                fontWeight = FontWeight.Bold,
+                            ),
                         )
                         Icon(
                             imageVector = Icons.Filled.Close,
@@ -62,7 +62,7 @@ fun CheckoutDialog(setShowDialog: (Boolean) -> Unit, cartViewModel: CartViewMode
                             modifier = Modifier
                                 .width(30.dp)
                                 .height(30.dp)
-                                .clickable { setShowDialog(true) }
+                                .clickable { setShowDialog(true) },
                         )
                     }
 
@@ -79,7 +79,7 @@ fun CheckoutDialog(setShowDialog: (Boolean) -> Unit, cartViewModel: CartViewMode
                             shape = RoundedCornerShape(50.dp),
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(50.dp)
+                                .height(50.dp),
                         ) {
                             Text(text = "Buy Items")
                         }

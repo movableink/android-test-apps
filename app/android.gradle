@@ -3,7 +3,10 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     namespace 'com.movableink.app'
-    compileSdkVersion findProperty("compileSdkVersion") as Integer
+    compileSdk findProperty("compileSdkVersion") as Integer
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -20,7 +23,6 @@ android {
         versionCode findProperty("versionCode") as Integer
         versionName findProperty("versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         manifestPlaceholders ["MOVABLE_INK_SDK_API_KEY"] = localProperties['MOVABLE_INK_SDK_API_KEY']
         vectorDrawables.useSupportLibrary = true
 
@@ -32,7 +34,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.0'
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     packagingOptions {
         resources {

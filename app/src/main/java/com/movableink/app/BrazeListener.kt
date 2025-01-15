@@ -14,10 +14,11 @@ class BrazeListener(activity: Activity) : IInAppMessageManagerListener {
 
     override fun beforeInAppMessageDisplayed(inAppMessage: IInAppMessage): InAppMessageOperation {
         if (inAppMessage.extras.containsKey(KEY_MI_LINK)) {
-         */
+ */
 /*  let the MovableInk SDK handle this.
             Log the impression to Braze, ask MIClient to show the message, and return .discard to
-            notify the Braze SDK that we don't want it to show anything.*//*
+            notify the Braze SDK that we don't want it to show anything.*/
+/*
 
             val movableLink = inAppMessage.extras[KEY_MI_LINK] as String
             MIClient.showInAppBrowser(

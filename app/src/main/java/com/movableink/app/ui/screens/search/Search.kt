@@ -28,7 +28,7 @@ fun Search(
     onSearchBarClick: () -> Unit,
     searchViewModel: SearchViewModel,
     homeViewModel: HomeViewModel,
-    navigateToProductDetail: (String) -> Unit
+    navigateToProductDetail: (String) -> Unit,
 ) {
     val products by searchViewModel.products.collectAsStateWithLifecycle()
     Column(modifier = Modifier.fillMaxSize()) {
@@ -40,7 +40,7 @@ fun Search(
                 .padding(10.dp),
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
 
         SearchProductList(products = products) { product ->
@@ -55,11 +55,11 @@ fun SearchViewBar(onSearchBarClick: () -> Unit) {
     TopAppBar(title = { Text("Search Products") }, actions = {
         IconButton(
             modifier = Modifier,
-            onClick = onSearchBarClick
+            onClick = onSearchBarClick,
         ) {
             Icon(
                 Icons.Filled.Search,
-                contentDescription = stringResource(id = R.string.app_name)
+                contentDescription = stringResource(id = R.string.app_name),
             )
         }
     })

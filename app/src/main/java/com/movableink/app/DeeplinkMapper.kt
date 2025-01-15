@@ -18,7 +18,7 @@ fun deepLinkToProductPage(url: String, context: Context, scheme: Scheme = Scheme
             Intent.ACTION_VIEW,
             "${DeepLinkPattern.baseDestination}/$productId".toUri(),
             context,
-            MainActivity::class.java
+            MainActivity::class.java,
         ).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
@@ -65,5 +65,5 @@ fun urlScheme(urlString: String): Scheme {
 enum class Scheme {
     INTERNAL,
     GLOBAL,
-    OTHER
+    OTHER,
 }

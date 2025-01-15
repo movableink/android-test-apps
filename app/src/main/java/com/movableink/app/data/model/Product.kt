@@ -9,7 +9,7 @@ data class Product(
     val price: Long,
     val name: String,
     val gender: String,
-    val category: String
+    val category: String,
 )
 
 val productList = listOf(
@@ -19,7 +19,7 @@ val productList = listOf(
         4450,
         "Women's Levi's® 505™ Straight Jeans",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "1695762",
@@ -27,7 +27,7 @@ val productList = listOf(
         4000,
         "Women's Gloria Vanderbilt Amanda Classic Tapered Jeans",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "1731442",
@@ -35,7 +35,7 @@ val productList = listOf(
         4400,
         "Women's Plus Size Gloria Vanderbilt Amanda Classic Tapered Jeans",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "1833330",
@@ -43,7 +43,7 @@ val productList = listOf(
         17900,
         "Men's Jean-Paul Germain Classic-Fit Microsuede Blazer",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "1878818",
@@ -51,7 +51,7 @@ val productList = listOf(
         4500,
         "Women's Lee Modern Fit Curvy Bootcut Jeans",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "2263298",
@@ -59,7 +59,7 @@ val productList = listOf(
         4000,
         "Women's Lee Relaxed Fit Straight Leg Jeans",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "2375187",
@@ -67,7 +67,7 @@ val productList = listOf(
         4200,
         "Women's Simply Vera Vera Wang Rivet Denim Leggings",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "2403210",
@@ -75,7 +75,7 @@ val productList = listOf(
         22000,
         "Men's Chaps Performance Classic-Fit Wool-Blend Comfort Stretch Suit Jacket",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2426788",
@@ -83,7 +83,7 @@ val productList = listOf(
         30000,
         "Men's Apt. 9® Slim-Fit Unhemmed Suit",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "2439667",
@@ -91,7 +91,7 @@ val productList = listOf(
         22000,
         "Men's Chaps Classic-Fit Wool-Blend Performance Suit Jacket",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2447810",
@@ -99,7 +99,7 @@ val productList = listOf(
         30000,
         "Men's Croft & Barrow Classic-Fit Unhemmed Suit",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "2467840",
@@ -107,7 +107,7 @@ val productList = listOf(
         3600,
         "Women's Briggs Comfort Waistband A-Line Skirt",
         "women",
-        "skirts"
+        "skirts",
     ),
     Product(
         "2480979",
@@ -115,7 +115,7 @@ val productList = listOf(
         24000,
         "Men's Marc Anthony Slim-Fit Stretch Suit Jacket",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2481364",
@@ -123,7 +123,7 @@ val productList = listOf(
         3000,
         "Women's Tek Gear® Knit Workout Skort",
         "women",
-        "skirts"
+        "skirts",
     ),
     Product(
         "2516619",
@@ -131,7 +131,7 @@ val productList = listOf(
         3400,
         "Men's Croft & Barrow® Patterned Tie",
         "men",
-        "ties"
+        "ties",
     ),
     Product(
         "2527130",
@@ -139,7 +139,7 @@ val productList = listOf(
         22000,
         "Men's Van Heusen Flex Slim-Fit Suit Jacket",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2591560",
@@ -147,7 +147,7 @@ val productList = listOf(
         7498,
         "Women's Chaps Pleated Sheath Dress",
         "women",
-        "dresses"
+        "dresses",
     ),
     Product(
         "2599191",
@@ -155,7 +155,7 @@ val productList = listOf(
         6000,
         "Men's Columbia Flattop Ridge Fleece Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2608418",
@@ -163,7 +163,7 @@ val productList = listOf(
         12999,
         "Men's Columbia Rockaway Mountain Interchange Systems Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2694388",
@@ -171,7 +171,7 @@ val productList = listOf(
         13499,
         "Men's Towne Wool-Blend Double-Breasted Peacoat with Plaid Scarf",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2728436",
@@ -179,7 +179,7 @@ val productList = listOf(
         22000,
         "Men's J.M. Haggar Premium Slim-Fit Stretch Suit Coat",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2753275",
@@ -187,7 +187,7 @@ val productList = listOf(
         3699,
         "Women's White Mark Solid Midi Skirt",
         "women",
-        "skirts"
+        "skirts",
     ),
     Product(
         "2783785",
@@ -195,7 +195,7 @@ val productList = listOf(
         18000,
         "Men's Apt. 9<sup>®</sup> Premier Flex Slim-Fit Suit Coat",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2852223",
@@ -203,7 +203,7 @@ val productList = listOf(
         8999,
         "Men's Columbia Wister Slope Colorblock Thermal Coil Insulated Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2871342",
@@ -211,7 +211,7 @@ val productList = listOf(
         3999,
         "Men's ZeroXposur Rocker Softshell Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2874625",
@@ -219,7 +219,7 @@ val productList = listOf(
         3500,
         "Men's Champion Fleece Powerblend Top",
         "men",
-        "shirts"
+        "shirts",
     ),
     Product(
         "2877645",
@@ -227,7 +227,7 @@ val productList = listOf(
         9999,
         "Men's Columbia Rapid Excursion Thermal Coil Puffer Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2881280",
@@ -235,7 +235,7 @@ val productList = listOf(
         3500,
         "Women's Apt. 9® Embellished Bootcut Jeans",
         "men",
-        "jeans"
+        "jeans",
     ),
     Product(
         "2898455",
@@ -243,7 +243,7 @@ val productList = listOf(
         4999,
         "Men's Heat Keep Nano Modern-Fit Packable Puffer Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2900935",
@@ -251,7 +251,7 @@ val productList = listOf(
         1998,
         "Men's Urban Pipeline® Awesomely Soft Ultimate Plaid Flannel Shirt",
         "men",
-        "shirts"
+        "shirts",
     ),
     Product(
         "2939320",
@@ -259,7 +259,7 @@ val productList = listOf(
         9399,
         "Men's Andrew Marc Wool-Blend Peacoat",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "2957101",
@@ -267,7 +267,7 @@ val productList = listOf(
         1499,
         "Men's Croft & Barrow® Classic-Fit Easy-Care Henley",
         "men",
-        "shirts"
+        "shirts",
     ),
     Product(
         "2957114",
@@ -275,7 +275,7 @@ val productList = listOf(
         1698,
         "Men's Croft & Barrow® Classic-Fit Easy-Care Interlock Polo",
         "men",
-        "shirts"
+        "shirts",
     ),
     Product(
         "2959247",
@@ -283,7 +283,7 @@ val productList = listOf(
         1499,
         "Men's Croft & Barrow® True Comfort Plaid Classic-Fit Flannel Button-Down Shirt",
         "men",
-        "shirts"
+        "shirts",
     ),
     Product(
         "2962920",
@@ -291,7 +291,7 @@ val productList = listOf(
         5000,
         "Women's Simply Vera Vera Wang Skinny Jeans",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "2964013",
@@ -299,7 +299,7 @@ val productList = listOf(
         3199,
         "LC Lauren Conrad Runway Collection Pleated Velvet Skirt - Women's",
         "wommen",
-        "skirts"
+        "skirts",
     ),
     Product(
         "2964826",
@@ -307,7 +307,7 @@ val productList = listOf(
         2499,
         "Women's Apt. 9® Tummy Control Pull-On Pencil Skirt",
         "women",
-        "skirts"
+        "skirts",
     ),
     Product(
         "2971290",
@@ -315,7 +315,7 @@ val productList = listOf(
         6400,
         "Men's Chaps Classic-Fit Corduroy Stretch Sport Coat",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2972771",
@@ -323,7 +323,7 @@ val productList = listOf(
         6400,
         "Men's Van Heusen Flex Slim-Fit Sport Coat",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "2980246",
@@ -331,7 +331,7 @@ val productList = listOf(
         1499,
         "Men's Croft & Barrow® Arctic Fleece Quarter-Zip Pullover",
         "men",
-        "shirts"
+        "shirts",
     ),
     Product(
         "2982007",
@@ -339,7 +339,7 @@ val productList = listOf(
         4000,
         "Women's Wallflower Luscious Curvy Bootcut Jeans",
         "women",
-        "jeans"
+        "jeans",
     ),
     Product(
         "2984389",
@@ -347,7 +347,7 @@ val productList = listOf(
         4000,
         "Women's Tek Gear® Hooded Long Sleeve Dress",
         "women",
-        "dresses"
+        "dresses",
     ),
     Product(
         "2995056",
@@ -355,7 +355,7 @@ val productList = listOf(
         1499,
         "Women's Croft & Barrow® Essential Ribbed Turtleneck Sweater",
         "women",
-        "sweaters"
+        "sweaters",
     ),
     Product(
         "2999682",
@@ -363,7 +363,7 @@ val productList = listOf(
         2499,
         "Women's Apt. 9® Cozy Shawl Collar Cardigan",
         "men",
-        "sweaters"
+        "sweaters",
     ),
     Product(
         "3003041",
@@ -371,7 +371,7 @@ val productList = listOf(
         2999,
         "Women's Apt. 9® Fit & Flare Dress",
         "men",
-        "dresses"
+        "dresses",
     ),
     Product(
         "3009587",
@@ -379,7 +379,7 @@ val productList = listOf(
         3699,
         "Men's New Balance Sherpa-Lined Polar Fleece Hooded Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "3021766",
@@ -387,7 +387,7 @@ val productList = listOf(
         1499,
         "Women's SONOMA Goods for Life™ Lattice Sweater",
         "women",
-        "sweaters"
+        "sweaters",
     ),
     Product(
         "3024658",
@@ -395,7 +395,7 @@ val productList = listOf(
         9999,
         "Men's Free Country 3-in-1 Systems Jacket",
         "men",
-        "jackets"
+        "jackets",
     ),
     Product(
         "3028158",
@@ -403,7 +403,7 @@ val productList = listOf(
         2499,
         "Women's Apt. 9® Lace Yoke A-Line Dress",
         "men",
-        "dresses"
+        "dresses",
     ),
     Product(
         "3036618",
@@ -411,7 +411,7 @@ val productList = listOf(
         1199,
         "Big & Tall Croft & Barrow® Classic-Fit Easy-Care Interlock Polo",
         "men",
-        "shirts"
+        "shirts",
     ),
     Product(
         "3040746",
@@ -419,7 +419,7 @@ val productList = listOf(
         8800,
         "Women's Rock & Republic® Fever Denim Rx™ Pull-On Jean Leggings",
         "men",
-        "jeans"
+        "jeans",
     ),
     Product(
         "3054934",
@@ -427,7 +427,7 @@ val productList = listOf(
         3899,
         "Chaps Women's Metallic Faux-Suede Pleated Midi Skirt",
         "women",
-        "skirts"
+        "skirts",
     ),
     Product(
         "3057086",
@@ -435,7 +435,7 @@ val productList = listOf(
         3200,
         "Women's Dana Buchman Mitered Cowlneck Sweater Dress",
         "women",
-        "dresses"
+        "dresses",
     ),
     Product(
         "3063706",
@@ -443,7 +443,7 @@ val productList = listOf(
         8199,
         "Women's Chaps Satin Trim Jersey Dress",
         "women",
-        "dresses"
+        "dresses",
     ),
     Product(
         "567950",
@@ -451,7 +451,7 @@ val productList = listOf(
         7998,
         "Men's Croft & Barrow® True Comfort Classic-Fit Sport Coat",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "825463",
@@ -459,7 +459,7 @@ val productList = listOf(
         3200,
         "Men's Croft & Barrow® Classic-Fit Easy Care Point-Collar Dress Shirt",
         "men",
-        "suitJackets"
+        "suitJackets",
     ),
     Product(
         "c1193954",
@@ -467,7 +467,7 @@ val productList = listOf(
         15000,
         "Men's Haggar Travel Tailored-Fit Performance Suit Separates",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "c1193957",
@@ -475,7 +475,7 @@ val productList = listOf(
         14500,
         "Men's Marc Anthony Slim-Fit Stretch Suit Separates",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "c1569952",
@@ -483,7 +483,7 @@ val productList = listOf(
         14000,
         "Men's Apt. 9® Premier Flex Extra-Slim Fit Suit Separates",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "c1621950",
@@ -491,7 +491,7 @@ val productList = listOf(
         18000,
         "Men's J.M. Haggar Premium Slim-Fit Stretch Suit Separates",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "c1672950",
@@ -499,7 +499,7 @@ val productList = listOf(
         13000,
         "Men's Apt. 9® Slim-Fit Stretch Suit Separates",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "c1672951",
@@ -507,7 +507,7 @@ val productList = listOf(
         13500,
         "Men's Apt. 9® Extra-Slim Fit Stretch Suit Separates",
         "men",
-        "dressSuit"
+        "dressSuit",
     ),
     Product(
         "c890950",
@@ -515,6 +515,6 @@ val productList = listOf(
         15999,
         "Men's Chaps Performance Classic-Fit Wool-Blend Stretch Suit Separates",
         "men",
-        "dressSuit"
-    )
+        "dressSuit",
+    ),
 )

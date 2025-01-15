@@ -11,51 +11,39 @@ apply(from = "android.gradle")
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions.jvmTarget = "1.8"
 }
-
+@Suppress("DSL_SCOPE_VIOLATION")
 dependencies {
-    implementation(platform(Firebase.bom))
-    implementation(Firebase.authentication)
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.core)
+    implementation(libs.firebase.messaging)
 
-    implementation(Kotlin.stdlib.jdk7)
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.activity.ktx)
-    implementation(AndroidX.constraintLayout)
-    implementation(Google.android.material)
-    implementation(AndroidX.compose.material)
-    implementation(AndroidX.lifecycle.runtime)
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha05")
-    implementation(AndroidX.lifecycle.runtime.compose)
-    implementation(AndroidX.lifecycle.runtime.ktx)
-    implementation(AndroidX.lifecycle.viewModel)
-    implementation(AndroidX.lifecycle.viewModelCompose)
-    implementation(AndroidX.activity.compose)
-    implementation(AndroidX.compose.ui)
-    implementation(AndroidX.compose.ui.tooling)
-    implementation(AndroidX.navigation.compose)
-    implementation(AndroidX.compose.ui.util)
-    // apps-flyer
-    implementation("com.appsflyer:af-android-sdk:6.12.1")
-    implementation("com.android.installreferrer:installreferrer:2.2")
+    implementation(libs.kotlin.stdlib.jdk7)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
 
+    // Compose
+    implementation(libs.bundles.compose)
 
-    implementation("com.movableink.sdk:inked:1.4.0")
+    // Lifecycle
+    implementation(libs.bundles.lifecycle)
 
-    implementation("androidx.browser:browser:1.8.0")
-//    implementation ("androidx.window:window:1.2.0")
+    implementation(libs.activity.compose)
+    implementation(libs.navigation.compose)
 
-    // firebase messaging
-    implementation("com.google.firebase:firebase-core:21.1.1")
-    implementation("com.google.firebase:firebase-messaging:23.1.2")
-    // testing dependencies
-    testImplementation(Testing.junit4)
-    testImplementation(AndroidX.test.ext.junit)
-    androidTestImplementation(AndroidX.test.core)
-    androidTestImplementation(AndroidX.archCore.testing)
-    androidTestImplementation(Testing.mockito.core)
-    androidTestImplementation(Testing.mockito.android)
-    androidTestImplementation(Testing.mockito.kotlin)
-    androidTestImplementation(AndroidX.test.runner)
-    androidTestImplementation(AndroidX.test.rules)
-    androidTestImplementation(AndroidX.test.espresso.core)
+    // Browser
+    implementation(libs.androidx.browser)
+
+    // AppsFlyer
+    implementation(libs.appsflyer)
+    implementation(libs.installreferrer)
+
+    // Movable Ink
+    implementation(libs.movableink)
+    // Testing
+    testImplementation(libs.bundles.test.implementation)
+    androidTestImplementation(libs.bundles.android.test.implementation)
 }

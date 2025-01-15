@@ -39,7 +39,7 @@ fun rememberAppState(
     navController: NavHostController = rememberNavController(),
     snackBarManager: SnackbarManager = SnackbarManager,
     resources: Resources = resources(),
-    coroutineScope: CoroutineScope = rememberCoroutineScope()
+    coroutineScope: CoroutineScope = rememberCoroutineScope(),
 ) =
     remember(scaffoldState, navController, snackBarManager, resources, coroutineScope) {
         AppState(scaffoldState, navController, snackBarManager, resources, coroutineScope)
@@ -51,7 +51,7 @@ class AppState(
     val navController: NavHostController,
     private val snackbarManager: SnackbarManager,
     private val resources: Resources,
-    coroutineScope: CoroutineScope
+    coroutineScope: CoroutineScope,
 ) {
     init {
         coroutineScope.launch {
@@ -94,7 +94,10 @@ class AppState(
         }
     }
 
-    fun navigateToCategories(gender: String, from: NavBackStackEntry) {
+    fun navigateToCategories(
+        gender: String,
+        from: NavBackStackEntry,
+    ) {
         if (from.lifecycleIsResumed()) {
             navController.navigate("${MainDestinations.CATEGORIES_ROUTE}/$gender")
         }
@@ -119,8 +122,7 @@ class AppState(
  *
  * This is used to de-duplicate navigation events.
  */
-private fun NavBackStackEntry.lifecycleIsResumed() =
-    this.getLifecycle().currentState == Lifecycle.State.RESUMED
+private fun NavBackStackEntry.lifecycleIsResumed() = this.lifecycle.currentState == Lifecycle.State.RESUMED
 
 private val NavGraph.startDestination: NavDestination?
     get() = findNode(startDestinationId)

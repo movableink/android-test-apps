@@ -3,7 +3,6 @@ package com.movableink.app
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.core.app.ComponentActivity
 import androidx.lifecycle.lifecycleScope
 import com.movableink.inked.MIClient

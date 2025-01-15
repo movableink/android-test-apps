@@ -67,7 +67,7 @@ fun CatalogScreen(
     onBackClicked: () -> Unit,
     viewModel: CartViewModel,
     onViewCart: () -> Unit,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
 ) {
     val homeUIState by homeViewModel.homeUIState.collectAsStateWithLifecycle()
 
@@ -77,12 +77,12 @@ fun CatalogScreen(
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Spacer(
             Modifier.windowInsetsTopHeight(
-                WindowInsets.statusBars.add(WindowInsets(top = 60.dp))
-            )
+                WindowInsets.statusBars.add(WindowInsets(top = 60.dp)),
+            ),
         )
         if (cartUiState.cart.isNotEmpty()) {
             CartItems(cartUiState.cart, onViewCart)
@@ -96,12 +96,12 @@ fun CatalogScreen(
 private fun Products(
     products: List<Product>,
     onProductClick: (String) -> Unit,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         items(products) { product ->
             ProductItem(product, onProductClick, homeViewModel)
@@ -114,15 +114,15 @@ fun ProductItem(
     product: Product,
     onProductClick: (String) -> Unit,
     homeViewModel: HomeViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier
             .size(
                 width = 250.dp,
-                height = 250.dp
+                height = 250.dp,
             )
-            .padding(all = 10.dp)
+            .padding(all = 10.dp),
     ) {
         Column(
             modifier = Modifier
@@ -131,22 +131,22 @@ fun ProductItem(
                     MIClient.productViewed(mapOf("id" to product.id))
                     onProductClick(product.id)
                 })
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             Box(
                 modifier = Modifier
                     .height(160.dp)
                     .fillMaxWidth()
                     .background(
-                        colorResource(id = android.R.color.transparent)
-                    )
+                        colorResource(id = android.R.color.transparent),
+                    ),
             ) {
                 ProductImage(
                     imageUrl = product.imageUrl,
                     modifier = Modifier
                         .size(120.dp)
                         .padding(8.dp)
-                        .align(Alignment.TopCenter)
+                        .align(Alignment.TopCenter),
                 )
             }
             Text(
@@ -155,7 +155,7 @@ fun ProductItem(
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.body2,
                 color = Color.Black,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = 16.dp),
             )
             // Spacer(modifier = Modifier.height(4.dp))
             Text(
@@ -164,7 +164,7 @@ fun ProductItem(
                 color = Color.Gray,
                 modifier = Modifier
                     .align(Alignment.End)
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = 16.dp),
 
             )
         }
@@ -174,12 +174,12 @@ fun ProductItem(
 @Composable
 fun ProductImage(
     imageUrl: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         color = Color.Transparent,
         shape = RoundedCornerShape(10.dp),
-        modifier = modifier
+        modifier = modifier,
     ) {
         fetchDrawableByName(imageUrl, context = LocalContext.current).apply {
             val painter: Painter = painterResource(id = this)
@@ -190,7 +190,7 @@ fun ProductImage(
                 painter = painter,
                 alignment = Alignment.CenterStart,
                 contentDescription = "",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
         }
     }
@@ -202,7 +202,7 @@ fun CatalogAppBar(modifier: Modifier = Modifier, gender: String?, category: Stri
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Color.Black,
-            elevation = 0.dp
+            elevation = 0.dp,
 
         ) {
             IconButton(
@@ -210,12 +210,12 @@ fun CatalogAppBar(modifier: Modifier = Modifier, gender: String?, category: Stri
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .size(24.dp, 24.dp)
-                    .align(Alignment.CenterVertically)
+                    .align(Alignment.CenterVertically),
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     tint = Color.White,
-                    contentDescription = stringResource(R.string.app_name)
+                    contentDescription = stringResource(R.string.app_name),
                 )
             }
             Text(
@@ -228,7 +228,7 @@ fun CatalogAppBar(modifier: Modifier = Modifier, gender: String?, category: Stri
                 modifier = Modifier
                     .weight(1f)
                     .padding(8.dp, 0.dp, 0.dp, 0.dp)
-                    .align(Alignment.CenterVertically)
+                    .align(Alignment.CenterVertically),
             )
         }
     }
@@ -240,6 +240,6 @@ fun CartItems(cart: List<Product>, onViewCart: () -> Unit) {
         icon = { Icon(Icons.Filled.ShoppingCart, "") },
         text = { Text("View Cart ( ${cart.size} )") },
         onClick = onViewCart,
-        elevation = FloatingActionButtonDefaults.elevation(8.dp)
+        elevation = FloatingActionButtonDefaults.elevation(8.dp),
     )
 }

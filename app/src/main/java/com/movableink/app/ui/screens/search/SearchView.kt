@@ -17,7 +17,7 @@ fun SearchView(
     onBackClicked: () -> Unit,
     viewModel: SearchViewModel,
     navigateToProductDetail: (String) -> Unit,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
 ) {
     val productSearchModelState by rememberFlowWithLifecycle(viewModel.productSearchModelState)
         .collectAsState(initial = ProductSearchModelState.Empty)
@@ -32,6 +32,6 @@ fun SearchView(
         onResultClick = {
             navigateToProductDetail(it)
         },
-        homeViewModel
+        homeViewModel,
     )
 }

@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:import-ordering")
+
 package com.movableink.app.ui.navigation
 
 import androidx.annotation.FloatRange
@@ -56,7 +58,7 @@ import androidx.navigation.compose.composable
 import com.movableink.app.R
 import com.movableink.app.ui.screens.cart.Cart
 import com.movableink.app.ui.screens.cart.CartViewModel
-import com.movableink.app.ui.screens.home.AppSettings
+// import com.movableink.app.ui.screens.home.AppSettings
 import com.movableink.app.ui.screens.home.HomeScreen
 import com.movableink.app.ui.screens.home.HomeViewModel
 import com.movableink.app.ui.screens.search.Search
@@ -69,13 +71,12 @@ fun NavGraphBuilder.addHomeGraph(
     cartViewModel: CartViewModel,
     homeViewModel: HomeViewModel,
     searchViewModel: SearchViewModel,
-    navigateToProductDetail: (String) -> Unit
+    navigateToProductDetail: (String) -> Unit,
 ) {
     composable(HomeSections.HOME.route) { from ->
         HomeScreen(
             onGenderSelected = { gender -> onGenderSelected(gender, from) },
-            homeViewModel = homeViewModel
-
+            homeViewModel = homeViewModel,
         )
     }
     composable(HomeSections.SEARCH.route) { from ->
@@ -83,21 +84,21 @@ fun NavGraphBuilder.addHomeGraph(
             onSearchBarClick = { onSearchBarClick(from) },
             searchViewModel,
             homeViewModel,
-            navigateToProductDetail = { product -> navigateToProductDetail(product) }
+            navigateToProductDetail = { product -> navigateToProductDetail(product) },
         )
     }
     composable(HomeSections.CART.route) { from ->
         Cart(cartViewModel)
     }
-    composable(HomeSections.SETTINGS.route){
-       AppSettings()
+    composable(HomeSections.SETTINGS.route) {
+//       AppSettings()
     }
 }
 
 enum class HomeSections(
     @StringRes val title: Int,
     val icon: ImageVector,
-    val route: String
+    val route: String,
 ) {
     HOME(R.string.home_feed, Icons.Outlined.Home, "home/init"),
     SEARCH(R.string.home_search, Icons.Outlined.Search, "home/search"),
@@ -111,26 +112,26 @@ fun MovableBottomBar(
     currentRoute: String,
     navigateToRoute: (String) -> Unit,
     color: Color = MaterialTheme.colors.primaryVariant,
-    contentColor: Color = Color.Cyan
+    contentColor: Color = Color.Cyan,
 ) {
     val routes = remember { tabs.map { it.route } }
     val currentSection = tabs.first { it.route == currentRoute }
 
     Surface(
         color = color,
-        contentColor = contentColor
+        contentColor = contentColor,
     ) {
         val springSpec = SpringSpec<Float>(
             // Determined experimentally
             stiffness = 800f,
-            dampingRatio = 0.8f
+            dampingRatio = 0.8f,
         )
         BottomNavLayout(
             selectedIndex = currentSection.ordinal,
             itemCount = routes.size,
             indicator = { BottomNavIndicator() },
             animSpec = springSpec,
-            modifier = Modifier.navigationBarsPadding()
+            modifier = Modifier.navigationBarsPadding(),
         ) {
             val configuration = LocalConfiguration.current
             val currentLocale: Locale =
@@ -143,7 +144,8 @@ fun MovableBottomBar(
                         Color.White
                     } else {
                         Color.LightGray
-                    }
+                    },
+                    label = "",
                 )
 
                 val text = stringResource(section.title).uppercase(currentLocale)
@@ -153,7 +155,7 @@ fun MovableBottomBar(
                         Icon(
                             imageVector = section.icon,
                             tint = tint,
-                            contentDescription = text
+                            contentDescription = text,
                         )
                     },
                     text = {
@@ -161,20 +163,21 @@ fun MovableBottomBar(
                             text = text,
                             color = tint,
                             style = MaterialTheme.typography.button,
-                            maxLines = 1
+                            maxLines = 1,
                         )
                     },
                     selected = selected,
                     onSelected = { navigateToRoute(section.route) },
                     animSpec = springSpec,
                     modifier = BottomNavigationItemPadding
-                        .clip(BottomNavIndicatorShape)
+                        .clip(BottomNavIndicatorShape),
                 )
             }
         }
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 private fun BottomNavLayout(
     selectedIndex: Int,
@@ -182,13 +185,14 @@ private fun BottomNavLayout(
     animSpec: AnimationSpec<Float>,
     indicator: @Composable BoxScope.() -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    val selectionFractions = remember(itemCount) {
-        List(itemCount) { i ->
-            Animatable(if (i == selectedIndex) 1f else 0f)
+    val selectionFractions =
+        remember(itemCount) {
+            List(itemCount) { i ->
+                Animatable(if (i == selectedIndex) 1f else 0f)
+            }
         }
-    }
     selectionFractions.forEachIndexed { index, selectionFraction ->
         val target = if (index == selectedIndex) 1f else 0f
         LaunchedEffect(target, animSpec) {
@@ -208,7 +212,7 @@ private fun BottomNavLayout(
         content = {
             content()
             Box(Modifier.layoutId("indicator"), content = indicator)
-        }
+        },
     ) { measurables, constraints ->
         check(itemCount == (measurables.size - 1)) // account for indicator
 
@@ -225,20 +229,20 @@ private fun BottomNavLayout(
                 measurable.measure(
                     constraints.copy(
                         minWidth = width,
-                        maxWidth = width
-                    )
+                        maxWidth = width,
+                    ),
                 )
             }
         val indicatorPlaceable = indicatorMeasurable.measure(
             constraints.copy(
                 minWidth = selectedWidth,
-                maxWidth = selectedWidth
-            )
+                maxWidth = selectedWidth,
+            ),
         )
 
         layout(
             width = constraints.maxWidth,
-            height = itemPlaceables.maxByOrNull { it.height }?.height ?: 0
+            height = itemPlaceables.maxByOrNull { it.height }?.height ?: 0,
         ) {
             val indicatorLeft = indicatorIndex.value * unselectedWidth
             indicatorPlaceable.placeRelative(x = indicatorLeft.toInt(), y = 0)
@@ -258,7 +262,7 @@ fun BottomNavigationItem(
     selected: Boolean,
     onSelected: () -> Unit,
     animSpec: AnimationSpec<Float>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     // Animate the icon/text positions within the item based on selection
     val animationProgress by animateFloatAsState(if (selected) 1f else 0f, animSpec)
@@ -268,7 +272,7 @@ fun BottomNavigationItem(
         animationProgress = animationProgress,
         modifier = modifier
             .selectable(selected = selected, onClick = onSelected)
-            .wrapContentSize()
+            .wrapContentSize(),
     )
 }
 
@@ -277,7 +281,7 @@ private fun BottomNavItemLayout(
     icon: @Composable BoxScope.() -> Unit,
     text: @Composable BoxScope.() -> Unit,
     @FloatRange(from = 0.0, to = 1.0) animationProgress: Float,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Layout(
         modifier = modifier,
@@ -286,7 +290,7 @@ private fun BottomNavItemLayout(
                 modifier = Modifier
                     .layoutId("icon")
                     .padding(horizontal = TextIconSpacing),
-                content = icon
+                content = icon,
             )
             val scale = lerp(0.6f, 1f, animationProgress)
             Box(
@@ -299,9 +303,9 @@ private fun BottomNavItemLayout(
                         scaleY = scale
                         transformOrigin = BottomNavLabelTransformOrigin
                     },
-                content = text
+                content = text,
             )
-        }
+        },
     ) { measurables, constraints ->
         val iconPlaceable = measurables.first { it.layoutId == "icon" }.measure(constraints)
         val textPlaceable = measurables.first { it.layoutId == "text" }.measure(constraints)
@@ -311,7 +315,7 @@ private fun BottomNavItemLayout(
             iconPlaceable,
             constraints.maxWidth,
             constraints.maxHeight,
-            animationProgress
+            animationProgress,
         )
     }
 }
@@ -321,7 +325,7 @@ private fun MeasureScope.placeTextAndIcon(
     iconPlaceable: Placeable,
     width: Int,
     height: Int,
-    @FloatRange(from = 0.0, to = 1.0) animationProgress: Float
+    @FloatRange(from = 0.0, to = 1.0) animationProgress: Float,
 ): MeasureResult {
     val iconY = (height - iconPlaceable.height) / 2
     val textY = (height - textPlaceable.height) / 2
@@ -342,13 +346,13 @@ private fun MeasureScope.placeTextAndIcon(
 private fun BottomNavIndicator(
     strokeWidth: Dp = 2.dp,
     color: Color = Color.White,
-    shape: Shape = BottomNavIndicatorShape
+    shape: Shape = BottomNavIndicatorShape,
 ) {
     Spacer(
         modifier = Modifier
             .fillMaxSize()
             .then(BottomNavigationItemPadding)
-            .border(strokeWidth, color, shape)
+            .border(strokeWidth, color, shape),
     )
 }
 
@@ -365,7 +369,7 @@ private fun BottomNavPreview() {
         MovableBottomBar(
             tabs = HomeSections.values(),
             currentRoute = "home/init",
-            navigateToRoute = { }
+            navigateToRoute = { },
         )
     }
 }

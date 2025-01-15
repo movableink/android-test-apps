@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class HomeViewModel(
-    private val repository: MovableRepository
+    private val repository: MovableRepository,
 ) : ViewModel() {
     private val _homeUIState = MutableStateFlow(HomeState())
     val homeUIState: StateFlow<HomeState> = _homeUIState.asStateFlow()
@@ -25,7 +25,7 @@ class HomeViewModel(
         _homeUIState.update { currentState ->
             currentState.copy(
                 categories = categories,
-                gender = lowerCase
+                gender = lowerCase,
             )
         }
     }
@@ -35,14 +35,14 @@ class HomeViewModel(
 
         _homeUIState.update { currentState ->
             currentState.copy(
-                catalog = catalog
+                catalog = catalog,
             )
         }
     }
     fun updateSelectedProduct(product: String) {
         _homeUIState.update { currentState ->
             currentState.copy(
-                selectedProductId = product
+                selectedProductId = product,
             )
         }
     }
@@ -52,7 +52,7 @@ class HomeViewModel(
     }
     companion object {
         fun provideFactory(
-            movableRepository: MovableRepository = MovableRepository
+            movableRepository: MovableRepository = MovableRepository,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -65,6 +65,6 @@ class HomeViewModel(
         val categories: List<String> = arrayListOf(),
         val catalog: List<Product> = arrayListOf(),
         val gender: String = "",
-        val selectedProductId: String = ""
+        val selectedProductId: String = "",
     )
 }

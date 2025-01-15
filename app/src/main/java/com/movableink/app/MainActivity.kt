@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
     private fun askNotificationPermission() {
         // This is only necessary for API level >= 33 (TIRAMISU)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -57,9 +56,8 @@ class MainActivity : ComponentActivity() {
         val context = this
         MIClient.checkPasteboardOnInstall { resolvedLink ->
             Log.d("ksk", "haha $resolvedLink")
-            Toast.makeText(this, " Text From CP: $resolvedLink",Toast.LENGTH_LONG ).show()
+            Toast.makeText(this, " Text From CP: $resolvedLink", Toast.LENGTH_LONG).show()
             try {
-
                 resolvedLink?.let {
                     val uri = Uri.parse(it)
                     if (uri != null) {
@@ -69,15 +67,12 @@ class MainActivity : ComponentActivity() {
                             Log.d(TAG, "fetchClickableLink: hahahah yeah {${intent.action}}")
                             startActivity(intent)
                         } else {
-
                             Log.d(TAG, "fetchClickableLink: hahahah Not")
                             Toast.makeText(this, "Cannot open the link", Toast.LENGTH_SHORT).show()
                         }
                     }
-
                 }
-            }
-            catch (e:Exception){
+            } catch (e: Exception) {
                 Log.d(TAG, "fetchClickableLink: Error :${e.message}")
             }
         }

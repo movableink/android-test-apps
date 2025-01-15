@@ -57,19 +57,19 @@ fun MovableSearchBar(
     matchesFound: Boolean,
     matchList: List<Product>,
     onResultClick: (product: String) -> Unit = {},
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
 ) {
     Box {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             SearchBar(
                 searchText,
                 placeholderText,
                 onSearchTextChanged,
                 onClearClick,
-                onNavigateBack
+                onNavigateBack,
             )
             if (matchesFound) {
                 Text(stringResource(id = R.string.searchResults), modifier = Modifier.padding(8.dp), fontWeight = FontWeight.Bold)
@@ -91,7 +91,7 @@ fun SearchBar(
     placeholderText: String = "",
     onSearchTextChanged: (String) -> Unit = {},
     onClearClick: () -> Unit = {},
-    onNavigateBack: () -> Unit = {}
+    onNavigateBack: () -> Unit = {},
 ) {
     var showClearButton by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -102,7 +102,7 @@ fun SearchBar(
             Icon(
                 imageVector = Icons.Filled.ArrowBack,
                 modifier = Modifier,
-                contentDescription = stringResource(id = R.string.app_name)
+                contentDescription = stringResource(id = R.string.app_name),
             )
         }
     }, actions = {
@@ -123,18 +123,18 @@ fun SearchBar(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 backgroundColor = Color.Transparent,
-                cursorColor = LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
+                cursorColor = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
             ),
             trailingIcon = {
                 AnimatedVisibility(
                     visible = showClearButton,
                     enter = fadeIn(),
-                    exit = fadeOut()
+                    exit = fadeOut(),
                 ) {
                     IconButton(onClick = { onClearClick() }) {
                         Icon(
                             imageVector = Icons.Filled.Close,
-                            contentDescription = stringResource(id = R.string.app_name)
+                            contentDescription = stringResource(id = R.string.app_name),
                         )
                     }
                 }
@@ -144,7 +144,7 @@ fun SearchBar(
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(onDone = {
                 keyboardController?.hide()
-            })
+            }),
         )
     })
 
@@ -158,7 +158,7 @@ fun NoSearchResults() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = CenterHorizontally
+        horizontalAlignment = CenterHorizontally,
     ) {
         Text(stringResource(id = R.string.noResults))
     }
@@ -168,7 +168,7 @@ fun NoSearchResults() {
 fun ResultsFoundView(
     products: List<Product>?,
     onResultClick: (product: String) -> Unit,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
 ) {
     SearchProductList(products = products) { product ->
         homeViewModel.updateSelectedProduct(product.id)

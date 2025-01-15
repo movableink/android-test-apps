@@ -23,7 +23,6 @@ class App : Application() {
         )
         MIClient.appInstallEventEnabled(true)
         FirebaseApp.initializeApp(this)
-
     }
 
     private fun Context.displayContext(): Context {
