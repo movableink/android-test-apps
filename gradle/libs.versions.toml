@@ -14,7 +14,7 @@ material = "1.11.0"
 browser = "1.8.0"
 
 # Compose
-compose = "1.4.3"  
+compose = "1.4.3"
 compose-compiler = "1.4.8"  # Compatible with Kotlin 1.8.22
 navigation-compose = "2.7.6"
 

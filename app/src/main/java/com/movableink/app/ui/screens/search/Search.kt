@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:function-naming")
+
 package com.movableink.app.ui.screens.search
 
 import androidx.compose.foundation.layout.Column
@@ -35,7 +37,8 @@ fun Search(
         SearchViewBar(onSearchBarClick)
         Text(
             stringResource(id = R.string.home_search),
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
             fontWeight = FontWeight.Bold,

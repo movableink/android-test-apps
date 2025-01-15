@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:function-naming")
+
 package com.movableink.app.ui.screens.home
 
 import androidx.compose.foundation.Image
@@ -117,15 +119,16 @@ fun ProductItem(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier
+        modifier =
+        modifier
             .size(
                 width = 250.dp,
                 height = 250.dp,
-            )
-            .padding(all = 10.dp),
+            ).padding(all = 10.dp),
     ) {
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .clickable(onClick = {
                     homeViewModel.updateSelectedProduct(product.id)
                     MIClient.productViewed(mapOf("id" to product.id))
@@ -134,7 +137,8 @@ fun ProductItem(
                 .fillMaxSize(),
         ) {
             Box(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .height(160.dp)
                     .fillMaxWidth()
                     .background(
@@ -143,7 +147,8 @@ fun ProductItem(
             ) {
                 ProductImage(
                     imageUrl = product.imageUrl,
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .size(120.dp)
                         .padding(8.dp)
                         .align(Alignment.TopCenter),
@@ -162,10 +167,10 @@ fun ProductItem(
                 text = formatPrice(product.price),
                 style = MaterialTheme.typography.body2,
                 color = Color.Gray,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .align(Alignment.End)
                     .padding(horizontal = 16.dp),
-
             )
         }
     }
@@ -184,7 +189,8 @@ fun ProductImage(
         fetchDrawableByName(imageUrl, context = LocalContext.current).apply {
             val painter: Painter = painterResource(id = this)
             Image(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .size(80.dp, 80.dp)
                     .clip(RoundedCornerShape(16.dp)),
                 painter = painter,
@@ -197,17 +203,22 @@ fun ProductImage(
 }
 
 @Composable
-fun CatalogAppBar(modifier: Modifier = Modifier, gender: String?, category: String, onBackClicked: () -> Unit) {
+fun CatalogAppBar(
+    modifier: Modifier = Modifier,
+    gender: String?,
+    category: String,
+    onBackClicked: () -> Unit,
+) {
     Column(modifier = modifier.statusBarsPadding()) {
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Color.Black,
             elevation = 0.dp,
-
         ) {
             IconButton(
                 onClick = onBackClicked,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .padding(all = 8.dp)
                     .size(24.dp, 24.dp)
                     .align(Alignment.CenterVertically),
@@ -225,7 +236,8 @@ fun CatalogAppBar(modifier: Modifier = Modifier, gender: String?, category: Stri
                 textAlign = TextAlign.Start,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .weight(1f)
                     .padding(8.dp, 0.dp, 0.dp, 0.dp)
                     .align(Alignment.CenterVertically),
@@ -235,7 +247,10 @@ fun CatalogAppBar(modifier: Modifier = Modifier, gender: String?, category: Stri
 }
 
 @Composable
-fun CartItems(cart: List<Product>, onViewCart: () -> Unit) {
+fun CartItems(
+    cart: List<Product>,
+    onViewCart: () -> Unit,
+) {
     ExtendedFloatingActionButton(
         icon = { Icon(Icons.Filled.ShoppingCart, "") },
         text = { Text("View Cart ( ${cart.size} )") },

@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:function-naming")
+
 package com.movableink.app.ui.screens.home
 
 import androidx.compose.foundation.Image
@@ -38,7 +40,8 @@ fun HomeScreen(
     homeViewModel: HomeViewModel,
 ) {
     Surface(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize(),
     ) {
         Box {
@@ -49,7 +52,10 @@ fun HomeScreen(
 }
 
 @Composable
-fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel) {
+fun GenderList(
+    onGenderClick: (String) -> Unit,
+    homeViewModel: HomeViewModel,
+) {
     val genderList = remember { listOf("Men", "Women") }
     LazyColumn {
         item {
@@ -71,35 +77,44 @@ fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel) {
 }
 
 @Composable
-fun GenderRow(gender: String, onGenderClick: (gender: String) -> Unit, homeViewModel: HomeViewModel) {
+fun GenderRow(
+    gender: String,
+    onGenderClick: (gender: String) -> Unit,
+    homeViewModel: HomeViewModel,
+) {
     Row(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .padding(all = 8.dp),
     ) {
         Surface(
             shape = RoundedCornerShape(8.dp),
             elevation = 4.dp,
-            modifier = Modifier.clickable {
+            modifier =
+            Modifier.clickable {
                 homeViewModel.updateCategories(gender)
                 onGenderClick(gender)
             },
         ) {
             Row(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
                     .padding(all = 8.dp),
             ) {
                 Text(
                     text = gender,
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .weight(1f)
                         .align(Alignment.CenterVertically)
                         .padding(8.dp),
                 )
                 Column(horizontalAlignment = Alignment.End) {
                     Image(
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .size(24.dp, 24.dp)
                             .clip(RoundedCornerShape(16.dp)),
                         painter = painterResource(id = R.drawable.baseline_navigate_next_24),

@@ -1,4 +1,4 @@
-@file:Suppress("ktlint:standard:import-ordering")
+@file:Suppress("ktlint:standard:import-ordering", "ktlint:standard:function-naming")
 
 package com.movableink.app.ui.navigation
 
@@ -25,7 +25,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingCart
@@ -58,7 +57,6 @@ import androidx.navigation.compose.composable
 import com.movableink.app.R
 import com.movableink.app.ui.screens.cart.Cart
 import com.movableink.app.ui.screens.cart.CartViewModel
-// import com.movableink.app.ui.screens.home.AppSettings
 import com.movableink.app.ui.screens.home.HomeScreen
 import com.movableink.app.ui.screens.home.HomeViewModel
 import com.movableink.app.ui.screens.search.Search
@@ -87,11 +85,8 @@ fun NavGraphBuilder.addHomeGraph(
             navigateToProductDetail = { product -> navigateToProductDetail(product) },
         )
     }
-    composable(HomeSections.CART.route) { from ->
+    composable(HomeSections.CART.route) {
         Cart(cartViewModel)
-    }
-    composable(HomeSections.SETTINGS.route) {
-//       AppSettings()
     }
 }
 
@@ -103,9 +98,9 @@ enum class HomeSections(
     HOME(R.string.home_feed, Icons.Outlined.Home, "home/init"),
     SEARCH(R.string.home_search, Icons.Outlined.Search, "home/search"),
     CART(R.string.home_cart, Icons.Outlined.ShoppingCart, "home/cart"),
-    SETTINGS(R.string.settings, Icons.Filled.Settings, "home/cart"),
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun MovableBottomBar(
     tabs: Array<HomeSections>,
@@ -121,11 +116,12 @@ fun MovableBottomBar(
         color = color,
         contentColor = contentColor,
     ) {
-        val springSpec = SpringSpec<Float>(
-            // Determined experimentally
-            stiffness = 800f,
-            dampingRatio = 0.8f,
-        )
+        val springSpec =
+            SpringSpec<Float>(
+                // Determined experimentally
+                stiffness = 800f,
+                dampingRatio = 0.8f,
+            )
         BottomNavLayout(
             selectedIndex = currentSection.ordinal,
             itemCount = routes.size,
@@ -169,15 +165,15 @@ fun MovableBottomBar(
                     selected = selected,
                     onSelected = { navigateToRoute(section.route) },
                     animSpec = springSpec,
-                    modifier = BottomNavigationItemPadding
-                        .clip(BottomNavIndicatorShape),
+                    modifier =
+                        BottomNavigationItemPadding
+                            .clip(BottomNavIndicatorShape),
                 )
             }
         }
     }
 }
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
 private fun BottomNavLayout(
     selectedIndex: Int,
@@ -221,24 +217,26 @@ private fun BottomNavLayout(
         val selectedWidth = 2 * unselectedWidth
         val indicatorMeasurable = measurables.first { it.layoutId == "indicator" }
 
-        val itemPlaceables = measurables
-            .filterNot { it == indicatorMeasurable }
-            .mapIndexed { index, measurable ->
-                // Animate item's width based upon the selection amount
-                val width = lerp(unselectedWidth, selectedWidth, selectionFractions[index].value)
-                measurable.measure(
-                    constraints.copy(
-                        minWidth = width,
-                        maxWidth = width,
-                    ),
-                )
-            }
-        val indicatorPlaceable = indicatorMeasurable.measure(
-            constraints.copy(
-                minWidth = selectedWidth,
-                maxWidth = selectedWidth,
-            ),
-        )
+        val itemPlaceables =
+            measurables
+                .filterNot { it == indicatorMeasurable }
+                .mapIndexed { index, measurable ->
+                    // Animate item's width based upon the selection amount
+                    val width = lerp(unselectedWidth, selectedWidth, selectionFractions[index].value)
+                    measurable.measure(
+                        constraints.copy(
+                            minWidth = width,
+                            maxWidth = width,
+                        ),
+                    )
+                }
+        val indicatorPlaceable =
+            indicatorMeasurable.measure(
+                constraints.copy(
+                    minWidth = selectedWidth,
+                    maxWidth = selectedWidth,
+                ),
+            )
 
         layout(
             width = constraints.maxWidth,
@@ -270,9 +268,10 @@ fun BottomNavigationItem(
         icon = icon,
         text = text,
         animationProgress = animationProgress,
-        modifier = modifier
-            .selectable(selected = selected, onClick = onSelected)
-            .wrapContentSize(),
+        modifier =
+            modifier
+                .selectable(selected = selected, onClick = onSelected)
+                .wrapContentSize(),
     )
 }
 
@@ -287,22 +286,24 @@ private fun BottomNavItemLayout(
         modifier = modifier,
         content = {
             Box(
-                modifier = Modifier
-                    .layoutId("icon")
-                    .padding(horizontal = TextIconSpacing),
+                modifier =
+                    Modifier
+                        .layoutId("icon")
+                        .padding(horizontal = TextIconSpacing),
                 content = icon,
             )
             val scale = lerp(0.6f, 1f, animationProgress)
             Box(
-                modifier = Modifier
-                    .layoutId("text")
-                    .padding(horizontal = TextIconSpacing)
-                    .graphicsLayer {
-                        alpha = animationProgress
-                        scaleX = scale
-                        scaleY = scale
-                        transformOrigin = BottomNavLabelTransformOrigin
-                    },
+                modifier =
+                    Modifier
+                        .layoutId("text")
+                        .padding(horizontal = TextIconSpacing)
+                        .graphicsLayer {
+                            alpha = animationProgress
+                            scaleX = scale
+                            scaleY = scale
+                            transformOrigin = BottomNavLabelTransformOrigin
+                        },
                 content = text,
             )
         },
@@ -349,10 +350,11 @@ private fun BottomNavIndicator(
     shape: Shape = BottomNavIndicatorShape,
 ) {
     Spacer(
-        modifier = Modifier
-            .fillMaxSize()
-            .then(BottomNavigationItemPadding)
-            .border(strokeWidth, color, shape),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .then(BottomNavigationItemPadding)
+                .border(strokeWidth, color, shape),
     )
 }
 
