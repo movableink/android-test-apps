@@ -39,7 +39,7 @@ mockito-kotlin = "5.2.1"
 # Other
 appsflyer = "6.12.1"
 installreferrer = "2.2"
-movableink = "1.6.0"
+movableink = "1.6.2-SNAPSHOT"
 
 [libraries]
 # Build plugins

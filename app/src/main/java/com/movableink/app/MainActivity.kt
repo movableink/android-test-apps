@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,13 +16,15 @@ import com.movableink.inked.MIClient
 private const val TAG = "MainActivity "
 
 class MainActivity : ComponentActivity() {
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission(),
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            // FCM SDK (and your app) can post notifications.
-        } else { }
-    }
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission(),
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                // FCM SDK (and your app) can post notifications.
+            } else {
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +53,16 @@ class MainActivity : ComponentActivity() {
         super.onWindowFocusChanged(hasFocus)
         fetchClickableLink()
     }
+
+    private fun showInAppMessage() {
+        MIClient.showInAppBrowser(
+            this,
+            "https://www.movable-ink-7158.com/p/rp/bc49c08945403625.html",
+        )
+    }
+
     private fun fetchClickableLink() {
-        val context = this
         MIClient.checkPasteboardOnInstall { resolvedLink ->
-            Log.d("ksk", "haha $resolvedLink")
-            Toast.makeText(this, " Text From CP: $resolvedLink", Toast.LENGTH_LONG).show()
             try {
                 resolvedLink?.let {
                     val uri = Uri.parse(it)
@@ -64,11 +70,9 @@ class MainActivity : ComponentActivity() {
                         // Check if your app can handle this URI
                         val intent = Intent(Intent.ACTION_VIEW, uri)
                         if (intent.resolveActivity(packageManager) != null) {
-                            Log.d(TAG, "fetchClickableLink: hahahah yeah {${intent.action}}")
                             startActivity(intent)
                         } else {
-                            Log.d(TAG, "fetchClickableLink: hahahah Not")
-                            Toast.makeText(this, "Cannot open the link", Toast.LENGTH_SHORT).show()
+                            Log.d(TAG, "Cannot open the link")
                         }
                     }
                 }
