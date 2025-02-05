@@ -13,8 +13,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
-fun MovableTopBar(modifier: Modifier = Modifier, title: String) {
+fun MovableTopBar(
+    modifier: Modifier = Modifier,
+    title: String,
+) {
     Column(modifier = modifier.statusBarsPadding()) {
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
@@ -28,9 +32,10 @@ fun MovableTopBar(modifier: Modifier = Modifier, title: String) {
                 textAlign = TextAlign.Center,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterVertically),
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically),
             )
         }
     }

@@ -19,6 +19,7 @@ allprojects {
         google()
         maven(url = "https://appboy.github.io/appboy-android-sdk/sdk")
         maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        maven(url = "https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/repository")
     }
 }
 

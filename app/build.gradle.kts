@@ -33,13 +33,14 @@ dependencies {
 
     implementation(libs.activity.compose)
     implementation(libs.navigation.compose)
-
+//    implementation(libs.play.services)
     // Browser
     implementation(libs.androidx.browser)
 
-    // AppsFlyer
-    implementation(libs.appsflyer)
-    implementation(libs.installreferrer)
+    // SFMC
+
+    implementation(libs.salesforce.mc.sdk)
+    implementation(libs.marketingcloudsdk.v810)
 
     // Movable Ink
     implementation(libs.movableink)

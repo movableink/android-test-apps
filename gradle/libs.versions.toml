@@ -1,6 +1,7 @@
 [versions]
 # Build tools and plugins
 kotlin = "1.8.22"
+play-services = "17.0.0'"
 spotless = "6.12.1"
 google-services = "4.3.15"
 agp = "8.2.0"
@@ -40,11 +41,16 @@ mockito-kotlin = "5.2.1"
 appsflyer = "6.12.1"
 installreferrer = "2.2"
 movableink = "1.6.0"
+salesforce = "8.0.8"
+marketingcloudsdk = "8.1.0"
+
 
 [libraries]
 # Build plugins
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+#play-services = { module = "com.google.android.gms:play-services", version.ref = "play-services" }
+marketingcloudsdk-v810 = { module = "com.salesforce.marketingcloud:marketingcloudsdk", version.ref = "marketingcloudsdk" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }
 
@@ -89,9 +95,9 @@ firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging
 # MovableInk
 movableink = { group = "com.movableink.sdk", name = "inked", version.ref = "movableink" }
 
-# AppsFlyer
-appsflyer = { group = "com.appsflyer", name = "af-android-sdk", version.ref = "appsflyer" }
-installreferrer = { group = "com.android.installreferrer", name = "installreferrer", version.ref = "installreferrer" }
+#sfmc
+salesforce-mc-sdk = { group = "com.salesforce.marketingcloud", name = "marketingcloudsdk", version.ref = "salesforce" }
+
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }
