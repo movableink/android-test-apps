@@ -70,11 +70,13 @@ fun NavGraphBuilder.addHomeGraph(
     homeViewModel: HomeViewModel,
     searchViewModel: SearchViewModel,
     navigateToProductDetail: (String) -> Unit,
+    onSettingsClicked: (NavBackStackEntry) -> Unit,
 ) {
     composable(HomeSections.HOME.route) { from ->
         HomeScreen(
             onGenderSelected = { gender -> onGenderSelected(gender, from) },
             homeViewModel = homeViewModel,
+            onSettingsClicked = { onSettingsClicked(from) },
         )
     }
     composable(HomeSections.SEARCH.route) { from ->

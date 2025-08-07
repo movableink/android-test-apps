@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.movableink.app.R
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun CategoryScreen(
     onCategoryClick: (String, String) -> Unit,
@@ -45,14 +46,14 @@ fun CategoryScreen(
     homeViewModel: HomeViewModel,
 ) {
     val homeUIState by homeViewModel.homeUIState.collectAsStateWithLifecycle()
-    val selectedGender = remember {
-        homeUIState.gender
-    }
+    val selectedGender =
+        remember {
+            homeUIState.gender
+        }
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp),
-
     ) {
         Spacer(
             Modifier.windowInsetsTopHeight(
@@ -99,13 +100,14 @@ fun CategoryRow(
     homeViewModel: HomeViewModel,
 ) {
     Card(
-        modifier = Modifier
-            .padding(all = 8.dp)
-            .fillMaxWidth()
-            .clickable {
-                homeViewModel.updateCatalogByCategory(category, gender)
-                onCategoryClick(category, gender)
-            },
+        modifier =
+            Modifier
+                .padding(all = 8.dp)
+                .fillMaxWidth()
+                .clickable {
+                    homeViewModel.updateCatalogByCategory(category, gender)
+                    onCategoryClick(category, gender)
+                },
     ) {
         Row(modifier = Modifier.padding(all = 10.dp)) {
             Text(
@@ -119,20 +121,24 @@ fun CategoryRow(
 }
 
 @Composable
-fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: () -> Unit) {
+fun CategoryBar(
+    modifier: Modifier = Modifier,
+    gender: String?,
+    onBackClicked: () -> Unit,
+) {
     Column(modifier = modifier.statusBarsPadding()) {
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Color.Black,
             elevation = 0.dp,
-
         ) {
             IconButton(
                 onClick = onBackClicked,
-                modifier = Modifier
-                    .padding(all = 8.dp)
-                    .size(24.dp, 24.dp)
-                    .align(Alignment.CenterVertically),
+                modifier =
+                    Modifier
+                        .padding(all = 8.dp)
+                        .size(24.dp, 24.dp)
+                        .align(Alignment.CenterVertically),
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
@@ -147,10 +153,11 @@ fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: (
                 textAlign = TextAlign.Start,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp, 0.dp, 0.dp, 0.dp)
-                    .align(Alignment.CenterVertically),
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .padding(8.dp, 0.dp, 0.dp, 0.dp)
+                        .align(Alignment.CenterVertically),
             )
         }
     }

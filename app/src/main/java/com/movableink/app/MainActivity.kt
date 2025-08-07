@@ -12,6 +12,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.movableink.inked.MIClient
+import com.movableink.integrations.MSPManager
 
 private const val TAG = "MainActivity "
 
@@ -32,6 +33,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             ShoppingCartApp()
         }
+        MSPManager.onActivityCreated(this)
+//        mPushConnector.hitEvent("start");
+    }
+
+    override fun onResume() {
+        MSPManager.onActivityResumed(this)
+        super.onResume()
     }
 
     private fun askNotificationPermission() {
@@ -55,10 +63,10 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun showInAppMessage() {
-        MIClient.showInAppBrowser(
+     /*   MIClient.showInAppBrowser(
             this,
             "https://www.movable-ink-7158.com/p/rp/bc49c08945403625.html",
-        )
+        )*/
     }
 
     private fun fetchClickableLink() {

@@ -31,6 +31,7 @@ object MainDestinations {
     const val SELECTED_GENDER = "gender"
     const val SELECTED_CATEGORY = "category"
     const val SEARCH_UI_ROUTE = "search_ui"
+    const val SETTINGS_UI_ROUTE = "settings_ui"
 }
 
 @Composable
@@ -38,12 +39,11 @@ fun rememberAppState(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     navController: NavHostController = rememberNavController(),
     snackBarManager: SnackbarManager = SnackbarManager,
-    resources: Resources = resources(),
+    resources: Resources = LocalContext.current.resources,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-) =
-    remember(scaffoldState, navController, snackBarManager, resources, coroutineScope) {
-        AppState(scaffoldState, navController, snackBarManager, resources, coroutineScope)
-    }
+) = remember(scaffoldState, navController, snackBarManager, resources, coroutineScope) {
+    AppState(scaffoldState, navController, snackBarManager, resources, coroutineScope)
+}
 
 @Stable
 class AppState(
@@ -70,8 +70,12 @@ class AppState(
     private val bottomBarRoutes = bottomBarTabs.map { it.route }
 
     val shouldShowBottomBar: Boolean
-        @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination?.route in bottomBarRoutes
+        @Composable get() =
+            navController
+                .currentBackStackEntryAsState()
+                .value
+                ?.destination
+                ?.route in bottomBarRoutes
 
     val currentRoute: String?
         get() = navController.currentDestination?.route
@@ -101,39 +105,52 @@ class AppState(
         if (from.lifecycleIsResumed()) {
             navController.navigate("${MainDestinations.CATEGORIES_ROUTE}/$gender")
         }
-    } fun navigateToCatalog(category: String, gender: String) {
+    }
+
+    fun navigateToCatalog(
+        category: String,
+        gender: String,
+    ) {
         navController.navigate("${MainDestinations.CATALOG_ROUTE}/$category/$gender")
     }
+
     fun navigateToProductDetail(product: String) {
         navController.navigate("${MainDestinations.PRODUCT_DETAIL_ROUTE}/$product")
     }
+
     fun navigateToSearchUI(from: NavBackStackEntry) {
         if (from.lifecycleIsResumed()) {
             navController.navigate(MainDestinations.SEARCH_UI_ROUTE)
         }
     }
+
     fun navigateToCart() {
         navController.navigate(MainDestinations.HOME_ROUTE)
     }
-}
 
-/**
- * If the lifecycle is not resumed it means this NavBackStackEntry already processed a nav event.
- *
- * This is used to de-duplicate navigation events.
- */
-private fun NavBackStackEntry.lifecycleIsResumed() = this.lifecycle.currentState == Lifecycle.State.RESUMED
+    fun navigateToSettings(from: NavBackStackEntry) {
+        if (from.lifecycleIsResumed()) {
+            navController.navigate(MainDestinations.SETTINGS_UI_ROUTE)
+        }
+    }
 
-private val NavGraph.startDestination: NavDestination?
-    get() = findNode(startDestinationId)
+    /**
+     * If the lifecycle is not resumed it means this NavBackStackEntry already processed a nav event.
+     *
+     * This is used to de-duplicate navigation events.
+     */
+    private fun NavBackStackEntry.lifecycleIsResumed() = this.lifecycle.currentState == Lifecycle.State.RESUMED
 
-private tailrec fun findStartDestination(graph: NavDestination): NavDestination {
-    return if (graph is NavGraph) findStartDestination(graph.startDestination!!) else graph
-}
+    private val NavGraph.startDestination: NavDestination?
+        get() = findNode(startDestinationId)
 
-@Composable
-@ReadOnlyComposable
-private fun resources(): Resources {
-    LocalConfiguration.current
-    return LocalContext.current.resources
+    private tailrec fun findStartDestination(graph: NavDestination): NavDestination =
+        if (graph is NavGraph) findStartDestination(graph.startDestination!!) else graph
+
+    @Composable
+    @ReadOnlyComposable
+    private fun resources(): Resources {
+        LocalConfiguration.current
+        return LocalContext.current.resources
+    }
 }

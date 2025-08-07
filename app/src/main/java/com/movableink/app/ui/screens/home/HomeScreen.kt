@@ -33,20 +33,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.movableink.app.R
 import com.movableink.app.ui.component.MovableTopBar
+import ie.imobile.extremepush.PushConnector.mPushConnector
 
 @Composable
 fun HomeScreen(
     onGenderSelected: (String) -> Unit,
     homeViewModel: HomeViewModel,
+    onSettingsClicked: () -> Unit,
 ) {
     Surface(
         modifier =
-        Modifier
-            .fillMaxSize(),
+            Modifier
+                .fillMaxSize(),
     ) {
         Box {
             GenderList(onGenderSelected, homeViewModel)
-            MovableTopBar(title = stringResource(id = R.string.app_name))
+            MovableTopBar(
+                title = stringResource(id = R.string.app_name),
+                onSettingsClick = onSettingsClicked,
+            )
         }
     }
 }
@@ -84,39 +89,39 @@ fun GenderRow(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(all = 8.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(all = 8.dp),
     ) {
         Surface(
             shape = RoundedCornerShape(8.dp),
             elevation = 4.dp,
             modifier =
-            Modifier.clickable {
-                homeViewModel.updateCategories(gender)
-                onGenderClick(gender)
-            },
+                Modifier.clickable {
+                    homeViewModel.updateCategories(gender)
+                    onGenderClick(gender)
+                },
         ) {
             Row(
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(all = 8.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(all = 8.dp),
             ) {
                 Text(
                     text = gender,
                     modifier =
-                    Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
-                        .padding(8.dp),
+                        Modifier
+                            .weight(1f)
+                            .align(Alignment.CenterVertically)
+                            .padding(8.dp),
                 )
                 Column(horizontalAlignment = Alignment.End) {
                     Image(
                         modifier =
-                        Modifier
-                            .size(24.dp, 24.dp)
-                            .clip(RoundedCornerShape(16.dp)),
+                            Modifier
+                                .size(24.dp, 24.dp)
+                                .clip(RoundedCornerShape(16.dp)),
                         painter = painterResource(id = R.drawable.baseline_navigate_next_24),
                         alignment = Alignment.Center,
                         contentDescription = "",

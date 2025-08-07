@@ -29,7 +29,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.ShoppingCart">
+           android:theme="@style/Theme.MyApp.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,12 +48,11 @@
 
 
         </activity>
-
         <activity
             android:name=".DeepLinkActivity"
             android:exported="true"
             android:launchMode="singleInstancePerTask"
-            android:theme="@style/Theme.ShoppingCart">
+            android:theme="@style/Theme.MyApp.Splash">
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 

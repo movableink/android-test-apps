@@ -4,4 +4,15 @@
     <style name="Theme.ShoppingCart" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/purple_700</item>
     </style>
+
+
+    <style name="Theme.MyApp.Splash" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:statusBarColor">@color/purple_700</item>
+    </style>
+
+    <style name="Theme.MyApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Replace this with a non-white color -->
+        <item name="android:windowBackground">@color/purple_200</item>
+    </style>
 </resources>

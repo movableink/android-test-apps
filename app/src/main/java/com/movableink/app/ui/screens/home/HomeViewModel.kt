@@ -17,8 +17,8 @@ class HomeViewModel(
     private val _homeUIState = MutableStateFlow(HomeState())
     val homeUIState: StateFlow<HomeState> = _homeUIState.asStateFlow()
 
-    private fun fetchCategories(gender: String) =
-        repository.getCategoriesByGender(gender)
+    private fun fetchCategories(gender: String) = repository.getCategoriesByGender(gender)
+
     fun updateCategories(gender: String) {
         val lowerCase = gender.toLowerCase(Locale.current)
         val categories = fetchCategories(lowerCase)
@@ -29,7 +29,11 @@ class HomeViewModel(
             )
         }
     }
-    fun updateCatalogByCategory(category: String, gender: String) {
+
+    fun updateCatalogByCategory(
+        category: String,
+        gender: String,
+    ) {
         val catalog =
             repository.getProductsByCategoryAndGender(category, gender)
 
@@ -39,6 +43,7 @@ class HomeViewModel(
             )
         }
     }
+
     fun updateSelectedProduct(product: String) {
         _homeUIState.update { currentState ->
             currentState.copy(
@@ -50,15 +55,13 @@ class HomeViewModel(
     init {
         _homeUIState.value = HomeState()
     }
+
     companion object {
-        fun provideFactory(
-            movableRepository: MovableRepository = MovableRepository,
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(movableRepository) as T
+        fun provideFactory(movableRepository: MovableRepository = MovableRepository): ViewModelProvider.Factory =
+            object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T = HomeViewModel(movableRepository) as T
             }
-        }
     }
 
     data class HomeState(
@@ -66,5 +69,6 @@ class HomeViewModel(
         val catalog: List<Product> = arrayListOf(),
         val gender: String = "",
         val selectedProductId: String = "",
+        val msp: String = "",
     )
 }

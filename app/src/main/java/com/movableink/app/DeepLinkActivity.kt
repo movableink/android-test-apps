@@ -25,6 +25,7 @@ class DeepLinkActivity : ComponentActivity() {
             }
         }
     }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         handleIntent(intent)
@@ -33,6 +34,7 @@ class DeepLinkActivity : ComponentActivity() {
     public override fun onResume() {
         super.onResume()
     }
+
     public override fun onPause() {
         super.onPause()
     }
@@ -50,9 +52,10 @@ class DeepLinkActivity : ComponentActivity() {
             }
             Scheme.GLOBAL -> {
                 lifecycleScope.launch {
-                    val resolvedLink = withContext(Dispatchers.IO) {
-                        MIClient.resolveUrl(uri)
-                    }
+                    val resolvedLink =
+                        withContext(Dispatchers.IO) {
+                            MIClient.resolveUrl(uri)
+                        }
                     resolvedLink?.let {
                         deepLinkToProductPage(it, this@DeepLinkActivity)
                     }

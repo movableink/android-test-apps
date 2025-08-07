@@ -7,13 +7,19 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
+    buildFeatures {
+        buildConfig true
+    }
     buildTypes {
         release {
-            minifyEnabled false
+//            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug{
+            debuggable true
             minifyEnabled false
+//            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
         }
     }
     defaultConfig {

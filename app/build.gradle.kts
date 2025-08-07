@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
+    implementation(libs.androidx.datastore.preferences)
 
     // Compose
     implementation(libs.bundles.compose)
@@ -37,12 +38,14 @@ dependencies {
     // Browser
     implementation(libs.androidx.browser)
 
-    // AppsFlyer
-    implementation(libs.appsflyer)
-    implementation(libs.installreferrer)
-
     // Movable Ink
     implementation(libs.movableink)
+    implementation(project(":msp-api"))
+    implementation(project(":msp-braze"))
+    implementation(project(":msp-moEngage"))
+    implementation(project(":msp-airShip"))
+    implementation(project(":msp-appsFlyer"))
+    implementation(project(":msp-xtremepush"))
     // Testing
     testImplementation(libs.bundles.test.implementation)
     androidTestImplementation(libs.bundles.android.test.implementation)
