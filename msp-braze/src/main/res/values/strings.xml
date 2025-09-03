@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Braze</string>
+    <string name="braze_channel_name">Braze Fallback Channel</string>
+    <string name="testuserName">Quasimodo</string>
+    <string name="testUserLastName">Sunday</string>
+    <string name="testUSerId">user-%s</string>
+</resources>

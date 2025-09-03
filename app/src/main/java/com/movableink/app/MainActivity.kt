@@ -11,6 +11,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.google.firebase.Firebase
+import com.google.firebase.messaging.messaging
 import com.movableink.inked.MIClient
 import com.movableink.integrations.MSPManager
 
@@ -33,6 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ShoppingCartApp()
         }
+        Firebase.messaging.isAutoInitEnabled = true
         MSPManager.onActivityCreated(this)
 //        mPushConnector.hitEvent("start");
     }
@@ -42,14 +45,21 @@ class MainActivity : ComponentActivity() {
         super.onResume()
     }
 
+
+
+
     private fun askNotificationPermission() {
         // This is only necessary for API level >= 33 (TIRAMISU)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
                 PackageManager.PERMISSION_GRANTED
             ) {
-                Log.d(TAG, "askNotificationPermission: granted")
+                // FCM SDK (and your app) can post notifications.
             } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                // TODO: display an educational UI explaining to the user the features that will be enabled
+                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+                //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+                //       If the user selects "No thanks," allow the user to continue without notifications.
             } else {
                 // Directly ask for the permission
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -62,12 +72,6 @@ class MainActivity : ComponentActivity() {
         fetchClickableLink()
     }
 
-    private fun showInAppMessage() {
-     /*   MIClient.showInAppBrowser(
-            this,
-            "https://www.movable-ink-7158.com/p/rp/bc49c08945403625.html",
-        )*/
-    }
 
     private fun fetchClickableLink() {
         MIClient.checkPasteboardOnInstall { resolvedLink ->
