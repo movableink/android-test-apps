@@ -51,15 +51,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        fetchClickableLink()
     }
 
-    private fun showInAppMessage() {
-        MIClient.showInAppBrowser(
-            this,
-            "https://www.movable-ink-7158.com/p/rp/bc49c08945403625.html",
-        )
-    }
 
     private fun fetchClickableLink() {
         MIClient.checkPasteboardOnInstall { resolvedLink ->
