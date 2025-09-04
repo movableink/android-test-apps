@@ -37,7 +37,6 @@ class MainActivity : ComponentActivity() {
         }
         Firebase.messaging.isAutoInitEnabled = true
         MSPManager.onActivityCreated(this)
-//        mPushConnector.hitEvent("start");
     }
 
     override fun onResume() {
@@ -69,7 +68,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        fetchClickableLink()
+//        fetchClickableLink()
     }
 
 
