@@ -11,6 +11,7 @@ import com.braze.support.BrazeLogger
 import com.braze.ui.inappmessage.BrazeInAppMessageManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
+import com.movableink.integrations.ApiKeyProvider
 import com.movableink.integrations.MSPInitializer
 
 const val LOG_TAG = "BrazeProvider"
@@ -36,9 +37,19 @@ class BrazeProvider : MSPInitializer {
 //            BrazeListener(this),
 //        )
 
+        val apiKey = ApiKeyProvider.getBrazeApiKey(application)
+        val customEndPoint = ApiKeyProvider.getBrazeCustomEndPoint(application)
+        val senderId = ApiKeyProvider.getFireBaseSenderId(application)
+
         val brazeConfig =
             BrazeConfig
                 .Builder()
+                .setApiKey(apiKey)
+                .setCustomEndpoint(customEndPoint)
+                .setFirebaseCloudMessagingSenderIdKey(senderId)
+                .setIsFirebaseCloudMessagingRegistrationEnabled(true)
+                .setHandlePushDeepLinksAutomatically(true)
+                .setPushDeepLinkBackStackActivityEnabled(false)
                 .setDefaultNotificationChannelName(application.getString(R.string.braze_channel_name))
                 .build()
         Braze.configure(application, brazeConfig)
@@ -69,7 +80,6 @@ class BrazeProvider : MSPInitializer {
 
     private fun setBrazeIdentifiers(application: Application) {
         val userID = application.getString(R.string.testUSerId, Build.PRODUCT ?: "unknown")
-        Log.d("TAG", "setBrazeIdentifiers: $userID")
         Braze.getInstance(application).changeUser(userID)
         Braze.getInstance(application).currentUser?.setFirstName(application.getString(R.string.testuserName))
         Braze.getInstance(application).currentUser?.setLastName(application.getString(R.string.testUserLastName))

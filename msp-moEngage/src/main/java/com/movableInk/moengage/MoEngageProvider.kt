@@ -15,14 +15,16 @@ import com.moengage.inapp.MoEInAppHelper
 import com.movableInk.moengage.inapp.ClickActionCallback
 import com.movableInk.moengage.inapp.InAppLifecycleCallbacks
 import com.movableInk.moengage.inapp.SelfHandledCallback
+import com.movableink.integrations.ApiKeyProvider
 import com.movableink.integrations.MSPInitializer
 import java.util.Date
 
 class MoEngageProvider : MSPInitializer {
     override fun initialize(application: Application) {
+        val appId= ApiKeyProvider.getMoEngageKey(application)
         val moEngage =
             MoEngage
-                .Builder(application, "TAQGW6TG2CFSQMH5P0NHXBIH", DataCenter.DATA_CENTER_4)
+                .Builder(application, appId, DataCenter.DATA_CENTER_4)
                 .configureFcm(FcmConfig(true))
                 .configurePushKit(PushKitConfig(true))
                 .build()

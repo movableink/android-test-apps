@@ -48,3 +48,7 @@ google-services.json
 .idea
 
 app/src/main/res/values/braze.xml
+
+#properties
+
+/msp-api/src/main/assets/secrets.properties

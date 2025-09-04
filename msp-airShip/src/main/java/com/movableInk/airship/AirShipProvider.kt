@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.util.Log
 import androidx.core.content.ContextCompat
+import com.movableink.integrations.ApiKeyProvider
 import com.movableink.integrations.MSPInitializer
 import com.urbanairship.AirshipConfigOptions
 import com.urbanairship.UAirship
@@ -14,8 +15,8 @@ class AirShipProvider : MSPInitializer {
         val config =
             AirshipConfigOptions
                 .newBuilder()
-                .setAppKey("SQgywH2xQmuAdg936oGSnQ")
-                .setAppSecret("b1RTUPFNRpyNP8uMQoAAsQ")
+                .setAppKey(ApiKeyProvider.getAirShipKey(application))
+                .setAppSecret(ApiKeyProvider.getAirShipAppSecret(application))
                 .setInProduction(false)
                 .setSite(AirshipConfigOptions.SITE_US)
                 .setNotificationAccentColor(ContextCompat.getColor(application, android.R.color.holo_purple))

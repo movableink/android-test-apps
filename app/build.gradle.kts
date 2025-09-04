@@ -1,11 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.application")
     kotlin("android")
     id("com.google.gms.google-services")
 }
-
 apply(from = "android.gradle")
 
 tasks.withType<KotlinCompile>().configureEach {

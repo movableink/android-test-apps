@@ -37,8 +37,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    // airShip
-    val airshipVersion = "17.8.0"
+
 
     // ADM & FCM push providers
     implementation(libs.urbanairship.fcm)

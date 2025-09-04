@@ -4,11 +4,13 @@ import android.app.Activity
 import android.app.Application
 import android.util.Log
 import com.appsflyer.AppsFlyerLib
+import com.movableink.integrations.ApiKeyProvider
 import com.movableink.integrations.MSPInitializer
 
 class AppsFlyerProvider : MSPInitializer {
     override fun initialize(application: Application) {
-        AppsFlyerLib.getInstance().init("bZJ8XHti6cTg5giXXuH2BZ".trim(), null, application)
+        val apiKey = ApiKeyProvider.getAppsFlyerKey(application)
+        AppsFlyerLib.getInstance().init(apiKey.trim(), null, application)
         AppsFlyerLib.getInstance().start(application)
         AppsFlyerLib.getInstance().setDebugLog(true)
     }

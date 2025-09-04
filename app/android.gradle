@@ -30,6 +30,7 @@ android {
         versionName findProperty("versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders ["MOVABLE_INK_SDK_API_KEY"] = localProperties['MOVABLE_INK_SDK_API_KEY']
+
         vectorDrawables.useSupportLibrary = true
 
 
