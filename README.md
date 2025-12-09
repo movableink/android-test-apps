@@ -43,6 +43,21 @@ XTREMEPUSH_PUBLIC_KEY=
 App Launch → Settings Screen → User selects "Braze" → Braze SDK initializes 
 ```
 
+
+## Adding Firebase Config
+The google-services.json file is ignored by version control. It can can be downloaded from the Firebase Console
+Once downloaded , Place it in the app module root directory- See illustration below
+```
+ShoppingCart/
+├── app/
+│   ├── google-services.json  ← The firebase file 
+│   ├── src/
+│   └── build.gradle.kts
+├── msp-api/
+├── msp-braze/
+└── ...
+```
+
 ## Building the App
 
 ```bash
@@ -52,4 +67,3 @@ This produces an APK in `app/build/outputs/apk/debug/`
 
 To generate a signed apk/app bundle that you can distribute to users  on Android Studio select:
 Build-> generate signed App bundle or APK
-
