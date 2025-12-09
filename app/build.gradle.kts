@@ -1,16 +1,18 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("plugin.compose")
     id("com.google.gms.google-services")
 }
 apply(from = "android.gradle")
 
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "1.8"
-}
-@Suppress("DSL_SCOPE_VIOLATION")
 dependencies {
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.util)
+    implementation(libs.compose.material.icons)
+
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.analytics)
@@ -21,11 +23,12 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.material)
+    implementation(libs.compose.material)
+
     implementation(libs.androidx.datastore.preferences)
 
     // Compose
-    implementation(libs.bundles.compose)
+//    implementation(libs.bundles.compose)
 
     // Lifecycle
     implementation(libs.bundles.lifecycle)

@@ -13,4 +13,6 @@
     <string name="search_label">Search products</string>
     <string name="msg_token_fmt">format</string>
     <string name="settings">settings</string>
+    <string name="channel_name">movable_channel</string>
+    <string name="channel_description">default_channel</string>
 </resources>

@@ -44,9 +44,6 @@ class MainActivity : ComponentActivity() {
         super.onResume()
     }
 
-
-
-
     private fun askNotificationPermission() {
         // This is only necessary for API level >= 33 (TIRAMISU)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -60,7 +57,6 @@ class MainActivity : ComponentActivity() {
                 //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
                 //       If the user selects "No thanks," allow the user to continue without notifications.
             } else {
-                // Directly ask for the permission
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
@@ -70,7 +66,6 @@ class MainActivity : ComponentActivity() {
         super.onWindowFocusChanged(hasFocus)
 //        fetchClickableLink()
     }
-
 
     private fun fetchClickableLink() {
         MIClient.checkPasteboardOnInstall { resolvedLink ->

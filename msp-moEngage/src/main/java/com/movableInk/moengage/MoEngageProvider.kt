@@ -21,7 +21,7 @@ import java.util.Date
 
 class MoEngageProvider : MSPInitializer {
     override fun initialize(application: Application) {
-        val appId= ApiKeyProvider.getMoEngageKey(application)
+        val appId = ApiKeyProvider.getMoEngageKey(application)
         val moEngage =
             MoEngage
                 .Builder(application, appId, DataCenter.DATA_CENTER_4)
@@ -54,19 +54,20 @@ class MoEngageProvider : MSPInitializer {
         MoECoreHelper.logoutUser(activity)
         MoEAnalyticsHelper.setUniqueId(activity, "Droid-1945-202222000")
 
-           MoEAnalyticsHelper.setAlias(activity,"Droid-1945-20w2225")
-     val properties = Properties()
-     properties.addAttribute("attributeString", "string")
-         .addAttribute("attributeInteger", 123)
-         .addAttribute("attributeDate", Date())
-         .addDateIso("attributeDateIso", "2022-02-10T21:12:00Z")
-     MoEAnalyticsHelper.trackEvent(activity, "EVENT_Movable", properties)
+        MoEAnalyticsHelper.setAlias(activity, "Droid-1945-20w2225")
+        val properties = Properties()
+        properties
+            .addAttribute("attributeString", "string")
+            .addAttribute("attributeInteger", 123)
+            .addAttribute("attributeDate", Date())
+            .addDateIso("attributeDateIso", "2022-02-10T21:12:00Z")
+        MoEAnalyticsHelper.trackEvent(activity, "EVENT_Movable", properties)
 
-     // user attribute tracking
-     MoEAnalyticsHelper.setFirstName(activity, "EL")
-     MoEAnalyticsHelper.setLastName(activity, "Quasimodo")
-     MoEAnalyticsHelper.setBirthDate(activity, Date())
-     MoEAnalyticsHelper.setEmailId(activity, "integrations@movableink.com")
+        // user attribute tracking
+        MoEAnalyticsHelper.setFirstName(activity, "EL")
+        MoEAnalyticsHelper.setLastName(activity, "Quasimodo")
+        MoEAnalyticsHelper.setBirthDate(activity, Date())
+        MoEAnalyticsHelper.setEmailId(activity, "integrations@movableink.com")
     }
 
     override fun deinitialize() {

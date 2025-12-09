@@ -3,10 +3,7 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     namespace 'com.movableink.app'
-    compileSdk findProperty("compileSdkVersion") as Integer
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
+    compileSdk = findProperty("compileSdkVersion") as Integer
     buildFeatures {
         buildConfig true
     }
@@ -18,7 +15,6 @@ android {
         debug{
             debuggable true
             minifyEnabled false
-//            applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
         }
     }
@@ -33,15 +29,9 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-
-
-
     }
     buildFeatures {
         compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     packagingOptions {
         resources {
@@ -49,7 +39,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }

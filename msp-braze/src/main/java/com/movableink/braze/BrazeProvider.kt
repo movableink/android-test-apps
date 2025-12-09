@@ -60,6 +60,7 @@ class BrazeProvider : MSPInitializer {
                 Log.w(LOG_TAG, "Exception while registering FCM token with Braze.", task.exception)
                 return@addOnCompleteListener
             }
+
             val token = task.result
             Braze.getInstance(application).registeredPushToken = token
         }

@@ -31,8 +31,12 @@ import androidx.compose.ui.window.Dialog
 import com.movableink.app.R
 import com.movableink.app.ui.screens.cart.CartViewModel
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
-fun CheckoutDialog(setShowDialog: (Boolean) -> Unit, cartViewModel: CartViewModel) {
+fun CheckoutDialog(
+    setShowDialog: (Boolean) -> Unit,
+    cartViewModel: CartViewModel,
+) {
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Surface(
             shape = RoundedCornerShape(16.dp),
@@ -49,20 +53,22 @@ fun CheckoutDialog(setShowDialog: (Boolean) -> Unit, cartViewModel: CartViewMode
                     ) {
                         Text(
                             text = "Buy Products?",
-                            style = TextStyle(
-                                fontSize = 24.sp,
-                                fontFamily = FontFamily.Default,
-                                fontWeight = FontWeight.Bold,
-                            ),
+                            style =
+                                TextStyle(
+                                    fontSize = 24.sp,
+                                    fontFamily = FontFamily.Default,
+                                    fontWeight = FontWeight.Bold,
+                                ),
                         )
                         Icon(
                             imageVector = Icons.Filled.Close,
                             contentDescription = "",
                             tint = colorResource(R.color.black),
-                            modifier = Modifier
-                                .width(30.dp)
-                                .height(30.dp)
-                                .clickable { setShowDialog(true) },
+                            modifier =
+                                Modifier
+                                    .width(30.dp)
+                                    .height(30.dp)
+                                    .clickable { setShowDialog(true) },
                         )
                     }
 
@@ -77,9 +83,10 @@ fun CheckoutDialog(setShowDialog: (Boolean) -> Unit, cartViewModel: CartViewMode
                                 setShowDialog(false)
                             },
                             shape = RoundedCornerShape(50.dp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(50.dp),
                         ) {
                             Text(text = "Buy Items")
                         }

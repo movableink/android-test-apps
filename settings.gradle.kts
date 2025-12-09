@@ -25,11 +25,12 @@ dependencyResolutionManagement {
         maven(url = "https://jitpack.io")
         maven(url = "https://appboy.github.io/appboy-android-sdk/sdk")
         maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        maven(url = "https://central.sonatype.com/repository/maven-snapshots/")
         maven(url = "https://maven.xtremepush.com/artifactory/libs-release-local/")
     }
     versionCatalogs {
         create("moengage") {
-            from("com.moengage:android-dependency-catalog:5.0.0")
+            from("com.moengage:android-dependency-catalog:6.1.0")
         }
     }
 }

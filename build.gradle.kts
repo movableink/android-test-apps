@@ -1,6 +1,7 @@
 group = "com.movableInk"
 plugins {
-    id("com.google.gms.google-services") version "4.4.3" apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 buildscript {
 
@@ -18,7 +19,6 @@ buildscript {
 }
 allprojects {
     repositories {
-
     }
 }
 
