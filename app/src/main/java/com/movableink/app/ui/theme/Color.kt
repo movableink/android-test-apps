@@ -14,4 +14,4 @@ val pinkText = Color(0xFFF5CAC9)
 val card = Color(0xFFFFFFFF)
 val cardNight = Color(0xFF162544)
 
-const val AlphaNearOpaque = 0.95f
+const val ALPHA_NEAR_OPAQUE = 0.95f

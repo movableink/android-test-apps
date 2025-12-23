@@ -12,6 +12,5 @@ object MovableRepository {
     fun getProductsByCategoryAndGender(selectedCategory: String, gender: String): List<Product> =
         productList.filter { it.category == selectedCategory && it.gender.contains(gender, ignoreCase = true) }
 
-    fun getProductById(id: String) =
-        productList.find { it.id == id }
+    fun getProductById(id: String) = productList.find { it.id == id }
 }

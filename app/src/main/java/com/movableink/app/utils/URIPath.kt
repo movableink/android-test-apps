@@ -20,7 +20,9 @@ object URIPath {
                     return segments[2]
                 }
 
-                else -> { return@runCatching }
+                else -> {
+                    return@runCatching
+                }
             }
         }
         return null

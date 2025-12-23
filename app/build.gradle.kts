@@ -1,18 +1,20 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("plugin.compose")
     id("com.google.gms.google-services")
 }
 
 apply(from = "android.gradle")
 
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "1.8"
+kotlin {
+    jvmToolchain(17)
 }
-@Suppress("DSL_SCOPE_VIOLATION")
+
 dependencies {
+    // Compose BOM
+    implementation(platform(libs.compose.bom))
+
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.analytics)

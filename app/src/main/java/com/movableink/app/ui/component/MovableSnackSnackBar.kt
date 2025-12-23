@@ -19,7 +19,7 @@ fun MovableSnackSnackBar(
     backgroundColor: Color = MaterialTheme.colors.onSecondary,
     contentColor: Color = Color.White,
     actionColor: Color = Color.Cyan,
-    elevation: Dp = 12.dp,
+    elevation: Dp = 12.dp
 ) {
     Snackbar(
         snackbarData = snackbarData,
@@ -29,6 +29,6 @@ fun MovableSnackSnackBar(
         backgroundColor = backgroundColor,
         contentColor = contentColor,
         actionColor = actionColor,
-        elevation = elevation,
+        elevation = elevation
     )
 }

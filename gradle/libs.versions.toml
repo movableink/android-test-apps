@@ -1,9 +1,9 @@
 [versions]
 # Build tools and plugins
-kotlin = "1.8.22"
-spotless = "6.12.1"
-google-services = "4.3.15"
-agp = "8.2.0"
+kotlin = "2.1.21"
+spotless = "8.0.0"
+google-services = "4.4.2"
+agp = "8.13.0"
 
 # AndroidX and Material
 appcompat = "1.6.1"
@@ -13,10 +13,9 @@ constraintlayout = "2.1.4"
 material = "1.11.0"
 browser = "1.8.0"
 
-# Compose
-compose = "1.4.3"
-compose-compiler = "1.4.8"  # Compatible with Kotlin 1.8.22
-navigation-compose = "2.7.6"
+# Compose (using BOM for version management)
+compose-bom = "2024.12.01"
+navigation-compose = "2.8.5"
 
 # Lifecycle
 lifecycle = "2.7.0"
@@ -45,6 +44,7 @@ movableink = "1.6.2-SNAPSHOT"
 # Build plugins
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-compose-gradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }
 
@@ -54,11 +54,13 @@ androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", ve
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
 
-# Compose
-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "compose" }
-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref = "compose" }
+# Compose (using BOM)
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+compose-material = { group = "androidx.compose.material", name = "material" }
+compose-material-icons = { group = "androidx.compose.material", name = "material-icons-core" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 
 # Lifecycle
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "lifecycle" }
@@ -109,11 +111,12 @@ mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", versio
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 
 [bundles]
-compose = ["compose-material", "compose-ui", "compose-ui-tooling", "compose-ui-util"]
+compose = ["compose-material", "compose-material-icons", "compose-ui", "compose-ui-tooling", "compose-ui-util"]
 lifecycle = ["lifecycle-runtime", "lifecycle-runtime-compose", "lifecycle-runtime-ktx", "lifecycle-viewmodel", "lifecycle-viewmodel-compose"]
 test-implementation = ["junit"]
 android-test-implementation = ["test-junit", "test-core", "test-arch-core", "test-runner", "test-rules", "test-espresso", "mockito-core", "mockito-android", "mockito-kotlin"]

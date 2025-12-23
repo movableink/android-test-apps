@@ -12,17 +12,15 @@ fun fetchDrawableByName(name: String, context: Context): Int {
     return resources.getIdentifier(
         name.trim(),
         "drawable",
-        context.packageName,
+        context.packageName
     )
 }
 
 // TODO refactor to this method
-fun getDrawableId(name: String): Int? {
-    return try {
-        val res: Class<*> = R.drawable::class.java
-        val idField = res.getField(name)
-        idField.getInt(idField)
-    } catch (exception: Exception) {
-        Log.e("Movable Ink", "Failure to get drawable id.", exception)
-    }
+fun getDrawableId(name: String): Int? = try {
+    val res: Class<*> = R.drawable::class.java
+    val idField = res.getField(name)
+    idField.getInt(idField)
+} catch (exception: Exception) {
+    Log.e("Movable Ink", "Failure to get drawable id.", exception)
 }

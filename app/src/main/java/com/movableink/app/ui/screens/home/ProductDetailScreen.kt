@@ -28,7 +28,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -54,11 +54,7 @@ import com.movableink.app.utils.getDrawableId
 val BottomBarHeight = 56.dp
 
 @Composable
-fun ProductDetailScreen(
-    popBackStack: () -> Unit,
-    viewModel: CartViewModel,
-    homeViewModel: HomeViewModel,
-) {
+fun ProductDetailScreen(popBackStack: () -> Unit, viewModel: CartViewModel, homeViewModel: HomeViewModel) {
     val homeUIState by homeViewModel.homeUIState.collectAsStateWithLifecycle()
     val productId = homeUIState.selectedProductId
     val product = remember { MovableRepository.getProductById(productId) }
@@ -67,18 +63,13 @@ fun ProductDetailScreen(
         CartBottomBar(modifier = Modifier.align(Alignment.BottomCenter), viewModel, product, popBackStack)
         DetailTopBar(
             product = product,
-            onBackClicked = popBackStack,
+            onBackClicked = popBackStack
         )
     }
 }
 
 @Composable
-private fun CartBottomBar(
-    modifier: Modifier = Modifier,
-    viewModel: CartViewModel,
-    product: Product?,
-    onCartUpdate: () -> Unit,
-) {
+private fun CartBottomBar(modifier: Modifier = Modifier, viewModel: CartViewModel, product: Product?, onCartUpdate: () -> Unit) {
     Surface(modifier) {
         Column {
             ScreenDivider()
@@ -87,7 +78,7 @@ private fun CartBottomBar(
                 modifier = Modifier
                     .navigationBarsPadding()
                     .then(Modifier.padding(horizontal = 24.dp))
-                    .heightIn(min = BottomBarHeight),
+                    .heightIn(min = BottomBarHeight)
             ) {
                 Spacer(Modifier.width(16.dp))
                 Button(
@@ -98,13 +89,13 @@ private fun CartBottomBar(
                     },
                     modifier = Modifier
                         .weight(1f)
-                        .padding(all = 18.dp),
+                        .padding(all = 18.dp)
                 ) {
                     Text(
                         text = stringResource(id = R.string.addToCart),
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
-                        maxLines = 1,
+                        maxLines = 1
                     )
                 }
                 Spacer(Modifier.width(16.dp))
@@ -114,15 +105,11 @@ private fun CartBottomBar(
 }
 
 @Composable
-fun ScreenDivider(
-    modifier: Modifier = Modifier,
-    color: Color = Color.Gray,
-    thickness: Dp = 1.dp,
-) {
+fun ScreenDivider(modifier: Modifier = Modifier, color: Color = Color.Gray, thickness: Dp = 1.dp) {
     Divider(
         modifier = modifier,
         color = color,
-        thickness = thickness,
+        thickness = thickness
     )
 }
 
@@ -131,13 +118,13 @@ fun DetailsView(product: Product?) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp, 16.dp, 16.dp, 0.dp),
+            .padding(16.dp, 16.dp, 16.dp, 0.dp)
     ) {
         item {
             Spacer(
                 Modifier.windowInsetsTopHeight(
-                    WindowInsets.statusBars.add(WindowInsets(top = 60.dp)),
-                ),
+                    WindowInsets.statusBars.add(WindowInsets(top = 60.dp))
+                )
             )
             product.apply {
                 val drawable = getDrawableId(product?.imageUrl.toString()) ?: R.drawable.placeholder
@@ -149,7 +136,7 @@ fun DetailsView(product: Product?) {
                     painter = image,
                     alignment = Alignment.CenterStart,
                     contentDescription = "",
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
@@ -157,7 +144,7 @@ fun DetailsView(product: Product?) {
                     modifier = Modifier.padding(0.dp, 0.dp, 12.dp, 0.dp),
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.h6
                 )
             }
         }
@@ -170,7 +157,7 @@ fun DetailTopBar(modifier: Modifier = Modifier, product: Product?, onBackClicked
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Color.Black,
-            elevation = 0.dp,
+            elevation = 0.dp
 
         ) {
             IconButton(
@@ -178,12 +165,12 @@ fun DetailTopBar(modifier: Modifier = Modifier, product: Product?, onBackClicked
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .size(24.dp, 24.dp)
-                    .align(Alignment.CenterVertically),
+                    .align(Alignment.CenterVertically)
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     tint = Color.White,
-                    contentDescription = stringResource(R.string.app_name),
+                    contentDescription = stringResource(R.string.app_name)
                 )
             }
             Text(
@@ -196,7 +183,7 @@ fun DetailTopBar(modifier: Modifier = Modifier, product: Product?, onBackClicked
                 modifier = Modifier
                     .weight(1f)
                     .padding(8.dp, 0.dp, 0.dp, 0.dp)
-                    .align(Alignment.CenterVertically),
+                    .align(Alignment.CenterVertically)
             )
         }
     }

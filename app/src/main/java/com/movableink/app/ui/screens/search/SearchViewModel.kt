@@ -4,14 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.movableink.app.data.model.Product
 import com.movableink.app.data.repository.MovableRepository
+import java.util.ArrayList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import java.util.ArrayList
 
 class SearchViewModel
-(private val repository: MovableRepository) :
-    ViewModel() {
+(private val repository: MovableRepository) : ViewModel() {
 
     private val _products: MutableStateFlow<List<Product>> =
         MutableStateFlow(repository.getProducts())
@@ -26,13 +25,13 @@ class SearchViewModel
     val productSearchModelState = combine(
         searchText,
         matchedProducts,
-        showProgressBar,
+        showProgressBar
     ) { text, matchedProducts, showProgress ->
 
         ProductSearchModelState(
             text,
             matchedProducts,
-            showProgress,
+            showProgress
         )
     }
 
@@ -56,9 +55,10 @@ class SearchViewModel
         }
         val productsFromSearch = allProducts.filter { product ->
             product.name.contains(changedSearchText, true) ||
-                product.category.contains(changedSearchText, true) || product.gender.contains(
+                product.category.contains(changedSearchText, true) ||
+                product.gender.contains(
                     changedSearchText,
-                    true,
+                    true
                 )
         }
 
@@ -70,22 +70,14 @@ class SearchViewModel
         matchedProducts.value = arrayListOf()
     }
     companion object {
-        fun provideFactory(
-            movableRepository: MovableRepository = MovableRepository,
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+        fun provideFactory(movableRepository: MovableRepository = MovableRepository): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return SearchViewModel(movableRepository) as T
-            }
+            override fun <T : ViewModel> create(modelClass: Class<T>): T = SearchViewModel(movableRepository) as T
         }
     }
 }
 
-data class ProductSearchModelState(
-    val searchText: String = "",
-    val products: List<Product> = arrayListOf(),
-    val showProgressBar: Boolean = false,
-) {
+data class ProductSearchModelState(val searchText: String = "", val products: List<Product> = arrayListOf(), val showProgressBar: Boolean = false) {
 
     companion object {
         val Empty = ProductSearchModelState()

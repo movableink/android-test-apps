@@ -1,48 +1,41 @@
 def localProperties = new Properties()
-localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
 
 android {
-    namespace 'com.movableink.app'
-    compileSdk findProperty("compileSdkVersion") as Integer
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
+    namespace = 'com.movableink.app'
+    compileSdk = findProperty("compileSdkVersion") as Integer
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug{
-            minifyEnabled false
+        debug {
+            minifyEnabled = false
         }
     }
     defaultConfig {
-        applicationId findProperty("applicationId")
-        minSdkVersion findProperty("minSdkVersion") as Integer
-        targetSdkVersion findProperty("targetSdkVersion")
-        versionCode findProperty("versionCode") as Integer
-        versionName findProperty("versionName")
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders ["MOVABLE_INK_SDK_API_KEY"] = localProperties['MOVABLE_INK_SDK_API_KEY']
+        applicationId = findProperty("applicationId")
+        minSdk = findProperty("minSdkVersion") as Integer
+        targetSdk = findProperty("targetSdkVersion") as Integer
+        versionCode = findProperty("versionCode") as Integer
+        versionName = findProperty("versionName")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["MOVABLE_INK_SDK_API_KEY"] = localProperties['MOVABLE_INK_SDK_API_KEY'] ?: ""
         vectorDrawables.useSupportLibrary = true
-
-
-
-
     }
     buildFeatures {
-        compose true
+        compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
-    packagingOptions {
+    packaging {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
