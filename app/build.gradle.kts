@@ -7,9 +7,6 @@ plugins {
 
 apply(from = "android.gradle")
 
-kotlin {
-    jvmToolchain(17)
-}
 
 dependencies {
     // Compose BOM
