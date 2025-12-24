@@ -22,7 +22,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -39,11 +39,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.movableink.app.R
 
 @Composable
-fun CategoryScreen(
-    onCategoryClick: (String, String) -> Unit,
-    onBackClicked: () -> Unit,
-    homeViewModel: HomeViewModel,
-) {
+fun CategoryScreen(onCategoryClick: (String, String) -> Unit, onBackClicked: () -> Unit, homeViewModel: HomeViewModel) {
     val homeUIState by homeViewModel.homeUIState.collectAsStateWithLifecycle()
     val selectedGender = remember {
         homeUIState.gender
@@ -51,13 +47,13 @@ fun CategoryScreen(
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
 
     ) {
         Spacer(
             Modifier.windowInsetsTopHeight(
-                WindowInsets.statusBars.add(WindowInsets(top = 60.dp)),
-            ),
+                WindowInsets.statusBars.add(WindowInsets(top = 60.dp))
+            )
         )
         CategoryList(onCategoryClick, homeUIState.categories, homeUIState.gender, homeViewModel)
     }
@@ -65,18 +61,13 @@ fun CategoryScreen(
 }
 
 @Composable
-fun CategoryList(
-    onCategoryClick: (String, String) -> Unit,
-    categories: List<String>,
-    gender: String,
-    homeViewModel: HomeViewModel,
-) {
+fun CategoryList(onCategoryClick: (String, String) -> Unit, categories: List<String>, gender: String, homeViewModel: HomeViewModel) {
     LazyColumn {
         item {
             Spacer(
                 Modifier.windowInsetsTopHeight(
-                    WindowInsets.statusBars.add(WindowInsets(top = 28.dp)),
-                ),
+                    WindowInsets.statusBars.add(WindowInsets(top = 28.dp))
+                )
             )
         }
 
@@ -85,19 +76,14 @@ fun CategoryList(
                 category = category,
                 onCategoryClick = onCategoryClick,
                 gender,
-                homeViewModel,
+                homeViewModel
             )
         }
     }
 }
 
 @Composable
-fun CategoryRow(
-    category: String,
-    onCategoryClick: (category: String, gender: String) -> Unit,
-    gender: String,
-    homeViewModel: HomeViewModel,
-) {
+fun CategoryRow(category: String, onCategoryClick: (category: String, gender: String) -> Unit, gender: String, homeViewModel: HomeViewModel) {
     Card(
         modifier = Modifier
             .padding(all = 8.dp)
@@ -105,14 +91,14 @@ fun CategoryRow(
             .clickable {
                 homeViewModel.updateCatalogByCategory(category, gender)
                 onCategoryClick(category, gender)
-            },
+            }
     ) {
         Row(modifier = Modifier.padding(all = 10.dp)) {
             Text(
                 text = category,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
-                modifier = Modifier.padding(10.dp),
+                modifier = Modifier.padding(10.dp)
             )
         }
     }
@@ -124,7 +110,7 @@ fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: (
         TopAppBar(
             backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Color.Black,
-            elevation = 0.dp,
+            elevation = 0.dp
 
         ) {
             IconButton(
@@ -132,12 +118,12 @@ fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: (
                 modifier = Modifier
                     .padding(all = 8.dp)
                     .size(24.dp, 24.dp)
-                    .align(Alignment.CenterVertically),
+                    .align(Alignment.CenterVertically)
             ) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     tint = Color.White,
-                    contentDescription = stringResource(R.string.app_name),
+                    contentDescription = stringResource(R.string.app_name)
                 )
             }
             Text(
@@ -150,7 +136,7 @@ fun CategoryBar(modifier: Modifier = Modifier, gender: String?, onBackClicked: (
                 modifier = Modifier
                     .weight(1f)
                     .padding(8.dp, 0.dp, 0.dp, 0.dp)
-                    .align(Alignment.CenterVertically),
+                    .align(Alignment.CenterVertically)
             )
         }
     }

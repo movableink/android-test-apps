@@ -15,7 +15,7 @@ class App : Application() {
         super.onCreate()
         MIClient.start()
         MIClient.registerDeeplinkDomains(
-            listOf("afra.io"),
+            listOf("afra.io")
         )
         MIClient.appInstallEventEnabled(true)
         FirebaseApp.initializeApp(this)

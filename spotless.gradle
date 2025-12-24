@@ -6,10 +6,12 @@ spotless {
 
     kotlin {
         target "**/*.kt"
-        ktlint('0.43.2').userData([
+        ktlint('1.5.0').editorConfigOverride([
                 'max_line_length': '150',
-                'ij_kotlin_allow_trailing_comma' : false,
-                'ij_kotlin_allow_trailing_comma_on_call_site' : false
+                'ktlint_code_style': 'android_studio',
+                'ij_kotlin_allow_trailing_comma': 'false',
+                'ij_kotlin_allow_trailing_comma_on_call_site': 'false',
+                'ktlint_function_naming_ignore_when_annotated_with': 'Composable'
         ])
         trimTrailingWhitespace()
         indentWithSpaces()

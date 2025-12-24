@@ -11,10 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class CartViewModel(
-    private val snackbarManager: SnackbarManager,
-    repository: MovableRepository,
-) : ViewModel() {
+class CartViewModel(private val snackbarManager: SnackbarManager, repository: MovableRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(CartState())
     val uiState: StateFlow<CartState> = _uiState.asStateFlow()
@@ -22,7 +19,7 @@ class CartViewModel(
         val updatedCart = _uiState.value.cart.plus(product)
         _uiState.update { currentState ->
             currentState.copy(
-                cart = updatedCart,
+                cart = updatedCart
             )
         }
         snackbarManager.showMessage(R.string.cart_updated)
@@ -36,7 +33,7 @@ class CartViewModel(
         val updatedCart = listOf<Product>()
         _uiState.update { currentState ->
             currentState.copy(
-                cart = updatedCart,
+                cart = updatedCart
             )
         }
         snackbarManager.showMessage(R.string.cart_checked_out)
@@ -44,15 +41,11 @@ class CartViewModel(
     companion object {
         fun provideFactory(
             snackbarManager: SnackbarManager = SnackbarManager,
-            movableRepository: MovableRepository = MovableRepository,
+            movableRepository: MovableRepository = MovableRepository
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return CartViewModel(snackbarManager, movableRepository) as T
-            }
+            override fun <T : ViewModel> create(modelClass: Class<T>): T = CartViewModel(snackbarManager, movableRepository) as T
         }
     }
 }
-data class CartState(
-    val cart: List<Product> = arrayListOf(),
-)
+data class CartState(val cart: List<Product> = arrayListOf())

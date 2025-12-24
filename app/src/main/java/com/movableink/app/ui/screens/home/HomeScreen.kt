@@ -35,14 +35,11 @@ import com.movableink.app.R
 import com.movableink.app.ui.component.MovableTopBar
 
 @Composable
-fun HomeScreen(
-    onGenderSelected: (String) -> Unit,
-    homeViewModel: HomeViewModel,
-) {
+fun HomeScreen(onGenderSelected: (String) -> Unit, homeViewModel: HomeViewModel) {
     Surface(
         modifier =
         Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
     ) {
         Box {
             GenderList(onGenderSelected, homeViewModel)
@@ -52,17 +49,14 @@ fun HomeScreen(
 }
 
 @Composable
-fun GenderList(
-    onGenderClick: (String) -> Unit,
-    homeViewModel: HomeViewModel,
-) {
+fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel) {
     val genderList = remember { listOf("Men", "Women") }
     LazyColumn {
         item {
             Spacer(
                 Modifier.windowInsetsTopHeight(
-                    WindowInsets.statusBars.add(WindowInsets(top = 60.dp)),
-                ),
+                    WindowInsets.statusBars.add(WindowInsets(top = 60.dp))
+                )
             )
         }
 
@@ -70,23 +64,19 @@ fun GenderList(
             GenderRow(
                 gender = gender,
                 onGenderClick = onGenderClick,
-                homeViewModel,
+                homeViewModel
             )
         }
     }
 }
 
 @Composable
-fun GenderRow(
-    gender: String,
-    onGenderClick: (gender: String) -> Unit,
-    homeViewModel: HomeViewModel,
-) {
+fun GenderRow(gender: String, onGenderClick: (gender: String) -> Unit, homeViewModel: HomeViewModel) {
     Row(
         modifier =
         Modifier
             .fillMaxWidth()
-            .padding(all = 8.dp),
+            .padding(all = 8.dp)
     ) {
         Surface(
             shape = RoundedCornerShape(8.dp),
@@ -95,13 +85,13 @@ fun GenderRow(
             Modifier.clickable {
                 homeViewModel.updateCategories(gender)
                 onGenderClick(gender)
-            },
+            }
         ) {
             Row(
                 modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(all = 8.dp),
+                    .padding(all = 8.dp)
             ) {
                 Text(
                     text = gender,
@@ -109,7 +99,7 @@ fun GenderRow(
                     Modifier
                         .weight(1f)
                         .align(Alignment.CenterVertically)
-                        .padding(8.dp),
+                        .padding(8.dp)
                 )
                 Column(horizontalAlignment = Alignment.End) {
                     Image(
@@ -120,7 +110,7 @@ fun GenderRow(
                         painter = painterResource(id = R.drawable.baseline_navigate_next_24),
                         alignment = Alignment.Center,
                         contentDescription = "",
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.Crop
                     )
                 }
             }

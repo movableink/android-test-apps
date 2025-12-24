@@ -18,7 +18,7 @@ private const val TAG = "MainActivity "
 class MainActivity : ComponentActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestPermission(),
+            ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
                 // FCM SDK (and your app) can post notifications.
@@ -52,7 +52,6 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
     }
-
 
     private fun fetchClickableLink() {
         MIClient.checkPasteboardOnInstall { resolvedLink ->

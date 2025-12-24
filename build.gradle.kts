@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath(libs.android.gradlePlugin)
         classpath(libs.kotlin.gradlePlugin)
+        classpath(libs.kotlin.compose.gradlePlugin)
         classpath(libs.spotless.gradlePlugin)
         classpath(libs.google.services)
     }
@@ -34,10 +35,4 @@ subprojects {
 
 tasks.register<DefaultTask>("hello") {
     group = "Custom"
-}
-
-buildScan {
-    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
-    setTermsOfServiceAgree("yes")
-    publishAlways()
 }

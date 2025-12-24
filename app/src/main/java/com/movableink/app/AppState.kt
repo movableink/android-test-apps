@@ -39,11 +39,10 @@ fun rememberAppState(
     navController: NavHostController = rememberNavController(),
     snackBarManager: SnackbarManager = SnackbarManager,
     resources: Resources = resources(),
-    coroutineScope: CoroutineScope = rememberCoroutineScope(),
-) =
-    remember(scaffoldState, navController, snackBarManager, resources, coroutineScope) {
-        AppState(scaffoldState, navController, snackBarManager, resources, coroutineScope)
-    }
+    coroutineScope: CoroutineScope = rememberCoroutineScope()
+) = remember(scaffoldState, navController, snackBarManager, resources, coroutineScope) {
+    AppState(scaffoldState, navController, snackBarManager, resources, coroutineScope)
+}
 
 @Stable
 class AppState(
@@ -51,7 +50,7 @@ class AppState(
     val navController: NavHostController,
     private val snackbarManager: SnackbarManager,
     private val resources: Resources,
-    coroutineScope: CoroutineScope,
+    coroutineScope: CoroutineScope
 ) {
     init {
         coroutineScope.launch {
@@ -94,10 +93,7 @@ class AppState(
         }
     }
 
-    fun navigateToCategories(
-        gender: String,
-        from: NavBackStackEntry,
-    ) {
+    fun navigateToCategories(gender: String, from: NavBackStackEntry) {
         if (from.lifecycleIsResumed()) {
             navController.navigate("${MainDestinations.CATEGORIES_ROUTE}/$gender")
         }
@@ -127,9 +123,8 @@ private fun NavBackStackEntry.lifecycleIsResumed() = this.lifecycle.currentState
 private val NavGraph.startDestination: NavDestination?
     get() = findNode(startDestinationId)
 
-private tailrec fun findStartDestination(graph: NavDestination): NavDestination {
-    return if (graph is NavGraph) findStartDestination(graph.startDestination!!) else graph
-}
+private tailrec fun findStartDestination(graph: NavDestination): NavDestination =
+    if (graph is NavGraph) findStartDestination(graph.startDestination!!) else graph
 
 @Composable
 @ReadOnlyComposable

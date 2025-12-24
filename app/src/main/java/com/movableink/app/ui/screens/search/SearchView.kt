@@ -13,12 +13,7 @@ import com.movableink.app.utils.rememberFlowWithLifecycle
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class)
 @Composable
-fun SearchView(
-    onBackClicked: () -> Unit,
-    viewModel: SearchViewModel,
-    navigateToProductDetail: (String) -> Unit,
-    homeViewModel: HomeViewModel,
-) {
+fun SearchView(onBackClicked: () -> Unit, viewModel: SearchViewModel, navigateToProductDetail: (String) -> Unit, homeViewModel: HomeViewModel) {
     val productSearchModelState by rememberFlowWithLifecycle(viewModel.productSearchModelState)
         .collectAsState(initial = ProductSearchModelState.Empty)
     MovableSearchBar(
@@ -32,6 +27,6 @@ fun SearchView(
         onResultClick = {
             navigateToProductDetail(it)
         },
-        homeViewModel,
+        homeViewModel
     )
 }
