@@ -31,6 +31,7 @@ object MainDestinations {
     const val SELECTED_GENDER = "gender"
     const val SELECTED_CATEGORY = "category"
     const val SEARCH_UI_ROUTE = "search_ui"
+    const val CAROUSEL_DEMO_ROUTE = "carousel_demo"
 }
 
 @Composable
@@ -110,6 +111,10 @@ class AppState(
     }
     fun navigateToCart() {
         navController.navigate(MainDestinations.HOME_ROUTE)
+    }
+
+    fun navigateToCarouselDemo() {
+        navController.navigate(MainDestinations.CAROUSEL_DEMO_ROUTE)
     }
 }
 

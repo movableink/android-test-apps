@@ -69,12 +69,14 @@ fun NavGraphBuilder.addHomeGraph(
     cartViewModel: CartViewModel,
     homeViewModel: HomeViewModel,
     searchViewModel: SearchViewModel,
-    navigateToProductDetail: (String) -> Unit
+    navigateToProductDetail: (String) -> Unit,
+    onCarouselDemoClicked: () -> Unit
 ) {
     composable(HomeSections.HOME.route) { from ->
         HomeScreen(
             onGenderSelected = { gender -> onGenderSelected(gender, from) },
-            homeViewModel = homeViewModel
+            homeViewModel = homeViewModel,
+            onCarouselDemoClicked = onCarouselDemoClicked
         )
     }
     composable(HomeSections.SEARCH.route) { from ->

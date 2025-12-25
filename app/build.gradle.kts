@@ -41,7 +41,9 @@ dependencies {
     implementation(libs.installreferrer)
 
     // Movable Ink
-    implementation(libs.movableink)
+    //implementation(libs.movableink)
+    implementation(files("libs/inked-debug.aar"))
+    implementation(files("libs/inked-ui-debug.aar"))
     // Testing
     testImplementation(libs.bundles.test.implementation)
     androidTestImplementation(libs.bundles.android.test.implementation)

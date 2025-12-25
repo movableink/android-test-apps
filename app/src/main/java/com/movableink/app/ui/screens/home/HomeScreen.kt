@@ -19,6 +19,9 @@ import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -35,21 +38,21 @@ import com.movableink.app.R
 import com.movableink.app.ui.component.MovableTopBar
 
 @Composable
-fun HomeScreen(onGenderSelected: (String) -> Unit, homeViewModel: HomeViewModel) {
+fun HomeScreen(onGenderSelected: (String) -> Unit, homeViewModel: HomeViewModel, onCarouselDemoClicked: () -> Unit = {}) {
     Surface(
         modifier =
         Modifier
             .fillMaxSize()
     ) {
         Box {
-            GenderList(onGenderSelected, homeViewModel)
+            GenderList(onGenderSelected, homeViewModel, onCarouselDemoClicked)
             MovableTopBar(title = stringResource(id = R.string.app_name))
         }
     }
 }
 
 @Composable
-fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel) {
+fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel, onCarouselDemoClicked: () -> Unit) {
     val genderList = remember { listOf("Men", "Women") }
     LazyColumn {
         item {
@@ -66,6 +69,25 @@ fun GenderList(onGenderClick: (String) -> Unit, homeViewModel: HomeViewModel) {
                 onGenderClick = onGenderClick,
                 homeViewModel
             )
+        }
+
+        item {
+            Spacer(modifier = Modifier.size(16.dp))
+            Button(
+                onClick = onCarouselDemoClicked,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colors.secondary
+                ),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    text = "Carousel Demo",
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
         }
     }
 }

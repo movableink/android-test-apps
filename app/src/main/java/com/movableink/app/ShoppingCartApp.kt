@@ -20,6 +20,7 @@ import com.movableink.app.ui.navigation.DeepLinkPattern.baseDestination
 import com.movableink.app.ui.navigation.HomeSections
 import com.movableink.app.ui.navigation.MovableBottomBar
 import com.movableink.app.ui.navigation.addHomeGraph
+import com.movableink.app.ui.screens.carousel.CarouselDemoScreen
 import com.movableink.app.ui.screens.cart.CartViewModel
 import com.movableink.app.ui.screens.home.CatalogScreen
 import com.movableink.app.ui.screens.home.CategoryScreen
@@ -70,7 +71,8 @@ fun ShoppingCartApp() {
                     cartViewModel = cartViewModel,
                     navigateToCart = appState::navigateToCart,
                     homeViewModel = homeViewModel,
-                    searchViewModel = searchViewModel
+                    searchViewModel = searchViewModel,
+                    onCarouselDemoClicked = appState::navigateToCarouselDemo
                 )
             }
         }
@@ -85,7 +87,8 @@ private fun NavGraphBuilder.appNavGraph(
     cartViewModel: CartViewModel,
     navigateToCart: () -> Unit,
     homeViewModel: HomeViewModel,
-    searchViewModel: SearchViewModel
+    searchViewModel: SearchViewModel,
+    onCarouselDemoClicked: () -> Unit
 ) {
     navigation(
         route = MainDestinations.HOME_ROUTE,
@@ -97,7 +100,8 @@ private fun NavGraphBuilder.appNavGraph(
             cartViewModel = cartViewModel,
             homeViewModel = homeViewModel,
             searchViewModel = searchViewModel,
-            navigateToProductDetail = navigateToProductDetail
+            navigateToProductDetail = navigateToProductDetail,
+            onCarouselDemoClicked = onCarouselDemoClicked
         )
     }
     composable(
@@ -164,5 +168,10 @@ private fun NavGraphBuilder.appNavGraph(
             navigateToProductDetail,
             homeViewModel
         )
+    }
+    composable(
+        route = MainDestinations.CAROUSEL_DEMO_ROUTE
+    ) {
+        CarouselDemoScreen(upPress = upPress)
     }
 }
