@@ -47,4 +47,18 @@ dependencies {
     // Testing
     testImplementation(libs.bundles.test.implementation)
     androidTestImplementation(libs.bundles.android.test.implementation)
+
+    // Dependencies used if importing inked from AAR files
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.coil)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.google.material)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.startup)
 }

@@ -39,6 +39,14 @@ mockito-kotlin = "5.2.1"
 appsflyer = "6.12.1"
 installreferrer = "2.2"
 movableink = "1.6.2-SNAPSHOT"
+core-ktx = "1.9.0"
+viewpager2 = "1.1.0"
+coil = "2.6.0"
+datastore = "1.0.0"
+kotlinx-serialization = "1.7.3"
+okhttp = "5.2.1"
+kotlinx-coroutines = "1.8.0"
+androidx-startup = "1.1.1"
 
 [libraries]
 # Build plugins
@@ -94,6 +102,20 @@ movableink = { group = "com.movableink.sdk", name = "inked", version.ref = "mova
 # AppsFlyer
 appsflyer = { group = "com.appsflyer", name = "af-android-sdk", version.ref = "appsflyer" }
 installreferrer = { group = "com.android.installreferrer", name = "installreferrer", version.ref = "installreferrer" }
+
+# AAR transitive dependencies
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+androidx-viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
+okhttp = { module = "com.squareup.okhttp3:okhttp" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }
