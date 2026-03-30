@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath(libs.android.gradlePlugin)
         classpath(libs.kotlin.gradlePlugin)
+        classpath(libs.kotlin.composePlugin)
         classpath(libs.spotless.gradlePlugin)
         classpath(libs.google.services)
     }

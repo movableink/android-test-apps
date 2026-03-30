@@ -7,11 +7,12 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.movableink.app.salesforce.WebViewUtility
 import com.movableink.inked.MIClient
 import com.salesforce.marketingcloud.MarketingCloudSdk
@@ -32,6 +33,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         askNotificationPermission()
+        getFCMToken()
+        checkIntentExtras()
         setContent {
             ShoppingCartApp()
         }
@@ -54,6 +57,39 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun checkIntentExtras() {
+        intent?.extras?.let { bundle ->
+            for (key in bundle.keySet()) {
+                bundle.getString(key)?.let { value ->
+                    Log.d(TAG, "Intent Extra - Key: $key, Value: $value")
+                }
+            }
+
+            MIClient.handlePushNotificationOpened(bundle)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        this.intent = intent
+        checkIntentExtras()
+    }
+
+    private fun getFCMToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Log.d(TAG, "FCM Token: $token")
+        })
+    }
+
     private fun askNotificationPermission() {
         // This is only necessary for API level >= 33 (TIRAMISU)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -71,7 +107,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        fetchClickableLink()
     }
 
     private fun fetchClickableLink() {
