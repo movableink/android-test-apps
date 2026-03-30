@@ -10,7 +10,7 @@ plugins {
 apply(from = "android.gradle")
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "17"
 }
 @Suppress("DSL_SCOPE_VIOLATION")
 dependencies {

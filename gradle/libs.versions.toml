@@ -27,14 +27,6 @@ firebase-bom = "32.7.0"
 firebase-core = "21.1.1"
 firebase-messaging = "23.1.2"
 
-# Other
-appsflyer = "6.12.1"
-installreferrer = "2.2"
-movableink = "1.6.2-SNAPSHOT"
-datastore = "1.0.0"
-serialization = "1.6.0"
-okhttp = "5.3.2"
-
 # Testing
 junit = "4.13.2"
 androidx-test = "1.5.0"
@@ -47,9 +39,12 @@ mockito-kotlin = "5.2.1"
 # Other
 appsflyer = "6.12.1"
 installreferrer = "2.2"
-movableink = "1.6.0"
+movableink = "3.0.0"
+datastore = "1.0.0"
+serialization = "1.6.0"
+okhttp = "5.3.2"
 salesforce = "8.0.8"
-marketingcloudsdk = "8.1.0"
+marketingcloudsdk = "9.0.3"
 
 
 [libraries]

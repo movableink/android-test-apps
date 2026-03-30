@@ -16,6 +16,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.movableink.app.salesforce.WebViewUtility
 import com.movableink.inked.MIClient
 import com.salesforce.marketingcloud.MarketingCloudSdk
+import android.widget.Toast
 
 private const val TAG = "MainActivity "
 
@@ -107,6 +108,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
+        fetchClickableLink()
     }
 
     private fun fetchClickableLink() {

@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.hardware.display.DisplayManager
 import android.view.Display.DEFAULT_DISPLAY
-import com.appsflyer.AppsFlyerLib
+// import com.appsflyer.AppsFlyerLib
 import android.app.PendingIntent
 import android.content.Intent
 import android.net.Uri
