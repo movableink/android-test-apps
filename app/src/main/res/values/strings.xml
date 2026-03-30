@@ -17,4 +17,13 @@
     <string name="testUserLastName">Sunday</string>
     <string name="braze_channel_name">Braze Fallback Channel</string>
     <string name="settings">settings</string>
+    <string name="settings_user_header">User</string>
+    <string name="settings_miu_placeholder">mi_u</string>
+    <string name="settings_miu_footer">The current MIU of the user. Changes are applied to the MI SDK and SFMC automatically.</string>
+    <string name="settings_fcm_token_header">FCM Push Token</string>
+    <string name="settings_fcm_token_label">Token</string>
+    <string name="settings_sfmc_header">SFMC Attributes</string>
+    <string name="settings_contact_key_label">Contact Key</string>
+    <string name="settings_device_id_label">Device ID</string>
+    <string name="settings_none">None</string>
 </resources>

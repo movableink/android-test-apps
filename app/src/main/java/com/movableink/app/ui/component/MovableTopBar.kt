@@ -1,6 +1,9 @@
 package com.movableink.app.ui.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -18,6 +21,7 @@ import androidx.compose.ui.unit.dp
 fun MovableTopBar(
     modifier: Modifier = Modifier,
     title: String,
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     Column(modifier = modifier.statusBarsPadding()) {
         TopAppBar(
@@ -25,18 +29,21 @@ fun MovableTopBar(
             contentColor = Color.Black,
             elevation = 0.dp,
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h4,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier =
-                    Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically),
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.h4,
+                    color = Color.White,
+                    textAlign = TextAlign.Start,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f),
+                )
+                actions()
+            }
         }
     }
 }

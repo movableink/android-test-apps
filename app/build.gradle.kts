@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
@@ -10,9 +11,8 @@ plugins {
 apply(from = "android.gradle")
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "17"
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
 }
-@Suppress("DSL_SCOPE_VIOLATION")
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
