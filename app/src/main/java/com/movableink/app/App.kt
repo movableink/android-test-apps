@@ -60,7 +60,7 @@ class App : Application() {
                                     context,
                                     Random().nextInt(),
                                     Intent(Intent.ACTION_VIEW, Uri.parse(url)),
-                                    PendingIntent.FLAG_UPDATE_CURRENT,
+                                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
                                 )
                             }
                         }.build(applicationContext)
