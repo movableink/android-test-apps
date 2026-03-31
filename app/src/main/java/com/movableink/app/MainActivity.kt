@@ -35,6 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         askNotificationPermission()
         getFCMToken()
+        fetchClickableLink()
         checkIntentExtras()
         setContent {
             ShoppingCartApp()
@@ -104,11 +105,6 @@ class MainActivity : ComponentActivity() {
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        fetchClickableLink()
     }
 
     private fun fetchClickableLink() {

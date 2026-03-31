@@ -41,7 +41,7 @@ dependencies {
     // SFMC
 
     implementation(libs.salesforce.mc.sdk)
-    implementation(libs.marketingcloudsdk.v810)
+    // implementation(libs.marketingcloudsdk.v810)
 
     // Movable Ink
     implementation(libs.movableink)
