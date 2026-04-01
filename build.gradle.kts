@@ -13,6 +13,7 @@ buildscript {
         classpath(libs.kotlin.composePlugin)
         classpath(libs.spotless.gradlePlugin)
         classpath(libs.google.services)
+        classpath("com.google.firebase:firebase-appdistribution-gradle:5.0.0")
     }
 }
 allprojects {

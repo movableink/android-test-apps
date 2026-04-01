@@ -7,12 +7,27 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
+
+    signingConfigs {
+        release {
+            storeFile file(localProperties['STORE_FILE'])
+            storePassword localProperties['STORE_PASSWORD']
+            keyAlias localProperties['KEY_ALIAS']
+            keyPassword localProperties['KEY_PASSWORD']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            firebaseAppDistribution {
+                artifactType = "APK"
+                releaseNotesFile = "app/release-notes.txt"
+            }
         }
-        debug{
+        debug {
             minifyEnabled false
         }
     }
@@ -29,10 +44,6 @@ android {
         resValue "string", "fcm_sender_id",       localProperties['FCM_SENDER_ID']
         resValue "string", "marketing_cloud_url", localProperties['MARKETING_CLOUD_URL']
         vectorDrawables.useSupportLibrary = true
-
-
-
-
     }
     buildFeatures {
         compose true

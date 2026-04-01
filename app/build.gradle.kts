@@ -6,6 +6,7 @@ plugins {
     kotlin("android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.gms.google-services")
+    id("com.google.firebase.appdistribution")
 }
 
 apply(from = "android.gradle")
@@ -39,7 +40,6 @@ dependencies {
     implementation(libs.androidx.browser)
 
     // SFMC
-
     implementation(libs.salesforce.mc.sdk)
     // implementation(libs.marketingcloudsdk.v810)
 
