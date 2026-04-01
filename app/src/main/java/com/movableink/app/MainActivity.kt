@@ -11,12 +11,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.movableink.app.salesforce.WebViewUtility
 import com.movableink.inked.MIClient
+import com.movableink.inked.inAppMessage.MovableInAppClient
 import com.salesforce.marketingcloud.MarketingCloudSdk
+import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
+import com.salesforce.marketingcloud.messages.iam.InAppMessageManager
+import com.salesforce.marketingcloud.messages.iam.InAppMessage
 import android.widget.Toast
+import kotlinx.coroutines.launch
 
 private const val TAG = "MainActivity "
 
@@ -44,17 +50,35 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun checkForSFMCMessage() {
-        MarketingCloudSdk.requestSdk { marketingCloudSdk ->
-            val inboxMessageManager = marketingCloudSdk.inboxMessageManager
-            val messages = inboxMessageManager.messages
+        SFMCSdk.requestSdk { sdk ->
+            sdk.mp {
+                it.inAppMessageManager.setInAppMessageListener(object : InAppMessageManager.EventListener {
+                    override fun shouldShowMessage(message: InAppMessage): Boolean {
+                        val text = message.title?.text
+                        if (text != null && text.startsWith("mi_link:")) {
+                            val miLink = text.drop("mi_link:".length)
 
-            if (messages.isNotEmpty()) {
-                val message = messages[0]
-                val htmlLink = message.customKeys?.get("mi_link")
-                htmlLink?.let {
-                    // render page
-                    WebViewUtility.openUrlInFullScreenWebView(this, it)
-                }
+                            lifecycleScope.launch {
+                                MIClient.showInAppBrowser(
+                                    this@MainActivity,
+                                    miLink,
+                                    listener = object : MovableInAppClient.OnUrlLoadingListener {
+                                        override fun onButtonClicked(buttonID: String) {
+                                            // User interacted with a link that has a buttonID
+                                        }
+                                    },
+                                )
+                            }
+
+                            return false
+                        }
+
+                        return true
+                    }
+
+                    override fun didShowMessage(message: InAppMessage) = Unit
+                    override fun didCloseMessage(message: InAppMessage) = Unit
+                })
             }
         }
     }
