@@ -18,7 +18,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.analytics)
-    implementation(libs.firebase.core)
+    implementation(libs.firebase.analytics)
     implementation(libs.firebase.messaging)
 
     implementation(libs.kotlin.stdlib.jdk7)

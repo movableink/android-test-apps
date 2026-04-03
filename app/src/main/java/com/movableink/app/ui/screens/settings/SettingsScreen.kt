@@ -81,6 +81,7 @@ fun SettingsScreen(onDismiss: () -> Unit) {
     var fcmToken by remember { mutableStateOf<String?>(null) }
     var contactKey by remember { mutableStateOf<String?>(null) }
     var deviceId by remember { mutableStateOf<String?>(null) }
+    var pushToken by remember { mutableStateOf<String?>(null) }
 
     // Load persisted MIU or generate + persist a UUID on first boot
     var miu by remember {
@@ -105,16 +106,18 @@ fun SettingsScreen(onDismiss: () -> Unit) {
         MarketingCloudSdk.requestSdk { sdk ->
             contactKey = sdk.registrationManager.contactKey
             deviceId = sdk.registrationManager.deviceId
+            pushToken = sdk.pushMessageManager.pushToken
         }
     }
 
     // Debounced: fires 500ms after miu stops changing
     LaunchedEffect(miu) {
+        val currentMiu = miu
         delay(DEBOUNCE_MS)
-        prefs.edit().putString(KEY_MIU, miu).apply()
-        MIClient.setMIU(miu)
+        prefs.edit().putString(KEY_MIU, currentMiu).apply()
+        MIClient.setMIU(currentMiu)
         SFMCSdk.requestSdk { sfmcSdk ->
-            sfmcSdk.identity.setProfileId(miu)
+            sfmcSdk.identity.setProfileId(currentMiu)
         }
     }
 
@@ -143,13 +146,13 @@ fun SettingsScreen(onDismiss: () -> Unit) {
             )
         }
 
-        // --- FCM Push Token section ---
+        // --- FCM section ---
         item {
             SettingsSectionHeader(title = stringResource(R.string.settings_fcm_token_header))
         }
         item {
             SettingsRow(
-                label = stringResource(R.string.settings_fcm_token_label),
+                label = stringResource(R.string.settings_push_token_label),
                 value = fcmToken ?: stringResource(R.string.settings_none),
                 copyable = fcmToken != null,
                 context = context,
@@ -176,6 +179,15 @@ fun SettingsScreen(onDismiss: () -> Unit) {
                 context = context,
             )
         }
+        item {
+            SettingsRow(
+                label = stringResource(R.string.settings_push_token_label),
+                value = pushToken ?: "-",
+                copyable = pushToken != null,
+                context = context,
+            )
+        }
+
     }
 }
 

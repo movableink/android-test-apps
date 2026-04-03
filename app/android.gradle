@@ -25,6 +25,7 @@ android {
             firebaseAppDistribution {
                 artifactType = "APK"
                 releaseNotesFile = "app/release-notes.txt"
+                groups = "Mobile"
             }
         }
         debug {
@@ -41,6 +42,7 @@ android {
         manifestPlaceholders ["MOVABLE_INK_SDK_API_KEY"] = localProperties['MOVABLE_INK_SDK_API_KEY']
         resValue "string", "accessToken",         localProperties['MC_ACCESS_TOKEN']
         resValue "string", "mc_appId",            localProperties['MC_APP_ID']
+        resValue "string", "mc_mid",              localProperties['MC_MID']
         resValue "string", "fcm_sender_id",       localProperties['FCM_SENDER_ID']
         resValue "string", "marketing_cloud_url", localProperties['MARKETING_CLOUD_URL']
         vectorDrawables.useSupportLibrary = true

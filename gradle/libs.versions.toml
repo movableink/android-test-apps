@@ -23,9 +23,9 @@ lifecycle = "2.7.0"
 lifecycle-runtime-compose = "2.7.0"
 
 # Firebase
-firebase-bom = "32.7.0"
-firebase-core = "21.1.1"
-firebase-messaging = "23.1.2"
+firebase-bom = "34.11.0"
+firebase-analytics = "23.2.0"
+firebase-messaging = "25.0.1"
 
 # Testing
 junit = "4.13.2"
@@ -43,7 +43,6 @@ movableink = "3.0.0"
 datastore = "1.0.0"
 serialization = "1.6.0"
 okhttp = "5.3.2"
-salesforce = "8.0.8"
 marketingcloudsdk = "9.0.3"
 
 
@@ -53,7 +52,6 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-composePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 #play-services = { module = "com.google.android.gms:play-services", version.ref = "play-services" }
-marketingcloudsdk-v810 = { module = "com.salesforce.marketingcloud:marketingcloudsdk", version.ref = "marketingcloudsdk" }
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }
 
@@ -91,8 +89,7 @@ kotlin-stdlib-jdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk
 # Firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
-firebase-core = { group = "com.google.firebase", name = "firebase-core", version.ref = "firebase-core" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref ="firebase-analytics" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebase-messaging" }
 
 # MovableInk
