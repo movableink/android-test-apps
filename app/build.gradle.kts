@@ -1,23 +1,24 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
     kotlin("android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.gms.google-services")
+    id("com.google.firebase.appdistribution")
 }
 
 apply(from = "android.gradle")
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "1.8"
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
 }
-@Suppress("DSL_SCOPE_VIOLATION")
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.analytics)
-    implementation(libs.firebase.core)
+    implementation(libs.firebase.analytics)
     implementation(libs.firebase.messaging)
 
     implementation(libs.kotlin.stdlib.jdk7)
@@ -34,13 +35,13 @@ dependencies {
 
     implementation(libs.activity.compose)
     implementation(libs.navigation.compose)
-
+//    implementation(libs.play.services)
     // Browser
     implementation(libs.androidx.browser)
 
-    // AppsFlyer
-    implementation(libs.appsflyer)
-    implementation(libs.installreferrer)
+    // SFMC
+    implementation(libs.salesforce.mc.sdk)
+    // implementation(libs.marketingcloudsdk.v810)
 
     // Movable Ink
     implementation(libs.movableink)

@@ -7,12 +7,28 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
+
+    signingConfigs {
+        release {
+            storeFile file(localProperties['STORE_FILE'])
+            storePassword localProperties['STORE_PASSWORD']
+            keyAlias localProperties['KEY_ALIAS']
+            keyPassword localProperties['KEY_PASSWORD']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            firebaseAppDistribution {
+                artifactType = "APK"
+                releaseNotesFile = "app/release-notes.txt"
+                groups = "Mobile"
+            }
         }
-        debug{
+        debug {
             minifyEnabled false
         }
     }
@@ -24,11 +40,12 @@ android {
         versionName findProperty("versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders ["MOVABLE_INK_SDK_API_KEY"] = localProperties['MOVABLE_INK_SDK_API_KEY']
+        resValue "string", "accessToken",         localProperties['MC_ACCESS_TOKEN']
+        resValue "string", "mc_appId",            localProperties['MC_APP_ID']
+        resValue "string", "mc_mid",              localProperties['MC_MID']
+        resValue "string", "fcm_sender_id",       localProperties['FCM_SENDER_ID']
+        resValue "string", "marketing_cloud_url", localProperties['MARKETING_CLOUD_URL']
         vectorDrawables.useSupportLibrary = true
-
-
-
-
     }
     buildFeatures {
         compose true
@@ -42,7 +59,7 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
