@@ -1,1 +1,1 @@
-SFMC Integration
+Updated SFMC app ID, access token, and version bump to SFMCCombinedApp
