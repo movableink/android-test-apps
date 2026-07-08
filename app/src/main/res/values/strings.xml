@@ -28,4 +28,9 @@
     <string name="settings_push_enabled_label">Push Enabled</string>
     <string name="settings_push_token_label">Push Token</string>
     <string name="settings_none">None</string>
+    <string name="settings_inapp_provider_header">In App Message</string>
+    <string name="settings_inapp_provider_footer">Toggles which SDK shows In-App Messages. Only one may be enabled at a time. Tap Restart Now to apply the change.</string>
+    <string name="settings_moengage_account_header">MoEngage Account</string>
+    <string name="settings_moengage_account_footer">Toggles which MoEngage account to use. Only one may be enabled at a time. Tap Restart Now to apply the change.</string>
+    <string name="settings_restart_now">Restart Now</string>
 </resources>

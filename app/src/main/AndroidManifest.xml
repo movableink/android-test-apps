@@ -50,6 +50,12 @@
             android:name=".salesforce.FullScreenWebViewActivity"
             android:exported="false" />
 
+        <!-- MoEngage rich landing page host -->
+        <activity
+            android:name="com.moe.pushlibrary.activities.MoEActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".DeepLinkActivity"
             android:exported="true"

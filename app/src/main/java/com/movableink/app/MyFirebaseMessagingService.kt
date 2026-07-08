@@ -10,7 +10,8 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.salesforce.marketingcloud.MarketingCloudSdk
+import com.moengage.pushbase.MoEPushHelper
+import com.movableink.app.messaging.MoEngageClient
 import com.salesforce.marketingcloud.messages.push.PushMessageManager
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
 import kotlin.random.Random
@@ -30,6 +31,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //                it.pushMessageManager.setPushToken(token)
 //            }
         }
+        // MoEngage owns no FCM registration (isRegistrationEnabled = false), so pass the token explicitly.
+        MoEngageClient.passPushToken(applicationContext, token)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -37,17 +40,23 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         Log.d(TAG, "From: ${remoteMessage.from}")
 
-        if (PushMessageManager.isMarketingCloudPush(remoteMessage)) {
-            SFMCSdk.requestSdk { sdk ->
-                sdk.mp {
-                    it.pushMessageManager.handleMessage(remoteMessage)
+        when {
+            MoEPushHelper.getInstance().isFromMoEngagePlatform(remoteMessage.data) -> {
+                MoEngageClient.passPushPayload(applicationContext, remoteMessage.data)
+            }
+            PushMessageManager.isMarketingCloudPush(remoteMessage) -> {
+                SFMCSdk.requestSdk { sdk ->
+                    sdk.mp {
+                        it.pushMessageManager.handleMessage(remoteMessage)
+                    }
                 }
             }
-        } else {
-            // Not from Marketing Cloud Engagement. Must handle ourselves.
-            remoteMessage.notification?.let {
-                Log.d(TAG, "Message Notification Body: ${it.body}")
-                showNotification(it.title, it.body, remoteMessage.data)
+            else -> {
+                // Not from MoEngage or Marketing Cloud. Handle ourselves.
+                remoteMessage.notification?.let {
+                    Log.d(TAG, "Message Notification Body: ${it.body}")
+                    showNotification(it.title, it.body, remoteMessage.data)
+                }
             }
         }
     }

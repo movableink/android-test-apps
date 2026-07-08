@@ -14,6 +14,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.movableink.app.messaging.MessagingProvider
+import com.movableink.app.messaging.MoEngageClient
+import com.movableink.app.settings.SettingsRepository
 import com.movableink.inked.MIClient
 import com.salesforce.marketingcloud.events.EventManager
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
@@ -44,6 +47,14 @@ class MainActivity : ComponentActivity() {
         EventManager.customEvent("display_message", mapOf())?.track()
     }
 
+    override fun onStart() {
+        super.onStart()
+        // MoEngage does not auto-display in-app; trigger it only when MoEngage is the selected provider.
+        if (SettingsRepository.from(this).selectedProvider == MessagingProvider.MOENGAGE) {
+            MoEngageClient.showInApp(this)
+        }
+    }
+
     private fun enableSFMCPush() {
         SFMCSdk.requestSdk { sdk ->
             sdk.mp {
@@ -70,25 +81,30 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getFCMToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-            val token = task.result
-            Log.d(TAG, "FCM Token: $token")
-
-            val miu = getSharedPreferences("settings_prefs", MODE_PRIVATE)
-                .getString("mi_u", null)
-            SFMCSdk.requestSdk { sdk ->
-                if (!miu.isNullOrEmpty()) {
-                    sdk.identity.setProfileId(miu)
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(
+            OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
                 }
+                val token = task.result
+                Log.d(TAG, "FCM Token: $token")
+
+                val miu = getSharedPreferences("settings_prefs", MODE_PRIVATE)
+                    .getString("mi_u", null)
+                SFMCSdk.requestSdk { sdk ->
+                    if (!miu.isNullOrEmpty()) {
+                        sdk.identity.setProfileId(miu)
+                    }
 //                sdk.mp {
 //                    it.pushMessageManager.setPushToken(token)
 //                }
+                }
+                // Forward the existing token to MoEngage in case it was registered before
+                // MoEngage init (onNewToken only fires on issue/refresh).
+                MoEngageClient.passPushToken(applicationContext, token)
             }
-        })
+        )
     }
 
     private fun askNotificationPermission() {

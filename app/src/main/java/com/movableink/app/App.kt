@@ -7,12 +7,14 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.FirebaseApp
+import com.movableink.app.messaging.MessagingProvider
+import com.movableink.app.messaging.MoEngageClient
+import com.movableink.app.settings.SettingsRepository
 import com.movableink.inked.MIClient
 import com.movableink.inked.inAppMessage.MovableInAppClient
 import com.salesforce.marketingcloud.MCLogListener
 import com.salesforce.marketingcloud.MarketingCloudConfig
 import com.salesforce.marketingcloud.MarketingCloudSdk
-import com.salesforce.marketingcloud.events.EventManager
 import com.salesforce.marketingcloud.messages.iam.InAppMessage
 import com.salesforce.marketingcloud.messages.iam.InAppMessageManager
 import com.salesforce.marketingcloud.notifications.NotificationCustomizationOptions
@@ -51,6 +53,7 @@ class App : Application() {
             listOf("afra.io"),
         )
         FirebaseApp.initializeApp(this)
+        setUpMoEngage()
         setUpSalesForce()
     }
 
@@ -131,6 +134,10 @@ class App : Application() {
             sdk.mp {
                 it.inAppMessageManager.setInAppMessageListener(object : InAppMessageManager.EventListener {
                     override fun shouldShowMessage(message: InAppMessage): Boolean {
+                        // Mutual exclusivity: suppress SFMC in-app unless SFMC is the selected provider.
+                        if (SettingsRepository.from(this@App).selectedProvider != MessagingProvider.SFMC) {
+                            return false
+                        }
                         val text = message.title?.text
                         if (text != null && text.startsWith("mi_link:")) {
                             val miLink = text.drop("mi_link:".length)
@@ -159,6 +166,18 @@ class App : Application() {
                         Log.d(LOG_TAG, "IAM closed: ${message.id}")
                     }
                 })
+            }
+        }
+    }
+
+    private fun setUpMoEngage() {
+        val repo = SettingsRepository.from(this)
+        val account = repo.selectedAccount
+        MoEngageClient.initialize(this, account)
+        miu()?.let { storedMiu ->
+            if (storedMiu.isNotEmpty()) {
+                MoEngageClient.identify(this, storedMiu)
+                Log.d(LOG_TAG, "MoEngage identify: $storedMiu")
             }
         }
     }

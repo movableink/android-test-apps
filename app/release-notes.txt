@@ -1,1 +1,1 @@
-Updated SFMC app ID, access token, and version bump to SFMCCombinedApp
+MoEngage SDK integration: init, push, and native in-app messages, plus settings for switching in-app provider (SFMC/MoEngage) and MoEngage account. Signed release build routes MoEngage data to Live.

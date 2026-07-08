@@ -18,7 +18,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.analytics)
-    implementation(libs.firebase.analytics)
     implementation(libs.firebase.messaging)
 
     implementation(libs.kotlin.stdlib.jdk7)
@@ -42,6 +41,12 @@ dependencies {
     // SFMC
     implementation(libs.salesforce.mc.sdk)
     // implementation(libs.marketingcloudsdk.v810)
+
+    // MoEngage
+    implementation(libs.moengage.android.sdk)
+    implementation(libs.moengage.inapp)
+    implementation(libs.moengage.rich.notification)
+    implementation(libs.glide)
 
     // Movable Ink
     implementation(libs.movableink)
