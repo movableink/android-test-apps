@@ -18,6 +18,8 @@ import com.salesforce.marketingcloud.MarketingCloudSdk
 import com.salesforce.marketingcloud.messages.iam.InAppMessage
 import com.salesforce.marketingcloud.messages.iam.InAppMessageManager
 import com.salesforce.marketingcloud.notifications.NotificationCustomizationOptions
+import com.salesforce.marketingcloud.notifications.NotificationManager
+import com.salesforce.marketingcloud.notifications.NotificationMessage
 import com.salesforce.marketingcloud.sfmcsdk.InitializationStatus
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdkModuleConfig
@@ -27,10 +29,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Random
+import androidx.core.net.toUri
 
 private const val LOG_TAG: String = "Application"
 private const val PREFS_NAME = "settings_prefs"
 private const val KEY_MIU = "mi_u"
+
+internal fun openDirectUrl(type: NotificationMessage.Type, url: String?): String? =
+    url?.takeIf { type == NotificationMessage.Type.OPEN_DIRECT && it.isNotBlank() }
 
 class App : Application() {
 
@@ -95,7 +101,24 @@ class App : Application() {
                         setMid(mid)
                         setAnalyticsEnabled(true)
                         setNotificationCustomizationOptions(
-                            NotificationCustomizationOptions.create(android.R.drawable.stat_notify_chat),
+                            NotificationCustomizationOptions.create(
+                                android.R.drawable.stat_notify_chat,
+                                { context, message ->
+                                    val intent = openDirectUrl(message.type, message.url)
+                                        ?.let { Intent(Intent.ACTION_VIEW, it.toUri()) }
+                                        ?: Intent(context, MainActivity::class.java)
+
+                                    PendingIntent.getActivity(
+                                        context,
+                                        Random().nextInt(),
+                                        intent,
+                                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                                    )
+                                },
+                                { context, _ ->
+                                    NotificationManager.createDefaultNotificationChannel(context)
+                                },
+                            ),
                         )
                         setUrlHandler { context, url, _ ->
                             PendingIntent.getActivity(
