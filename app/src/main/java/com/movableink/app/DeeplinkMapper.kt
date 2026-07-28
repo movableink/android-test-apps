@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
+import com.movableink.app.data.repository.MovableRepository
 import com.movableink.app.ui.navigation.DeepLinkPattern
 import com.movableink.app.utils.URIPath
 
@@ -12,8 +13,12 @@ private const val TAG = "DeepLinkMapper"
 private const val MISCHEME = "miapp"
 private const val HTTPSCHEME = "https"
 
+internal fun knownProductId(productId: String?): String? =
+    productId?.takeIf { MovableRepository.getProductById(it) != null }
+
 fun deepLinkToProductPage(url: String, context: Context, scheme: Scheme = Scheme.GLOBAL) {
-    URIPath.getProductFromURI(url.toUri(), scheme)?.let { productId ->
+    val productId = URIPath.getProductFromURI(url.toUri(), scheme)
+    knownProductId(productId)?.let { productId ->
         val productDetailIntent = Intent(
             Intent.ACTION_VIEW,
             "${DeepLinkPattern.baseDestination}/$productId".toUri(),
@@ -29,24 +34,24 @@ fun deepLinkToProductPage(url: String, context: Context, scheme: Scheme = Scheme
             Log.e(TAG, "Failed to send deep link pending intent", e)
         }
     } ?: run {
-        /*cannot deeplink to a product with the given click-through , go to homepage */
+        // cannot deeplink to a product with the given click-through, go to homepage
         with(context) {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             val activity = this as? DeepLinkActivity
-            activity?. finish()
+            activity?.finish()
         }
         Log.e(TAG, "The Product value is null ")
     }
 }
 
 fun hasInternalScheme(urlString: String): Boolean {
-    val uri = Uri.parse(urlString)
+    val uri = urlString.toUri()
     return uri.scheme == MISCHEME
 }
 fun hasExternalScheme(urlString: String): Boolean {
-    val uri = Uri.parse(urlString)
+    val uri = urlString.toUri()
     return uri.scheme == HTTPSCHEME
 }
 
