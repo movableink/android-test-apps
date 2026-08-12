@@ -49,7 +49,7 @@ import com.movableink.app.messaging.MessagingProvider
 import com.movableink.app.messaging.MoEngageAccount
 import com.movableink.app.settings.SettingsRepository
 import com.movableink.inked.MIClient
-import com.salesforce.marketingcloud.MarketingCloudSdk
+import com.salesforce.marketingcloud.pushfeature.PushFeature
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -118,10 +118,12 @@ fun SettingsScreen(onDismiss: () -> Unit) {
             null
         }
 
-        MarketingCloudSdk.requestSdk { sdk ->
-            contactKey = sdk.registrationManager.contactKey
-            deviceId = sdk.registrationManager.deviceId
-            pushToken = sdk.pushMessageManager.pushToken
+        SFMCSdk.requestSdk { sdk ->
+            contactKey = sdk.identity.profileId
+            deviceId = sdk.identity.registrationId
+        }
+        PushFeature.requestSdk { pushFeature ->
+            pushToken = pushFeature.getPushMessageManager().getPushToken()
         }
     }
 
@@ -132,7 +134,7 @@ fun SettingsScreen(onDismiss: () -> Unit) {
         prefs.edit().putString(KEY_MIU, currentMiu).apply()
         MIClient.setMIU(currentMiu)
         SFMCSdk.requestSdk { sfmcSdk ->
-            sfmcSdk.identity.setProfileId(currentMiu)
+            sfmcSdk.identity.edit { profileId = currentMiu }
         }
     }
 

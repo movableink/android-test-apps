@@ -12,24 +12,25 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.moengage.pushbase.MoEPushHelper
 import com.movableink.app.messaging.MoEngageClient
-import com.salesforce.marketingcloud.messages.push.PushMessageManager
+import com.salesforce.marketingcloud.pushfeature.PushFeature
+import com.salesforce.marketingcloud.pushfeature.push.PushMessageManager
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
 import kotlin.random.Random
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
-
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(TAG, "Refreshed token: $token")
         val miu = getSharedPreferences("settings_prefs", MODE_PRIVATE)
             .getString("mi_u", null)
+
         SFMCSdk.requestSdk { sdk ->
             if (!miu.isNullOrEmpty()) {
-                sdk.identity.setProfileId(miu)
+                sdk.identity.edit { profileId = miu }
             }
-//            sdk.mp {
-//                it.pushMessageManager.setPushToken(token)
-//            }
+        }
+        PushFeature.requestSdk { pushFeature ->
+            pushFeature.getPushMessageManager().setPushToken(token)
         }
         // MoEngage owns no FCM registration (isRegistrationEnabled = false), so pass the token explicitly.
         MoEngageClient.passPushToken(applicationContext, token)
@@ -45,10 +46,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 MoEngageClient.passPushPayload(applicationContext, remoteMessage.data)
             }
             PushMessageManager.isMarketingCloudPush(remoteMessage) -> {
-                SFMCSdk.requestSdk { sdk ->
-                    sdk.mp {
-                        it.pushMessageManager.handleMessage(remoteMessage)
-                    }
+                PushFeature.requestSdk { pushFeature ->
+                    pushFeature.getPushMessageManager().handleMessage(remoteMessage)
                 }
             }
             else -> {

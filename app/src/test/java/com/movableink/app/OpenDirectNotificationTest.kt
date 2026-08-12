@@ -1,6 +1,6 @@
 package com.movableink.app
 
-import com.salesforce.marketingcloud.notifications.NotificationMessage
+import com.salesforce.marketingcloud.pushmodels.NotificationMessage
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
 import org.junit.Test

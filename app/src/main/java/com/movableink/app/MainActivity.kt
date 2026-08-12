@@ -18,8 +18,9 @@ import com.movableink.app.messaging.MessagingProvider
 import com.movableink.app.messaging.MoEngageClient
 import com.movableink.app.settings.SettingsRepository
 import com.movableink.inked.MIClient
-import com.salesforce.marketingcloud.events.EventManager
+import com.salesforce.marketingcloud.pushfeature.PushFeature
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
+import com.salesforce.marketingcloud.sfmcsdk.components.events.EventManager
 
 private const val TAG = "MainActivity"
 
@@ -56,10 +57,8 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun enableSFMCPush() {
-        SFMCSdk.requestSdk { sdk ->
-            sdk.mp {
-                it.pushMessageManager.enablePush()
-            }
+        PushFeature.requestSdk { pushFeature ->
+            pushFeature.getPushMessageManager().enablePush()
         }
     }
 
@@ -94,7 +93,7 @@ class MainActivity : ComponentActivity() {
                     .getString("mi_u", null)
                 SFMCSdk.requestSdk { sdk ->
                     if (!miu.isNullOrEmpty()) {
-                        sdk.identity.setProfileId(miu)
+                        sdk.identity.edit { profileId = miu }
                     }
 //                sdk.mp {
 //                    it.pushMessageManager.setPushToken(token)

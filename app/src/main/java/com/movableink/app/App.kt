@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.app.PendingIntent
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import com.google.firebase.FirebaseApp
 import com.movableink.app.messaging.MessagingProvider
@@ -12,14 +11,15 @@ import com.movableink.app.messaging.MoEngageClient
 import com.movableink.app.settings.SettingsRepository
 import com.movableink.inked.MIClient
 import com.movableink.inked.inAppMessage.MovableInAppClient
-import com.salesforce.marketingcloud.MCLogListener
 import com.salesforce.marketingcloud.MarketingCloudConfig
-import com.salesforce.marketingcloud.MarketingCloudSdk
-import com.salesforce.marketingcloud.messages.iam.InAppMessage
-import com.salesforce.marketingcloud.messages.iam.InAppMessageManager
-import com.salesforce.marketingcloud.notifications.NotificationCustomizationOptions
-import com.salesforce.marketingcloud.notifications.NotificationManager
-import com.salesforce.marketingcloud.notifications.NotificationMessage
+import com.salesforce.marketingcloud.inappmessaging.models.InAppMessage
+import com.salesforce.marketingcloud.inappmessagingfeature.InAppMessageCloseAction
+import com.salesforce.marketingcloud.inappmessagingfeature.InAppMessageManager
+import com.salesforce.marketingcloud.inappmessagingfeature.config.InAppMessagingFeatureConfig
+import com.salesforce.marketingcloud.pushfeature.config.PushFeatureConfig
+import com.salesforce.marketingcloud.pushfeature.notifications.NotificationCustomizationOptions
+import com.salesforce.marketingcloud.pushfeature.notifications.NotificationManager
+import com.salesforce.marketingcloud.pushmodels.NotificationMessage
 import com.salesforce.marketingcloud.sfmcsdk.InitializationStatus
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdkModuleConfig
@@ -30,6 +30,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Random
 import androidx.core.net.toUri
+import com.salesforce.marketingcloud.inappmessagingfeature.InAppMessagingFeature
 
 private const val LOG_TAG: String = "Application"
 private const val PREFS_NAME = "settings_prefs"
@@ -39,7 +40,6 @@ internal fun openDirectUrl(type: NotificationMessage.Type, url: String?): String
     url?.takeIf { type == NotificationMessage.Type.OPEN_DIRECT && it.isNotBlank() }
 
 class App : Application() {
-
     private var currentActivity: Activity? = null
 
     override fun onCreate() {
@@ -86,53 +86,56 @@ class App : Application() {
         Log.d(LOG_TAG, "SFMC: starting configuration")
 
         SFMCSdk.setLogging(LogLevel.DEBUG, LogListener.AndroidLogger())
-        MarketingCloudSdk.setLogLevel(MCLogListener.VERBOSE)
-        MarketingCloudSdk.setLogListener(MCLogListener.AndroidLogListener())
+        val notificationCustomizationOptions =
+            NotificationCustomizationOptions.create(
+                android.R.drawable.stat_notify_chat,
+                { context, message ->
+                    val intent = openDirectUrl(message.type, message.url)
+                        ?.let { Intent(Intent.ACTION_VIEW, it.toUri()) }
+                        ?: Intent(context, MainActivity::class.java)
+
+                    PendingIntent.getActivity(
+                        context,
+                        Random().nextInt(),
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+                    )
+                },
+                { context, _ ->
+                    NotificationManager.createDefaultNotificationChannel(context)
+                },
+            )
 
         val config = SFMCSdkModuleConfig.build {
-            pushModuleConfig =
-                MarketingCloudConfig
-                    .builder()
-                    .apply {
-                        setApplicationId(mc_application_id)
-                        setAccessToken(mc_access_token)
-                        setMarketingCloudServerUrl(marketing_cloud_url)
-                        setSenderId(senderId)
-                        setMid(mid)
-                        setAnalyticsEnabled(true)
-                        setNotificationCustomizationOptions(
-                            NotificationCustomizationOptions.create(
-                                android.R.drawable.stat_notify_chat,
-                                { context, message ->
-                                    val intent = openDirectUrl(message.type, message.url)
-                                        ?.let { Intent(Intent.ACTION_VIEW, it.toUri()) }
-                                        ?: Intent(context, MainActivity::class.java)
+            engagementModuleConfig =
+                MarketingCloudConfig.Builder().apply {
+                    setApplicationId(mc_application_id)
+                    setAccessToken(mc_access_token)
+                    setMarketingCloudServerUrl(marketing_cloud_url)
+                    setMid(mid)
+                    setAnalyticsEnabled(true)
+                }.build(applicationContext)
 
-                                    PendingIntent.getActivity(
-                                        context,
-                                        Random().nextInt(),
-                                        intent,
-                                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-                                    )
-                                },
-                                { context, _ ->
-                                    NotificationManager.createDefaultNotificationChannel(context)
-                                },
-                            ),
+            pushFeatureModuleConfig =
+                PushFeatureConfig.builder()
+                    .setSenderId(senderId)
+                    .setNotificationCustomizationOptions(notificationCustomizationOptions)
+                    .setUrlHandler { context, url, _ ->
+                        PendingIntent.getActivity(
+                            context,
+                            Random().nextInt(),
+                            Intent(Intent.ACTION_VIEW, url.toUri()),
+                            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
                         )
-                        setUrlHandler { context, url, _ ->
-                            PendingIntent.getActivity(
-                                context,
-                                Random().nextInt(),
-                                Intent(Intent.ACTION_VIEW, Uri.parse(url)),
-                                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
-                            )
-                        }
-                    }.build(applicationContext)
+                    }.build()
+
+            inAppMessagingFeatureModuleConfig = InAppMessagingFeatureConfig.builder().apply {
+                setEventListener(inAppMessageEventListener())
+            }.build()
         }
 
         SFMCSdk.configure(
-            applicationContext as Application,
+            applicationContext,
             config,
             { initStatus ->
                 when (initStatus.status) {
@@ -140,11 +143,15 @@ class App : Application() {
                         Log.d(LOG_TAG, "SFMC init: SUCCESS")
                         miu()?.let { miu ->
                             SFMCSdk.requestSdk { sdk ->
-                                sdk.identity.setProfileId(miu)
+                                sdk.identity.edit { profileId = miu }
                                 Log.d(LOG_TAG, "SFMC profile ID set: $miu")
                             }
                         }
                         MIClient.setMIU(miu() ?: "")
+
+                        InAppMessagingFeature.requestSdk { feature ->
+                            feature.getInAppMessageManager().setInAppMessageListener(inAppMessageEventListener())
+                        }
                     }
                     InitializationStatus.FAILURE -> {
                         Log.e(LOG_TAG, "SFMC init: FAILED (status=${initStatus.status})")
@@ -152,44 +159,54 @@ class App : Application() {
                 }
             },
         )
+    }
 
-        SFMCSdk.requestSdk { sdk ->
-            sdk.mp {
-                it.inAppMessageManager.setInAppMessageListener(object : InAppMessageManager.EventListener {
-                    override fun shouldShowMessage(message: InAppMessage): Boolean {
-                        // Mutual exclusivity: suppress SFMC in-app unless SFMC is the selected provider.
-                        if (SettingsRepository.from(this@App).selectedProvider != MessagingProvider.SFMC) {
-                            return false
-                        }
-                        val text = message.title?.text
-                        if (text != null && text.startsWith("mi_link:")) {
-                            val miLink = text.drop("mi_link:".length)
-                            val activity = currentActivity ?: return@shouldShowMessage true
-                            CoroutineScope(Dispatchers.Main).launch {
-                                MIClient.showInAppBrowser(
-                                    activity,
-                                    miLink,
-                                    listener = object : MovableInAppClient.OnUrlLoadingListener {
-                                        override fun onButtonClicked(buttonID: String) {
-                                            // User interacted with a link that has a buttonID
-                                        }
-                                    },
-                                )
-                            }
-                            return false
-                        }
-                        return true
-                    }
-
-                    override fun didShowMessage(message: InAppMessage) {
-                        Log.d(LOG_TAG, "IAM shown: ${message.id}")
-                    }
-
-                    override fun didCloseMessage(message: InAppMessage) {
-                        Log.d(LOG_TAG, "IAM closed: ${message.id}")
-                    }
-                })
+    private fun inAppMessageEventListener() = object : InAppMessageManager.EventListener {
+        override fun shouldShowMessage(message: InAppMessage): Boolean {
+            Log.d(LOG_TAG, "SFMC - shouldShowMessage: $message")
+            // Mutual exclusivity: suppress SFMC in-app unless SFMC is the selected provider.
+            if (SettingsRepository.from(this@App).selectedProvider != MessagingProvider.SFMC) {
+                Log.d(LOG_TAG, "SFMC - suppressing in app - not selected provider")
+                return false
             }
+
+            val text = message.title?.text
+            if (text != null && text.startsWith("mi_link:")) {
+                val miLink = text.drop("mi_link:".length)
+                val activity = currentActivity ?: run {
+                    Log.w(LOG_TAG, "SFMC: no resumed activity for MI link")
+                    return true
+                }
+                CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        Log.d(LOG_TAG, "SFMC: opening MI link in ${activity.javaClass.simpleName}")
+                        MIClient.showInAppBrowser(
+                            activity,
+                            miLink,
+                            listener = object : MovableInAppClient.OnUrlLoadingListener {
+                                override fun onButtonClicked(buttonID: String) {
+                                    // User interacted with a link that has a buttonID
+                                }
+                            },
+                        )
+                        Log.d(LOG_TAG, "SFMC: MI browser launch requested")
+                    } catch (error: Exception) {
+                        Log.e(LOG_TAG, "SFMC: failed to open MI link", error)
+                    }
+                }
+
+                return false
+            }
+
+            return true
+        }
+
+        override fun didShowMessage(message: InAppMessage) {
+            Log.d(LOG_TAG, "SFMC IAM shown: ${message.id}")
+        }
+
+        override fun didCloseMessage(message: InAppMessage, action: InAppMessageCloseAction) {
+            Log.d(LOG_TAG, "SFMC IAM closed: ${message.id}")
         }
     }
 
