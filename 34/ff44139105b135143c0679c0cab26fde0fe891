@@ -1,0 +1,65 @@
+app/src/main/java/com/movableink/app/MyFirebaseMessagingService.kt
+  s_4c979a1fb8673a::t_c53ae3b015533e 29,50
+  s_4c979a1fb8673a::t_4a8f6c34f8b843 15-16,49
+  h_d6c2140d28ded4 26,31-33
+settings.gradle.kts
+  s_2afbec52e87699::t_9b306cc4373c65 7-15
+app/src/main/java/com/movableink/app/MainActivity.kt
+  s_4c979a1fb8673a::t_4a8f6c34f8b843 21,23,60
+  s_4c979a1fb8673a::t_c53ae3b015533e 61,96
+app/src/main/java/com/movableink/app/App.kt
+  s_4c979a1fb8673a::t_c53ae3b015533e 22,146
+  s_f485e1a21a7df9::t_72d5edc03a9d89 176-179,181-194
+  s_4c979a1fb8673a::t_4a8f6c34f8b843 15-21,89-107,110-117,119-126,128,130,138,162,164-165,167-168,170-171,173-175,180,196,198,201-204,206-208
+  h_d6c2140d28ded4 33,118,127,131-134,151-154,166,169,200,205,209
+app/src/main/java/com/movableink/app/ui/screens/settings/SettingsScreen.kt
+  s_4c979a1fb8673a::t_28a3437bc9bb21 126
+  s_4c979a1fb8673a::t_c53ae3b015533e 137
+  s_4c979a1fb8673a::t_4a8f6c34f8b843 52,121-125
+gradle.properties
+  s_4c979a1fb8673a::t_5c09a90c7c8891 13
+app/src/test/java/com/movableink/app/OpenDirectNotificationTest.kt
+  s_4c979a1fb8673a::t_698a6078e59d93 3
+gradle/libs.versions.toml
+  s_f485e1a21a7df9::t_0607368f771f4e 19,75
+  s_f485e1a21a7df9::t_f42bf0a8949db6 141
+  s_f485e1a21a7df9::t_95e5388b9fadeb 18
+  s_4c979a1fb8673a::t_9f2dd585c35548 55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "34ff44139105b135143c0679c0cab26fde0fe891",
+  "prompts": {},
+  "humans": {
+    "h_d6c2140d28ded4": {
+      "author": "Chayel J Heinsen <cheinsen@movableink.com>"
+    }
+  },
+  "sessions": {
+    "s_2afbec52e87699": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00d6a968effebnec0Hp7gD8dVU",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Chayel J Heinsen <cheinsen@movableink.com>"
+    },
+    "s_4c979a1fb8673a": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00d65d7fdffeCwSH1clGsd5Zzv",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Chayel J Heinsen <cheinsen@movableink.com>"
+    },
+    "s_f485e1a21a7df9": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00d75cae5ffeMesx9osDo9YupX",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Chayel J Heinsen <cheinsen@movableink.com>"
+    }
+  }
+}
