@@ -1,0 +1,46 @@
+app/build.gradle.kts
+  s_f485e1a21a7df9::t_2797d23dce6b17 45-47
+app/src/main/java/com/movableink/app/messaging/MessagingProvider.kt
+  s_f485e1a21a7df9::t_eaf2632604b7ae 11
+gradle/libs.versions.toml
+  s_f485e1a21a7df9::t_2797d23dce6b17 29,56,115-116
+  s_f485e1a21a7df9::t_2f8b930ad29c41 117
+app/src/main/java/com/movableink/app/App.kt
+  s_f485e1a21a7df9::t_8e47afcab74cec 9,63,226-231
+  s_f485e1a21a7df9::t_458f7031501f33 232-233
+app/src/main/java/com/movableink/app/ui/screens/settings/SettingsScreen.kt
+  s_f485e1a21a7df9::t_0be19c6687d1c3 48,137
+app/src/main/java/com/movableink/app/messaging/BrazeClient.kt
+  s_f485e1a21a7df9::t_eaf2632604b7ae 1-29,31-58
+  s_f485e1a21a7df9::t_34425ebd4c90b7 30
+app/src/main/java/com/movableink/app/MainActivity.kt
+  s_f485e1a21a7df9::t_8e47afcab74cec 17,106
+app/src/main/java/com/movableink/app/MyFirebaseMessagingService.kt
+  s_f485e1a21a7df9::t_8e47afcab74cec 14,38-43,55
+app/src/test/java/com/movableink/app/settings/SettingsRepositoryTest.kt
+  s_f485e1a21a7df9::t_7a5cf9400c19cb 57-64
+  s_f485e1a21a7df9::t_9e7050c131a9bb 56
+app/android.gradle
+  s_f485e1a21a7df9::t_2797d23dce6b17 48-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "300c13241bac3471992bc533e91340ca407594dc",
+  "prompts": {},
+  "humans": {
+    "h_d6c2140d28ded4": {
+      "author": "Chayel J Heinsen <cheinsen@movableink.com>"
+    }
+  },
+  "sessions": {
+    "s_f485e1a21a7df9": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_00d75cae5ffeMesx9osDo9YupX",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Chayel J Heinsen <cheinsen@movableink.com>"
+    }
+  }
+}
