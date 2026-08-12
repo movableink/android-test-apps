@@ -8,6 +8,7 @@ package com.movableink.app.messaging
 enum class MessagingProvider(val title: String) {
     SFMC("Salesforce Marketing Cloud"),
     MOENGAGE("MoEngage"),
+    BRAZE("Braze"),
     ;
 
     companion object {

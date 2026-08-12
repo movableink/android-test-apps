@@ -26,7 +26,7 @@ lifecycle-runtime-compose = "2.7.0"
 # Firebase
 firebase-bom = "34.11.0"
 firebase-analytics = "23.2.0"
-firebase-messaging = "25.0.1"
+firebase-messaging = "25.1.0"
 
 # Testing
 junit = "4.13.2"
@@ -53,6 +53,7 @@ moengage-inapp = "11.0.0"
 moengage-rich-notification = "7.0.0"
 glide = "4.16.0"
 marketingcloudsdk = "11.0.1"
+braze = "43.0.0"
 
 
 [libraries]
@@ -110,6 +111,9 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 
 #sfmc
 salesforce-mc-sdk = { group = "com.salesforce.marketingcloud", name = "marketingcloudsdk", version.ref = "marketingcloudsdk" }
+
+# Braze
+braze-android-sdk-ui = { group = "com.braze", name = "android-sdk-ui", version.ref = "braze" }
 
 # MoEngage
 moengage-android-sdk = { group = "com.moengage", name = "moe-android-sdk", version.ref = "moengage-android-sdk" }

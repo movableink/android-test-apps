@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.movableink.app.messaging.BrazeClient
 import com.movableink.app.messaging.MessagingProvider
 import com.movableink.app.messaging.MoEngageClient
 import com.movableink.app.settings.SettingsRepository
@@ -102,6 +103,7 @@ class MainActivity : ComponentActivity() {
                 // Forward the existing token to MoEngage in case it was registered before
                 // MoEngage init (onNewToken only fires on issue/refresh).
                 MoEngageClient.passPushToken(applicationContext, token)
+                BrazeClient.passPushToken(applicationContext, token)
             }
         )
     }

@@ -42,6 +42,9 @@ dependencies {
     implementation(libs.salesforce.mc.sdk)
     // implementation(libs.marketingcloudsdk.v810)
 
+    // Braze
+    implementation(libs.braze.android.sdk.ui)
+
     // MoEngage
     implementation(libs.moengage.android.sdk)
     implementation(libs.moengage.inapp)

@@ -45,6 +45,8 @@ android {
         resValue "string", "mc_mid",              localProperties['MC_MID']
         resValue "string", "fcm_sender_id",       localProperties['FCM_SENDER_ID']
         resValue "string", "marketing_cloud_url", localProperties['MARKETING_CLOUD_URL']
+        resValue "string", "braze_api_key",       localProperties['BRAZE_API_KEY']
+        resValue "string", "braze_sdk_endpoint",  localProperties['BRAZE_SDK_ENDPOINT']
         vectorDrawables.useSupportLibrary = true
     }
     buildFeatures {

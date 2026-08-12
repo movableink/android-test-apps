@@ -54,6 +54,15 @@ class SettingsRepositoryTest {
     }
 
     @Test
+    fun `selectedProvider persists Braze`() {
+        val repo = SettingsRepository(FakePrefs())
+
+        repo.selectedProvider = MessagingProvider.BRAZE
+
+        assertEquals(MessagingProvider.BRAZE, repo.selectedProvider)
+    }
+
+    @Test
     fun `selectedAccount defaults to partner sandbox when unset`() {
         val repo = SettingsRepository(FakePrefs())
         assertEquals(MoEngageAccount.PARTNER_SANDBOX, repo.selectedAccount)

@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.moengage.pushbase.MoEPushHelper
+import com.movableink.app.messaging.BrazeClient
 import com.movableink.app.messaging.MoEngageClient
 import com.salesforce.marketingcloud.pushfeature.PushFeature
 import com.salesforce.marketingcloud.pushfeature.push.PushMessageManager
@@ -34,6 +35,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
         // MoEngage owns no FCM registration (isRegistrationEnabled = false), so pass the token explicitly.
         MoEngageClient.passPushToken(applicationContext, token)
+        BrazeClient.passPushToken(applicationContext, token)
+    }
+
+    override fun onRegistered(installationId: String) {
+        super.onRegistered(installationId)
+        BrazeClient.passPushToken(applicationContext, installationId)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -45,6 +52,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             MoEPushHelper.getInstance().isFromMoEngagePlatform(remoteMessage.data) -> {
                 MoEngageClient.passPushPayload(applicationContext, remoteMessage.data)
             }
+            BrazeClient.handlePushPayload(applicationContext, remoteMessage) -> Unit
             PushMessageManager.isMarketingCloudPush(remoteMessage) -> {
                 PushFeature.requestSdk { pushFeature ->
                     pushFeature.getPushMessageManager().handleMessage(remoteMessage)

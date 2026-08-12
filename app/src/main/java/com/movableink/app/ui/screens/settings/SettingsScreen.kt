@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.movableink.app.R
+import com.movableink.app.messaging.BrazeClient
 import com.movableink.app.messaging.MessagingProvider
 import com.movableink.app.messaging.MoEngageAccount
 import com.movableink.app.settings.SettingsRepository
@@ -133,6 +134,7 @@ fun SettingsScreen(onDismiss: () -> Unit) {
         delay(DEBOUNCE_MS)
         prefs.edit().putString(KEY_MIU, currentMiu).apply()
         MIClient.setMIU(currentMiu)
+        BrazeClient.identify(context.applicationContext, currentMiu)
         SFMCSdk.requestSdk { sfmcSdk ->
             sfmcSdk.identity.edit { profileId = currentMiu }
         }

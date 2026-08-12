@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.util.Log
 import com.google.firebase.FirebaseApp
+import com.movableink.app.messaging.BrazeClient
 import com.movableink.app.messaging.MessagingProvider
 import com.movableink.app.messaging.MoEngageClient
 import com.movableink.app.settings.SettingsRepository
@@ -59,6 +60,7 @@ class App : Application() {
             listOf("afra.io"),
         )
         FirebaseApp.initializeApp(this)
+        setUpBraze()
         setUpMoEngage()
         setUpSalesForce()
     }
@@ -219,6 +221,14 @@ class App : Application() {
                 MoEngageClient.identify(this, storedMiu)
                 Log.d(LOG_TAG, "MoEngage identify: $storedMiu")
             }
+        }
+    }
+
+    private fun setUpBraze() {
+        BrazeClient.initialize(this)
+        miu()?.takeIf { it.isNotEmpty() }?.let { storedMiu ->
+            BrazeClient.identify(this, storedMiu)
+            Log.d(LOG_TAG, "Braze identify: $storedMiu")
         }
     }
 }
